@@ -482,6 +482,8 @@
                             $listaBlanca = AppControlador::obtenerListaBlancaAlumno();
                         }
 
+                       
+
                         //Guardad en la variable la ruta que venga de GET
 
                         //Crea un arreglo vacio
@@ -506,9 +508,10 @@
                         $page = $_404 ? '404' : $ruta_get;
 
                         //Cargar la pagina solicitada
-
+                        
                         cargarPagina($page, $rutas);
                     } else {
+                        var_dump($_SESSION);
                         cargarPagina('bienvenido');
                     }
 

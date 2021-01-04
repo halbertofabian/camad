@@ -1,4 +1,4 @@
-<?php @session_start();
+<?php
 include_once 'config.php';
 require_once 'app/modulos/app/app.controlador.php';
 require_once 'app/modulos/login/login.controlador.php';

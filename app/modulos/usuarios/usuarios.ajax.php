@@ -11,9 +11,11 @@
  *  Instagram: http://instagram.com/softmormx
  *  Twitter: https://twitter.com/softmormx
  */
-
-session_start();
 include_once '../../../config.php';
+
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 require_once DOCUMENT_ROOT . 'app/lib/phpMailer/Exception.php';
 require_once DOCUMENT_ROOT . 'app/lib/phpMailer/PHPMailer.php';
@@ -60,15 +62,18 @@ class UsuariosAjax
 
     public function ajaxListarUsuariosById()
     {
-        $respuesta = UsuariosModelo::mdlMostrarUsuarios($this->usr_id, $this->usr_rol , $this->usr_searh);
+        $respuesta = UsuariosModelo::mdlMostrarUsuarios($this->usr_id, $this->usr_rol, $this->usr_searh);
         echo json_encode($respuesta, true);
     }
 
 
     public function ajaxAgreagarUsuarios()
     {
-        $respuesta = UsuariosControlador::ctrAgregarUsuariosAjax();
-        echo json_encode($respuesta, true);
+
+
+        var_dump($_SESSION);
+        // $respuesta = UsuariosControlador::ctrAgregarUsuariosAjax();
+        // echo json_encode($respuesta, true);
     }
 }
 if (isset($_POST['btnEliminarUsuario'])) {
