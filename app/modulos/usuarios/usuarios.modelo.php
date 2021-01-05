@@ -38,7 +38,7 @@ class UsuariosModelo
             $pps->bindValue(15, $usr['usr_rol']);
             $pps->bindValue(16, $usr['usr_usuario_registro']);
             $pps->bindValue(17, $usr['usr_fecha_registro']);
-            $pps->bindValue(18, SUCURSAL_ID);
+            $pps->bindValue(18, $_SESSION['session_suc']['scl_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -65,7 +65,7 @@ class UsuariosModelo
             $pps->bindValue(7, $usr['usr_usuario_registro']);
             $pps->bindValue(8, $usr['usr_fecha_registro']);
             $pps->bindValue(9, $usr['usr_firma']);
-            $pps->bindValue(10, SUCURSAL_ID);
+            $pps->bindValue(10, $_SESSION['session_suc']['scl_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -183,43 +183,43 @@ class UsuariosModelo
         try {
             //code...
             if ($usr_searh && $usr_matricula != "") {
-                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_matricula = ? AND usr_id_sucursal = ? ";
+                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_matricula = ? ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $usr_matricula);
-                $pps->bindValue(2, SUCURSAL_ID);
+                // $pps->bindValue(2, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetch();
             } else if ($usr_searh && $usr_id == "" && $usr_rol != "") {
-                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_rol = ? AND usr_id_sucursal = ? ORDER BY usr_id DESC LIMIT 1";
+                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_rol = ?  ORDER BY usr_id DESC LIMIT 1";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $usr_rol);
-                $pps->bindValue(2, SUCURSAL_ID);
+                // $pps->bindValue(2, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetch();
             } else if ($usr_id == "" && $usr_rol != "") {
-                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_rol = ? AND usr_id_sucursal = ? ORDER BY usr_id DESC ";
+                $sql = "SELECT usr.*,scl.scl_nombre FROM tbl_usuarios_usr usr JOIN tbl_sucursal_scl scl ON usr.usr_id_sucursal = scl.scl_id  WHERE usr_rol = ?     ORDER BY usr_id DESC ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $usr_rol);
-                $pps->bindValue(2, SUCURSAL_ID);
+                // $pps->bindValue(2, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             } else if ($usr_id == "" && $usr_rol == "") {
-                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_rol != 'Alumno' AND usr_id_sucursal = ? ORDER BY usr_id DESC ";
+                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_rol != 'Alumno'  ORDER BY usr_id DESC ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
-                $pps->bindValue(1, SUCURSAL_ID);
+                // $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
 
                 $pps->execute();
                 return $pps->fetchAll();
             } else {
-                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_id = ? AND usr_id_sucursal = ? ";
+                $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_id = ? ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $usr_id);
-                $pps->bindValue(2, SUCURSAL_ID);
+                // $pps->bindValue(2, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetch();
             }

@@ -31,7 +31,7 @@ class PagosModelo
             $pps->bindValue(8, $ppg['ppg_estado_pagado']);
             $pps->bindValue(9, $ppg['ppg_fecha_pagado']);
             $pps->bindValue(10, $ppg['ppg_mp']);
-            $pps->bindValue(11, $ppg['ppg_id_sucursal']);
+            $pps->bindValue(11, $_SESSION['session_suc']['scl_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -57,7 +57,7 @@ class PagosModelo
             $pps->bindValue(7, $ppg['ppg_concepto']);
             $pps->bindValue(8, $ppg['ppg_usuario_registro']);
             $pps->bindValue(9, $ppg['ppg_adeudo']);
-            $pps->bindValue(10, $ppg['ppg_id_sucursal']);
+            $pps->bindValue(10, $_SESSION['session_suc']['scl_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -79,7 +79,7 @@ class PagosModelo
             $pps->bindValue(3, $ppg['ppg_concepto']);
             $pps->bindValue(4, $ppg['ppg_usuario_registro']);
             $pps->bindValue(5, $ppg['ppg_adeudo']);
-            $pps->bindValue(6, $ppg['ppg_id_sucursal']);
+            $pps->bindValue(6, $_SESSION['session_suc']['scl_id']);
             $pps->bindValue(7, $ppg['ppg_ficha_venta']);
             $pps->bindValue(8, $ppg['ppg_concepto']);
             $pps->execute();
@@ -233,13 +233,13 @@ class PagosModelo
     {
         try {
             //code...
-            $sql = "SELECT ppg.ppg_adeudo,fpg.*  FROM tbl_paquetes_pagos_ppg ppg JOIN tbl_ficha_pago_fpg fpg ON fpg.fpg_id = ppg.ppg_ficha_pago WHERE ppg.ppg_ficha_pago = ? AND ppg.ppg_concepto = ? AND ppg.ppg_estado_pagado = 'PAGADO' AND ppg_id_sucursal = ? ORDER BY ppg.ppg_id DESC LIMIT 1 ";
+            $sql = "SELECT SUM(ppg_monto) AS ppg_adeudo_s  FROM tbl_paquetes_pagos_ppg ppg JOIN tbl_ficha_pago_fpg fpg ON fpg.fpg_id = ppg.ppg_ficha_pago WHERE ppg.ppg_ficha_pago = ? AND ppg.ppg_concepto = ? AND ppg.ppg_estado_pagado = 'PAGADO' AND ppg_id_sucursal = ?  ";
 
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $ppg['ppg_ficha_pago']);
             $pps->bindValue(2, $ppg['ppg_concepto']);
-            $pps->bindValue(3, $ppg['ppg_id_sucursal']);
+            $pps->bindValue(3, $_SESSION['session_suc']['scl_id']);
             $pps->execute();
             return $pps->fetch();
         } catch (PDOException $th) {
@@ -254,7 +254,7 @@ class PagosModelo
     {
         try {
             //code...
-            $sql = "SELECT ppg.*,pqt.pqt_nombre,usr.usr_nombre,usr.usr_matricula FROM tbl_paquetes_pagos_ppg ppg JOIN tbl_ficha_pago_fpg fpg ON fpg.fpg_id = ppg.ppg_ficha_pago JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno WHERE ppg_estado_pagado = 'PAGADO' ";
+            $sql = "SELECT ppg.*,pqt.pqt_nombre,usr.usr_nombre,usr.usr_matricula FROM tbl_paquetes_pagos_ppg ppg JOIN tbl_ficha_pago_fpg fpg ON fpg.fpg_id = ppg.ppg_ficha_pago JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno WHERE ppg_estado_pagado = 'PAGADO'  ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
 
@@ -393,7 +393,7 @@ class PagosModelo
             $con = null;
         }
     }
-    public static function mdlConsultarFichas($vfch_id = "", $vfch_ficha_pago="")
+    public static function mdlConsultarFichas($vfch_id = "", $vfch_ficha_pago = "", $vfch_solicitud_cancelacion = 0)
     {
         try {
             //code...
@@ -404,21 +404,74 @@ class PagosModelo
                 $pps->bindValue(1, $vfch_ficha_pago);
                 $pps->execute();
                 return $pps->fetchAll();
-            }
-            elseif ($vfch_id != "" && $vfch_ficha_pago== "" ) {
+            } elseif ($vfch_id != "" && $vfch_ficha_pago == "") {
                 $sql = "SELECT * FROM tbl_ficha_venta_vfch WHERE vfch_id = ?";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $vfch_id);
                 $pps->execute();
                 return $pps->fetch();
-            } else {
-                $sql = "SELECT * FROM tbl_ficha_venta_vfch WHERE vfch_estado = 'PAGADO'";
+            } elseif ($vfch_solicitud_cancelacion >= 1) {
+                $sql = "SELECT * FROM tbl_ficha_venta_vfch WHERE vfch_solicitud_cancelacion != 0 AND vfch_id_sucursal = ? ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
+                $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+                $pps->execute();
+                return $pps->fetchAll();
+            } else {
+                $sql = "SELECT * FROM tbl_ficha_venta_vfch WHERE vfch_estado = 'PAGADO' AND vfch_id_sucursal = ?";
+                $con = Conexion::conectar();
+                $pps = $con->prepare($sql);
+                $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             }
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlSolicitudCancelacion($vfch)
+    {
+        try {
+            //code...
+
+            $sql = "UPDATE tbl_ficha_venta_vfch SET vfch_solicitud_cancelacion = 1 , vfch_justificacion = ?, vfch_fecha_solicitud = ?, vfch_usuario_solicito = ? WHERE vfch_id = ? ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $vfch['vfch_justificacion']);
+            $pps->bindValue(2, $vfch['vfch_fecha_solicitud']);
+            $pps->bindValue(3, $vfch['vfch_usuario_solicito']);
+            $pps->bindValue(4, $vfch['vfch_id']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlSolicitudCancelacion2($vfch)
+    {
+        try {
+            //code...
+
+            $sql = " UPDATE tbl_paquetes_pagos_ppg SET ppg_estado_pagado = 'CANCELADO' WHERE ppg_ficha_venta  = ?; UPDATE tbl_ficha_venta_vfch SET vfch_estado = 'CANCELADO', vfch_solicitud_cancelacion = 2 , vfch_fecha_aprobacion = ?, vfch_usuario_aprobo = ? WHERE vfch_id = ? ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $vfch['vfch_id']);
+            $pps->bindValue(2, $vfch['vfch_fecha_aprobacion']);
+            $pps->bindValue(3, $vfch['vfch_usuario_aprobo']);
+            $pps->bindValue(4, $vfch['vfch_id']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
         } catch (PDOException $th) {
             //throw $th;
             return false;

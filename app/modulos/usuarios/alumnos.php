@@ -298,7 +298,7 @@
                             <div class="form-group">
                                 <?php
 
-                                $usr_id = UsuariosControlador::ctrConsultarSiguienteUsuario();
+                                $usr_id = UsuariosControlador::ctrConsultarSiguienteUsuario($_SESSION['session_suc']['scl_sub_fijo']);
 
                                 ?>
                                 <label for="usr_matricula">Matricula</label>
@@ -495,7 +495,7 @@
                                 <th>Correo electrónico</th>
                                 <th>Usuario registro</th>
                                 <th>Fecha registro</th>
-                                <!-- <th>Modalidad</th> -->
+                                <th>Plantel</th>
                                 <!-- <th>Dirección</th> -->
                                 <th>Acciones</th>
                             </tr>
@@ -526,7 +526,7 @@
                                     <td><?php echo $usr['usr_correo'] ?></td>
                                     <td><?php echo $usr['usr_usuario_registro'] ?></td>
                                     <td><?php echo $usr['usr_fecha_registro'] ?></td>
-                                    <!-- <td><?php echo $usr['usr_modalidad'] ?></td> -->
+                                    <td> <strong> <?php echo $usr['scl_nombre'] ?> </strong> </td>
                                     
                                     <td>
                                         <div class="btn-group">

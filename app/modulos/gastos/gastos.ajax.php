@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 include_once '../../../config.php';
 
 require_once DOCUMENT_ROOT . 'app/modulos/gastos/gastos.modelo.php';

@@ -11,7 +11,7 @@
  *  Instagram: http://instagram.com/softmormx
  *  Twitter: https://twitter.com/softmormx
  */
-@session_start();
+
 
 include_once '../../../config.php';
 

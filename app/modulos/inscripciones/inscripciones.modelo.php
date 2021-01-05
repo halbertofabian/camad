@@ -34,7 +34,7 @@ class InscripcionesModelo
             $pps->bindValue(10, $ins['fpg_liga']);
             $pps->bindValue(11, $ins['fpg_usuario_registro']);
             $pps->bindValue(12, FECHA);
-            $pps->bindValue(13, SUCURSAL_ID);
+            $pps->bindValue(13, $_SESSION['session_suc']['scl_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -66,9 +66,10 @@ class InscripcionesModelo
         try {
             //code...
             if ($usr_id == "") {
-                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete ";
+                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg.fpg_id_sucursal = ? ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
+                $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             } elseif ($usr_id != "") {

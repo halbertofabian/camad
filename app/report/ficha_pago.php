@@ -1,6 +1,7 @@
 <?php
 ob_start();
 include_once '../../config.php';
+
 require_once DOCUMENT_ROOT . 'app/modulos/pagos/pagos.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/pagos/pagos.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.modelo.php';
@@ -54,11 +55,11 @@ $pdf->setFontSubsetting(true);
 $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);
 $pdf->SetMargins(8, 4, 6, 0);
-$pdf->SetFont('Courier', '', 12, '', true);
+$pdf->SetFont('Courier', '', 20, '', true);
 
-$impresion = 190;
+$impresion = 210;
 $impresion2 = $impresion / 2;
-$formato = 'A7';
+$formato = 'A4';
 // Add a page
 // This method has several options, check the source code documentation for more information.
 $pdf->AddPage('P', $formato);
@@ -80,6 +81,7 @@ $alumno = UsuariosModelo::mdlMostrarUsuarios('', '', true, $vfch['vfch_alumno'])
 $abonos = PagosModelo::mdlMostrarCarritoAlumno($vfch['vfch_ficha_pago'], $vfch['vfch_id']);
 
 
+
 // preArray($vfch);
 // preArray($alumno);
 // preArray($abonos);
@@ -88,7 +90,7 @@ $abonos = PagosModelo::mdlMostrarCarritoAlumno($vfch['vfch_ficha_pago'], $vfch['
 // Set some content to print
 $header = <<<EOD
 
-    <table style="font-size:9px">
+    <table style="font-size:10px">
         <thead>
             <tr>
                 <td style="text-align: center; width:$impresion px;">
@@ -148,7 +150,7 @@ $pdf->writeHTMLCell(0, 0, '', '', $header, 0, 1, 0, true, '', true);
 foreach ($abonos as $key => $abs) :
     $body = <<<EOD
 
-    <table style="font-size:9px">
+    <table style="font-size:10px">
         <thead>
             <tr>
                 <td style="text-align: left; width:$impresion px;">
@@ -177,7 +179,7 @@ $descuento = $vfch['vfch_sub_monto'] - $vfch['vfch_monto'];
 
 $header = <<<EOD
 
-    <table style="font-size:9px">
+    <table style="font-size:10px">
         <thead>
         
             <tr>

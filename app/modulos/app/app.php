@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="keywords" content="admin template, Vuexy admin template, Panel de control template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title>S.E.A.D - SYSTEM </title>
     <link rel="apple-touch-icon" href="<?php echo  HTTP_HOST . 'app/assets/' ?>images/ico/apple-icon-120.png">
@@ -34,7 +34,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/core/menu/menu-types/horizontal-menu.css">
     <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/pages/dashboard-analytics.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/pages/Panel de control-analytics.css">
     <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/pages/card-analytics.css">
     <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/plugins/tour/tour.css">
     <!-- END: Page CSS-->
@@ -96,7 +96,7 @@
     <!-- Toastr -->
     <script src="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/toastr/build/toastr.min.js"></script>
     <!-- BEGIN: Page JS-->
-    <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>js/scripts/pages/dashboard-analytics.js"></script>
+    <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>js/scripts/pages/Panel de control-analytics.js"></script>
 
     <!-- <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>plugin/select2/select2.full.min.js"></script> -->
     <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>plugin/select2-c/js/select2.min.js"></script>
@@ -125,7 +125,16 @@
             <div class="navbar-header d-xl-block d-none">
                 <ul class="nav navbar-nav flex-row">
                     <li class="nav-item"><a class="navbar-brand" href="">
-                            <div class="brand-logo"></div>
+                            <div class="brand-logo">
+                                <img src="<?php echo  ICON_APP ?>" width="35" alt="">
+                                <?php if (isset($_SESSION['session_suc']['scl_nombre'])) {
+                                    echo $_SESSION['session_suc']['scl_nombre'];
+                                } else {
+                                    echo "";
+                                }
+
+                                ?>
+                            </div>
                         </a></li>
                 </ul>
             </div>
@@ -236,6 +245,9 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item" href="<?php echo HTTP_HOST . 'mi-perfil' ?>"><i class="feather icon-user"></i> Editar perfil</a>
+                                    <?php if ($_SESSION['session_usr']['usr_rol'] != "Alumno") : ?>
+                                        <a class="dropdown-item" href="<?php echo HTTP_HOST . 'plantel' ?>"><i class="feather icon-grid"></i> Cambio de sucursal</a>
+                                    <?php endif; ?>
                                     <!-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My -->
                                     <!-- Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a> -->
                                     <!-- <div class="dropdown-divider"></div> -->
@@ -247,6 +259,18 @@
                 </div>
             </div>
         </nav>
+        <?php
+        if (isset($_GET['ruta']) && $_GET['ruta'] == "plantel" && $_SESSION['session_usr']['usr_rol'] != "Alumno") {
+            echo '<br><br><br><br><br>';
+            cargarPagina('plantel');
+            return;
+        }
+        if (!isset($_SESSION['session_suc'])) {
+            echo '<br><br><br><br><br>';
+            cargarPagina('plantel');
+            return;
+        }
+        ?>
         <ul class="main-search-list-defaultlist d-none">
             <li class="d-flex align-items-center"><a class="pb-25" href="#">
                     <h6 class="text-primary mb-0">Files</h6>
@@ -350,12 +374,12 @@
                         <!-- include ../../../includes/mixins-->
                         <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
 
-                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown"><i class="feather icon-home"></i><span data-i18n="Dashboard">Dasboard</span></a>
+                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown"><i class="feather icon-home"></i><span data-i18n="Panel de control">Panel de control</span></a>
                                 <ul class="dropdown-menu">
-                                    <li class="active" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-home"></i>Inicio</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-home"></i>Inicio</a>
                                         <!-- 
                             </li>
-                            <li data-menu=""><a class="dropdown-item" href="dashboard-ecommerce.html" data-toggle="dropdown" data-i18n="eCommerce"><i class="feather icon-shopping-cart"></i>eCommerce</a>
+                            <li data-menu=""><a class="dropdown-item" href="Panel de control-ecommerce.html" data-toggle="dropdown" data-i18n="eCommerce"><i class="feather icon-shopping-cart"></i>eCommerce</a>
                             </li> -->
                                 </ul>
                             </li>
@@ -435,12 +459,13 @@
                         <!-- include ../../../includes/mixins-->
                         <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
 
-                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown"><i class="feather icon-home"></i><span data-i18n="Dashboard">Dasboard</span></a>
+                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown"><i class="feather icon-home"></i><span data-i18n="Panel de control">Panel de control</span></a>
                                 <ul class="dropdown-menu">
-                                    <li class="active" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-home"></i>Inicio</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-home"></i>Inicio</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'sucursales' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-home"></i>Sucursales</a>
                                         <!-- 
                             </li>
-                            <li data-menu=""><a class="dropdown-item" href="dashboard-ecommerce.html" data-toggle="dropdown" data-i18n="eCommerce"><i class="feather icon-shopping-cart"></i>eCommerce</a>
+                            <li data-menu=""><a class="dropdown-item" href="Panel de control-ecommerce.html" data-toggle="dropdown" data-i18n="eCommerce"><i class="feather icon-shopping-cart"></i>eCommerce</a>
                             </li> -->
                                 </ul>
                             </li>
@@ -478,6 +503,8 @@
                                     <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/new' ?>" data-toggle="dropdown" data-i18n="Nuevo pago"><i class="feather icon-plus"></i>Nuevo pago</a>
                                     </li>
                                     <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/fichas' ?>" data-toggle="dropdown" data-i18n="Historial de pagos"><i class="feather icon-plus"></i>Historial de fichas</a>
+                                    </li>
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/fichas-canceladas' ?>" data-toggle="dropdown" data-i18n="Historial de fichas canceladas"><i class="feather icon-plus"></i>Fichas canceladas</a>
                                     </li>
                                 </ul>
                             </li>

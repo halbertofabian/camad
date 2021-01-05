@@ -14,7 +14,7 @@ if (isset($rutas[2]) && isset($rutas[3])) :
                     <button type="button" class="btn  float-right btn-link mb-1 ">Buscar alumno</button>
 
                     <div class="input-group mb-3">
-                        <input type="text" id="usr_matricula" readonly class="form-control" value="<?php echo str_replace(SUB_FIJO, '', $rutas[2]) ?>" placeholder="Dígite la matricula del alumno">
+                        <input type="text" id="usr_matricula" readonly class="form-control" value="<?php echo str_replace($_SESSION['session_suc']['scl_sub_fijo'], '', $rutas[2]) ?>" placeholder="Dígite la matricula del alumno">
                     </div>
 
                 </div> -->
@@ -25,9 +25,9 @@ if (isset($rutas[2]) && isset($rutas[3])) :
                     <div class="input-group mb-3">
 
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><?php echo SUB_FIJO ?></span>
+                            <span class="input-group-text" id="basic-addon1"><?php echo $_SESSION['session_suc']['scl_sub_fijo'] ?></span>
                         </div>
-                        <input type="number" id="usr_matricula" readonly class="form-control" value="<?php echo str_replace(SUB_FIJO, '', $rutas[2]) ?>" placeholder="Dígite la matricula del alumno" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="number" id="usr_matricula" readonly class="form-control" value="<?php echo str_replace($_SESSION['session_suc']['scl_sub_fijo'], '', $rutas[2]) ?>" placeholder="Dígite la matricula del alumno" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
 
                 </div>
@@ -563,7 +563,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
 
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><?php echo SUB_FIJO ?></span>
+                            <span class="input-group-text" id="basic-addon1"><?php echo $_SESSION['session_suc']['scl_sub_fijo'] ?></span>
                         </div>
                         <input type="number" id="usr_matricula" class="form-control" placeholder="Dígite la matricula del alumno" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
@@ -915,7 +915,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                             </tr>
                             <tr style="background-color: #A7D3F3;">
                                 <th><?php echo $alumno['usr_matricula'] ?></th>
-                                <th><?php echo $alumno['usr_nombre'].' '. $alumno['usr_app'] .' '. $alumno['usr_apm']  ?></th>
+                                <th><?php echo $alumno['usr_nombre'] . ' ' . $alumno['usr_app'] . ' ' . $alumno['usr_apm']  ?></th>
 
                                 <th style="text-align: right;">
 
@@ -1048,7 +1048,17 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                         foreach ($fichas_venta as $key => $ppg) :
 
                         ?>
-                            <tr>
+
+                            <?php
+                            $vfch_class = "";
+                            if ($ppg['vfch_solicitud_cancelacion'] == 1) {
+                                $vfch_class = "bg-warning";
+                                $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
+                            } else {
+                                $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago mt-1" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
+                            }
+                            ?>
+                            <tr class="<?php echo $vfch_class  ?>">
 
                                 <td>
                                     <a href="<?php echo HTTP_HOST . 'pagos/fichas/' . $ppg['vfch_id'] ?>" class="btn btn-dark"><?php echo $ppg['vfch_id'] ?></a>
@@ -1064,9 +1074,11 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 <td><?php echo $ppg['vfch_usuario_registro'] ?></td>
                                 <td><?php echo $ppg['vfch_estado'] ?></td>
                                 <td>
-                                    <div class="btn-group">
-                                        <a class="btn btn-info" href="<?php echo HTTP_HOST . 'pagos/ficha/' . $ppg['vfch_id'] ?> " data-toggle="tooltip" data-placement="top" title="Ver ficha de pago" "><i class=" fa fa-file-pdf-o"></i></a>
-                                    </div>
+
+                                    <a class="btn btn-info" href="<?php echo HTTP_HOST . 'pagos/ficha/' . $ppg['vfch_id'] ?> " data-toggle="tooltip" data-placement="top" title="Ver ficha de pago" "><i class=" fa fa-file-pdf-o"></i></a>
+
+
+                                    <?php echo $vfch_button ?>
                                 </td>
 
 
@@ -1077,6 +1089,98 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
             </div>
         </div>
     </div>
+
+<?php elseif (isset($rutas[1]) && $rutas[1] == "fichas-canceladas") :
+    cargarComponente('breadcrumb', '', 'Fichas de pago canceladas');
+?>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <p>
+                <div style="border: 3px solid #FF9F43; width: 40px; display: inline-block;"></div>
+                <strong>Solicitud de cancelación en espera de aprobación</strong>
+                </p>
+                <p>
+                <div style="border: 3px solid #28C76F; width: 40px; display: inline-block;"></div>
+                <strong>Solicitud de cancelación aprobada</strong>
+                </p>
+                <p>
+                <div style="border: 3px solid #EA5455; width: 40px; display: inline-block;"></div>
+                <strong>Solicitud de cancelación rechazada</strong>
+                </p>
+
+            </div>
+        </div>
+        <div class="row">
+            <!-- <button type="button" class="btn btn-dark" id="btnImprimir" >Imprimir</button> -->
+            <div class="col-12 table-responsive table-bordered tablaPagosAlumno table-striped dt-responsive table-hover" id="tablaPagosAlumno">
+                <table class="table tablas tablasPagosAlumnosCancelar ">
+                    <thead>
+                        <tr>
+                            <th># Número de ficha</th>
+                            <th>Monto</th>
+                            <th>Método de pago</th>
+                            <th>Usuario solicito</th>
+                            <th>Fecha solicitud</th>
+                            <th>Justificación de cancelación</th>
+                            <th>Usuario responsable</th>
+                            <th>Fecha atendio</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+
+                        $fichas_venta =  PagosModelo::mdlConsultarFichas("", "", 1);
+                        //preArray($pagos);
+                        foreach ($fichas_venta as $key => $ppg) :
+
+                        ?>
+
+                            <?php
+                            $vfch_class = "";
+                            if ($ppg['vfch_solicitud_cancelacion'] == 1) {
+                                $vfch_class = "bg-warning";
+                                $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
+                            } elseif ($ppg['vfch_solicitud_cancelacion'] == 2) {
+                                $vfch_class = "background-color: green ";
+                                $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
+                            }
+                            ?>
+                            <tr class="<?php echo $vfch_class  ?>">
+
+                                <td>
+                                    <a href="<?php echo HTTP_HOST . 'pagos/fichas/' . $ppg['vfch_id'] ?>" class="btn btn-dark"><?php echo $ppg['vfch_id'] ?></a>
+                                </td>
+                                <td>$<?php echo number_format($ppg['vfch_monto'], 2) ?></td>
+                                <th><?php echo $ppg['vfch_mp'] ?> </th>
+                                <td><?php echo $ppg['vfch_usuario_solicito'] ?></td>
+                                <td><?php echo $ppg['vfch_fecha_solicitud'] ?></td>
+                                <td><?php echo $ppg['vfch_justificacion'] ?></td>
+                                <td><?php echo $ppg['vfch_usuario_aprobo'] ?></td>
+                                <td><?php echo $ppg['vfch_fecha_aprobacion'] ?></td>
+                                <td style="width: 150px;">
+
+
+
+                                    <select class="form-control btnCambioEstadoSolicitud" vfch_id="<?php echo $ppg['vfch_id'] ?>" name="vfch_solicitud_cancelacion" id="vfch_solicitud_cancelacion">
+                                        <option value="1">Pendiente</option>
+                                        <option value="2">Aprobar</option>
+                                        <option value="3">Rechazar</option>
+                                    </select>
+
+                                </td>
+
+
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
 
 
 <?php elseif (isset($rutas[1]) && $rutas[1] == "historial") :

@@ -22,7 +22,8 @@ class AppControlador
             'listar-gastos',
             'listar-ingresos',
             'categorias',
-            'mi-perfil'
+            'mi-perfil',
+            'sucursales'
         );
     }
     public static function obtenerListaBlancaAlumno()

@@ -12,7 +12,6 @@
  *  Twitter: https://twitter.com/softmormx
  */
 
-session_start();
 include_once '../../../config.php';
 
 require_once DOCUMENT_ROOT . 'app/modulos/pagos/pagos.modelo.php';
@@ -86,6 +85,17 @@ class PagosAjax
         $res = PagosControlador::ctrAplicarCupon();
         echo json_encode($res, true);
     }
+
+    public function ajaxSolicitudCancelacion()
+    {
+        $res = PagosControlador::ctrSolicitudCancelacion();
+        echo json_encode($res, true);
+    }
+    public function ajaxCambioEstadoSolicitud()
+    {
+        $res = PagosControlador::ctrCambioEstadoSolicitud();
+        echo json_encode($res, true);
+    }
 }
 
 if (isset($_POST['btnRevisarPagos'])) {
@@ -142,3 +152,14 @@ if (isset($_POST['btnAplicarCupon'])) {
     $revisarPgos = new PagosAjax();
     $revisarPgos->ajaxAplicarCupon();
 }
+
+if (isset($_POST['btnCanelarFichaPago'])) {
+    $cancelarFicha = new PagosAjax();
+    $cancelarFicha->ajaxSolicitudCancelacion();
+}
+
+if (isset($_POST['btnCambioEstadoSolicitud'])) {
+    $cancelarFicha = new PagosAjax();
+    $cancelarFicha->ajaxCambioEstadoSolicitud();
+}
+

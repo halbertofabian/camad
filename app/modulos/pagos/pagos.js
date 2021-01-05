@@ -605,9 +605,9 @@ function listarCarrito() {
             var ppg_monto_total = 0;
             res.forEach(ppg => {
                 ppg_sub_total += Number(ppg.ppg_monto);
-                if(Number(ppg.ppg_descuento) >0){
+                if (Number(ppg.ppg_descuento) > 0) {
                     ppg_monto_total = (Number(ppg.ppg_monto)) - (Number(ppg.ppg_monto) * Number(ppg.ppg_descuento) / 100)
-                }else{
+                } else {
                     ppg_monto_total = ppg.ppg_monto
                 }
                 // ppg_monto_total = (Number(ppg.ppg_monto)) - (Number(ppg.ppg_monto) * Number(ppg.ppg_descuento) / 100)
@@ -677,4 +677,141 @@ $("#btnAplicarCupon").on("click", function () {
         }
 
     })
+})
+
+$(".tablasPagosAlumnos tbody").on("click", "button.btnCanelarFichaPago", function () {
+    var vfch_id = $(this).attr("vfch_id");
+    swal({
+        title: "¿Estás seguro de realizar el proceso de cancelación?",
+        text: "Se realizará una petición a los administradores para cancelar la ficha de pago # " + vfch_id,
+        icon: "warning",
+        buttons: ['No, cancelar', 'Si, cancelar ficha de pago'],
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal(" Escribe el motivo por el cual estás solicitando su cancelación", {
+                    content: "input",
+                })
+                    .then((value) => {
+                        if (value != "") {
+
+                            var vfch_justificacion = value;
+
+                            var datos = new FormData();
+
+                            datos.append("vfch_id", vfch_id);
+                            datos.append("vfch_justificacion", vfch_justificacion);
+                            datos.append("btnCanelarFichaPago", true);
+
+                            $.ajax({
+                                type: "POST",
+                                url: urlApp + 'app/modulos/pagos/pagos.ajax.php',
+                                data: datos,
+                                cache: false,
+                                dataType: "json",
+                                processData: false,
+                                contentType: false,
+                                beforeSend: function () {
+
+                                },
+                                success: function (res) {
+
+                                    if (res.status) {
+
+
+                                        swal({
+                                            title: "!Muy bien¡",
+                                            text: res.mensaje,
+                                            icon: "success",
+                                            buttons: [false, "Continuar"],
+                                            dangerMode: true,
+                                            closeOnClickOutside: false,
+                                        })
+                                            .then((willDelete) => {
+                                                if (willDelete) {
+                                                    location.href = res.pagina
+                                                } else {
+                                                    location.href = res.pagina
+                                                }
+                                            });
+
+
+                                    } else {
+                                        swal({
+                                            title: "!Error¡",
+                                            text: res.mensaje,
+                                            icon: "error",
+                                            buttons: [false, "Continuar"],
+                                            dangerMode: true,
+                                            closeOnClickOutside: false,
+                                        })
+                                            .then((willDelete) => {
+                                                if (willDelete) {
+                                                    location.href = res.pagina
+                                                } else {
+                                                    location.href = res.pagina
+                                                }
+                                            });
+
+                                    }
+                                }
+                            })
+
+
+
+                        } else {
+                            swal(`Debes de escribir el porqué`);
+
+                        }
+                    });
+            }
+        })
+})
+
+
+$(".btnCambioEstadoSolicitud").on("change", function () {
+
+
+    var vfch_solicitud_cancelacion = $(this).val();
+    var vfch_id = $(this).attr("vfch_id");
+
+    swal({
+        title: "¿Estás seguro de realizar está operación?",
+        text: "Se realizara este aprobación / rechazo a la ficha # " + vfch_id,
+        icon: "warning",
+        buttons: ['No, cancelar', 'Si, continuar'],
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+
+                var datos = new FormData()
+                datos.append("vfch_solicitud_cancelacion", vfch_solicitud_cancelacion);
+                datos.append("vfch_id", vfch_id);
+                datos.append("btnCambioEstadoSolicitud", true);
+
+                $.ajax({
+                    type: "POST",
+                    url: urlApp + 'app/modulos/pagos/pagos.ajax.php',
+                    data: datos,
+                    cache: false,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+
+                    },
+                    success: function (res) {
+
+                        if (res.status) {
+
+                        }else{
+                            
+                        }
+                    }
+                })
+            }
+        })
+
 })

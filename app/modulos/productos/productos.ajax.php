@@ -11,8 +11,6 @@
  *  Instagram: http://instagram.com/softmormx
  *  Twitter: https://twitter.com/softmormx
  */
-
-session_start();
 include_once '../../../config.php';
 
 require_once DOCUMENT_ROOT . 'app/modulos/productos/productos.modelo.php';

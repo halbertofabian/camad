@@ -2,7 +2,7 @@
 <?php
 /**
  *  Desarrollador: ifixitmor
- *  Fecha de creación: 27/11/2020 01:39
+ *  Fecha de creación: 04/01/2021 22:49
  *  Desarrollado por: Softmor
  *  Software de Morelos SA.DE.CV 
  *  Sitio web: https://softmor.com
@@ -12,24 +12,23 @@
  */
 require_once DOCUMENT_ROOT . "app/modulos/conexion/conexion.php";
 
-class PaquetesModelo
+class SucursalesModelo
 {
-    public static function mdlAgregarPaquetes($pqt)
+    public static function mdlAgregarSucursales($scl)
     {
         try {
             //code...
-            $sql = "INSERT INTO tbl_paquete_pqt (pqt_sku,pqt_nombre,pqt_modalidad,pqt_duracion,pqt_descripcion,pqt_costo,pqt_usuario_registro,pqt_fecha_registro,pqt_id_sucursal) VALUES(?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO tbl_sucursal_scl (scl_id,scl_nombre,scl_direccion,scl_rfc,scl_telefono,scl_sub_fijo,scl_usuario_registro,scl_fecha_registro) VALUES (?,?,?,?,?,?,?,?)";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
-            $pps->bindValue(1, $pqt['pqt_sku']);
-            $pps->bindValue(2, $pqt['pqt_nombre']);
-            $pps->bindValue(3, $pqt['pqt_modalidad']);
-            $pps->bindValue(4, $pqt['pqt_duracion']);
-            $pps->bindValue(5, $pqt['pqt_descripcion']);
-            $pps->bindValue(6, $pqt['pqt_costo']);
-            $pps->bindValue(7, $_SESSION['session_usr']['usr_nombre']);
-            $pps->bindValue(8, FECHA);
-            $pps->bindValue(9, $_SESSION['session_suc']['scl_id']);
+            $pps->bindValue(1, $scl['scl_id']);
+            $pps->bindValue(2, $scl['scl_nombre']);
+            $pps->bindValue(3, $scl['scl_direccion']);
+            $pps->bindValue(4, $scl['scl_rfc']);
+            $pps->bindValue(5, $scl['scl_telefono']);
+            $pps->bindValue(6, $scl['scl_sub_fijo']);
+            $pps->bindValue(7, $scl['scl_usuario_registro']);
+            $pps->bindValue(8, $scl['scl_fecha_registro']);
 
             $pps->execute();
             return $pps->rowCount() > 0;
@@ -40,7 +39,7 @@ class PaquetesModelo
             $con = null;
         }
     }
-    public static function mdlActualizarPaquetes()
+    public static function mdlActualizarSucursales()
     {
         try {
             //code...
@@ -57,35 +56,33 @@ class PaquetesModelo
             $con = null;
         }
     }
-    public static function mdlMostrarPaquetes($pqt_sku = "")
+    public static function mdlMostrarSucursales($scl_id = "")
     {
         try {
             //code...
-            if ($pqt_sku == "") {
-                $sql = "SELECT * FROM tbl_paquete_pqt WHERE pqt_estado_actividad = 1  ";
+            if ($scl_id == "") {
+                $sql = "SELECT * FROM tbl_sucursal_scl";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
-                // $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+
                 $pps->execute();
                 return $pps->fetchAll();
-            } elseif ($pqt_sku != "") {
-                $sql = "SELECT * FROM tbl_paquete_pqt WHERE pqt_estado_actividad = 1  AND pqt_sku = ? ";
+            } elseif ($scl_id != "") {
+                $sql = "SELECT * FROM tbl_sucursal_scl WHERE scl_id = ?";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
-                // $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
-                $pps->bindValue(1, $pqt_sku);
+                $pps->bindValue(1, $scl_id);
                 $pps->execute();
                 return $pps->fetch();
             }
         } catch (PDOException $th) {
             //throw $th;
-            return false;
         } finally {
             $pps = null;
             $con = null;
         }
     }
-    public static function mdlEliminarPaquetes()
+    public static function mdlEliminarSucursales()
     {
         try {
             //code...
@@ -102,6 +99,4 @@ class PaquetesModelo
             $con = null;
         }
     }
-
-    
 }

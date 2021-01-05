@@ -1,4 +1,4 @@
-<?php if ($rutas[1] == $_SESSION['session_usr']['usr_id']) : ?>
+<?php if ($rutas[1] == $_SESSION['session_usr']['usr_id'] || $_SESSION['session_usr']['usr_rol'] != "Alumno" ) : ?>
 
     <div class="container">
 

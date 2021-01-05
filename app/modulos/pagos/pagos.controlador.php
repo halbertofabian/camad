@@ -19,7 +19,7 @@ class PagosControlador
     //         $_POST['ppg_adeudo'] =  str_replace(",", "", $_POST['ppg_adeudo'])  -  $_POST['ppg_monto'];
     //         $_POST['ppg_fecha_registro']  = FECHA;
     //         $_POST['ppg_usuario_registro']  = $_SESSION['session_usr']['usr_nombre'];
-    //         $_POST['ppg_id_sucursal'] = SUCURSAL_ID;
+    //         $_POST['ppg_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
     //         $_POST['ppg_ficha_pago'] = $_POST['fpg_id'];
 
     //         if ($_POST['ppg_monto'] <= 0) {
@@ -132,7 +132,7 @@ class PagosControlador
 
             $_POST['ppg_fecha_registro']  = FECHA;
             $_POST['ppg_usuario_registro']  = $_SESSION['session_usr']['usr_nombre'];
-            $_POST['ppg_id_sucursal'] = SUCURSAL_ID;
+            $_POST['ppg_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
             $_POST['ppg_ficha_pago'] = $_POST['ppg_ficha_pago'];
             $_POST['ppg_ficha_venta'] = $_POST['ppg_ficha_venta'];
 
@@ -246,7 +246,7 @@ class PagosControlador
     {
         if (isset($_POST['btnRevisarPagos'])) {
 
-            $_POST['usr_matricula'] =  SUB_FIJO . $_POST['usr_matricula'];
+            $_POST['usr_matricula'] =  $_SESSION['session_suc']['scl_sub_fijo'] . $_POST['usr_matricula'];
             // Consultar si existe el alumno
             $alumno_pgo = UsuariosModelo::mdlMostrarUsuarios('', '', true, $_POST['usr_matricula']);
             if ($alumno_pgo == null) {
@@ -271,44 +271,45 @@ class PagosControlador
         $dt_incripcion = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_INSCRIPCION',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_incripcion_adeudo = $dt_incripcion['ppg_adeudo'] == "" ? $dt_ficha['fpg_inscripcion'] : $dt_incripcion['ppg_adeudo'];
+        $dt_incripcion_adeudo = $dt_incripcion['ppg_adeudo_s'] == 0 ? $dt_ficha['fpg_inscripcion'] : $dt_ficha['fpg_inscripcion'] - $dt_incripcion['ppg_adeudo_s'];
 
         $dt_examen = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_EXAMEN',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_examen_adeudo = $dt_examen['ppg_adeudo'] == "" ? $dt_ficha['fpg_examen'] : $dt_examen['ppg_adeudo'];
+        $dt_examen_adeudo = $dt_examen['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_examen'] : $dt_ficha['fpg_examen'] - $dt_examen['ppg_adeudo_s'];
 
         $dt_guia = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_GUIA',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_guia_adeudo = $dt_guia['ppg_adeudo'] == "" ? $dt_ficha['fpg_guia'] : $dt_guia['ppg_adeudo'];
+        $dt_guia_adeudo = $dt_guia['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_guia'] : $dt_ficha['fpg_guia'] - $dt_guia['ppg_adeudo_s'];
 
         $dt_incorporacion = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_INCORPORACION',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_incorporacion_adeudo = $dt_incorporacion['ppg_adeudo'] == "" ? $dt_ficha['fpg_incorporacion'] : $dt_incorporacion['ppg_adeudo'];
+        $dt_incorporacion_adeudo = $dt_incorporacion['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_incorporacion'] : $dt_ficha['fpg_incorporacion'] - $dt_incorporacion['ppg_adeudo_s'];
 
         $dt_certificado = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_CERTIFICADO',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_certificado_adeudo = $dt_certificado['ppg_adeudo'] == "" ? $dt_ficha['fpg_certificado'] : $dt_certificado['ppg_adeudo'];
+        $dt_certificado_adeudo = $dt_certificado['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_certificado'] : $dt_ficha['fpg_certificado'] - $dt_certificado['ppg_adeudo_s'];
 
         $dt_semanal = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_SEMANAL',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_semanal_adeudo = $dt_semanal['ppg_adeudo'] == "" ? $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] : $dt_semanal['ppg_adeudo'];
+        $dt_semanal_adeudo = $dt_semanal['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] : $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] - $dt_semanal['ppg_adeudo_s'];
+
 
 
         return array(
@@ -348,44 +349,44 @@ class PagosControlador
         $dt_incripcion = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_INSCRIPCION',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_incripcion_adeudo = $dt_incripcion['ppg_adeudo'] == "" ? $dt_ficha['fpg_inscripcion'] : $dt_incripcion['ppg_adeudo'];
+        $dt_incripcion_adeudo = $dt_incripcion['ppg_adeudo_s'] == 0 ? $dt_ficha['fpg_inscripcion'] : $dt_ficha['fpg_inscripcion'] - $dt_incripcion['ppg_adeudo_s'];
 
         $dt_examen = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_EXAMEN',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_examen_adeudo = $dt_examen['ppg_adeudo'] == "" ? $dt_ficha['fpg_examen'] : $dt_examen['ppg_adeudo'];
+        $dt_examen_adeudo = $dt_examen['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_examen'] : $dt_ficha['fpg_examen'] - $dt_examen['ppg_adeudo_s'];
 
         $dt_guia = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_GUIA',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_guia_adeudo = $dt_guia['ppg_adeudo'] == "" ? $dt_ficha['fpg_guia'] : $dt_guia['ppg_adeudo'];
+        $dt_guia_adeudo = $dt_guia['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_guia'] : $dt_ficha['fpg_guia'] - $dt_guia['ppg_adeudo_s'];
 
         $dt_incorporacion = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_INCORPORACION',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_incorporacion_adeudo = $dt_incorporacion['ppg_adeudo'] == "" ? $dt_ficha['fpg_incorporacion'] : $dt_incorporacion['ppg_adeudo'];
+        $dt_incorporacion_adeudo = $dt_incorporacion['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_incorporacion'] : $dt_ficha['fpg_incorporacion'] - $dt_incorporacion['ppg_adeudo_s'];
 
         $dt_certificado = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_CERTIFICADO',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_certificado_adeudo = $dt_certificado['ppg_adeudo'] == "" ? $dt_ficha['fpg_certificado'] : $dt_certificado['ppg_adeudo'];
+        $dt_certificado_adeudo = $dt_certificado['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_certificado'] : $dt_ficha['fpg_certificado'] - $dt_certificado['ppg_adeudo_s'];
 
         $dt_semanal = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_SEMANAL',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_semanal_adeudo = $dt_semanal['ppg_adeudo'] == "" ? $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] : $dt_semanal['ppg_adeudo'];
+        $dt_semanal_adeudo = $dt_semanal['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] : $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] - $dt_semanal['ppg_adeudo_s'];
 
 
         return array(
@@ -425,44 +426,45 @@ class PagosControlador
         $dt_incripcion = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_INSCRIPCION',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_incripcion_adeudo = $dt_incripcion['ppg_adeudo'] == "" ? $dt_ficha['fpg_inscripcion'] : $dt_incripcion['ppg_adeudo'];
+        $dt_incripcion_adeudo = $dt_incripcion['ppg_adeudo_s'] == 0 ? $dt_ficha['fpg_inscripcion'] : $dt_ficha['fpg_inscripcion'] - $dt_incripcion['ppg_adeudo_s'];
 
         $dt_examen = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_EXAMEN',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_examen_adeudo = $dt_examen['ppg_adeudo'] == "" ? $dt_ficha['fpg_examen'] : $dt_examen['ppg_adeudo'];
+        $dt_examen_adeudo = $dt_examen['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_examen'] : $dt_ficha['fpg_examen'] - $dt_examen['ppg_adeudo_s'];
 
         $dt_guia = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_GUIA',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_guia_adeudo = $dt_guia['ppg_adeudo'] == "" ? $dt_ficha['fpg_guia'] : $dt_guia['ppg_adeudo'];
+        $dt_guia_adeudo = $dt_guia['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_guia'] : $dt_ficha['fpg_guia'] - $dt_guia['ppg_adeudo_s'];
 
         $dt_incorporacion = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_INCORPORACION',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_incorporacion_adeudo = $dt_incorporacion['ppg_adeudo'] == "" ? $dt_ficha['fpg_incorporacion'] : $dt_incorporacion['ppg_adeudo'];
+        $dt_incorporacion_adeudo = $dt_incorporacion['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_incorporacion'] : $dt_ficha['fpg_incorporacion'] - $dt_incorporacion['ppg_adeudo_s'];
 
         $dt_certificado = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_CERTIFICADO',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_certificado_adeudo = $dt_certificado['ppg_adeudo'] == "" ? $dt_ficha['fpg_certificado'] : $dt_certificado['ppg_adeudo'];
+        $dt_certificado_adeudo = $dt_certificado['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_certificado'] : $dt_ficha['fpg_certificado'] - $dt_certificado['ppg_adeudo_s'];
 
         $dt_semanal = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => 'PPG_SEMANAL',
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
-        $dt_semanal_adeudo = $dt_semanal['ppg_adeudo'] == "" ? $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] : $dt_semanal['ppg_adeudo'];
+        $dt_semanal_adeudo = $dt_semanal['ppg_adeudo_s'] == "" ? $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] : $dt_ficha['fpg_semana'] * $dt_ficha['fpg_numero_semana'] - $dt_semanal['ppg_adeudo_s'];
+
 
 
         return array(
@@ -501,7 +503,7 @@ class PagosControlador
         $dt_incripcion = PagosModelo::mdlMostrarDatosFichaPago(array(
             'ppg_ficha_pago' => $dt_ficha['fpg_id'],
             'ppg_concepto' => $_POST['ppg_concepto'],
-            'ppg_id_sucursal' => SUCURSAL_ID
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
         ));
         if ($_POST['ppg_concepto'] == '') {
             $dt_incripcion_adeudo = $dt_incripcion['ppg_adeudo'] == "" ? $dt_ficha['fpg_inscripcion'] : $dt_incripcion['ppg_adeudo'];
@@ -524,7 +526,7 @@ class PagosControlador
 
             $_POST['vfch_fecha_registro'] = FECHA;
             $_POST['vfch_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
-            $_POST['vfch_id_sucursal'] = SUCURSAL_ID;
+            $_POST['vfch_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
             $_POST['vfch_id'] = $vfch_id['vfch_id'];
 
             $empezarVentaFicha = PagosModelo::mdlEmpezarVenta($_POST);
@@ -625,6 +627,63 @@ class PagosControlador
                 'mensaje' => 'Cupón aplicado',
                 'data' => $restrinciones['cupon']
             );
+        }
+    }
+
+    public  static function ctrSolicitudCancelacion()
+    {
+        if (isset($_POST['btnCanelarFichaPago'])) {
+
+            $_POST['vfch_usuario_solicito'] = $_SESSION['session_usr']['usr_nombre'];
+            $_POST['vfch_fecha_solicitud'] = FECHA;
+
+            $cancelacion = PagosModelo::mdlSolicitudCancelacion($_POST);
+
+            if ($cancelacion) {
+
+                return array(
+                    'mensaje' => "Tu solicitud fue enviada con éxito a los administradores. Como recomendación espera a que aprueben tu solicitud antes de seguir abonando sobre esta inscripción",
+                    'status' => true,
+                    'pagina' => HTTP_HOST . 'pagos/fichas'
+                );
+            } else {
+                return array(
+                    'mensaje' => 'Ocurrio un error, recarga la página e intenta de nuevo',
+                    'status' => false,
+                    'pagina' => HTTP_HOST . 'pagos/fichas'
+
+                );
+            }
+        }
+    }
+
+    public  static function ctrCambioEstadoSolicitud()
+    {
+        if (isset($_POST['btnCambioEstadoSolicitud'])) {
+
+            if ($_POST['vfch_solicitud_cancelacion'] ==  2) {
+
+                $_POST['vfch_usuario_aprobo'] = $_SESSION['session_usr']['usr_nombre'];
+                $_POST['vfch_fecha_aprobacion'] = FECHA;
+                $cancelacion = PagosModelo::mdlSolicitudCancelacion2($_POST);
+
+                if ($cancelacion) {
+
+                    return array(
+                        'mensaje' => "cancelación aprobada",
+                        'status' => true,
+                        'pagina' => HTTP_HOST . 'pagos/fichas-canceladas'
+                    );
+                } else {
+                    return array(
+                        'mensaje' => 'Ocurrio un error, recarga la página e intenta de nuevo',
+                        'status' => false,
+                        'pagina' => HTTP_HOST . 'pagos/fichas-canceladas'
+
+                    );
+                }
+            } else {
+            }
         }
     }
 }
