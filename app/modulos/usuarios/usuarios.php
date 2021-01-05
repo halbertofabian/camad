@@ -61,7 +61,7 @@
                                     <option value="<?php echo $usr['usr_rol'] ?>"><?php echo $usr['usr_rol'] ?></option>
                                     <option value="Administrador">Administrador</option>
                                     <option value="Ejecutivo">Ejecutivo</option>
-                                    <option value="Vendedor">Vendedor</option>
+                                    <option value="Asesor Educativo">Asesor Educativo</option>
                                     <option value="Caja">Caja</option>
                                     <option value="Auditor">Auditor</option>
                                 </select>
@@ -152,7 +152,7 @@
                                 <select name="usr_rol" id="usr_rol" class="form-control">
                                     <option value="Administrador">Administrador</option>
                                     <option value="Ejecutivo">Ejecutivo</option>
-                                    <option value="Vendedor">Vendedor</option>
+                                    <option value="Asesor Educativo">Asesor Educativo</option>
                                     <option value="Caja">Caja</option>
                                     <option value="Auditor">Auditor</option>
                                 </select>
