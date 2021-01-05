@@ -1,4 +1,4 @@
-<?php @session_start();
+<?php
 // XXX FECHA  XXX
 date_default_timezone_set('America/Mexico_city');
 $fecha = date('Y-m-d h:i:s');
