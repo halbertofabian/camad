@@ -1,4 +1,4 @@
-<?php @session_start(); ?>
+<?php ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 
@@ -116,6 +116,9 @@
     <body class="horizontal-layout horizontal-menu 2-columns  navbar-floating footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="2-columns">
 
         <div class="urlApp" urlApp="<?php echo HTTP_HOST ?>"></div>
+        <div class="session" session='<?php echo json_encode($_SESSION, true) ?>'></div>
+
+
 
         <!-- END: Header-->
         <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-fixed navbar-shadow navbar-brand-center">
@@ -512,7 +515,7 @@
 
                         cargarPagina($page, $rutas);
                     } else {
-                        var_dump($_SESSION);
+                       
                         cargarPagina('bienvenido');
                     }
 

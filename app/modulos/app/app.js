@@ -1,6 +1,7 @@
 var urlApp = $(".urlApp").attr("urlApp")
+var session = $(".session").attr("session")
 
-
+// alert(session);
 
 $(".tablas").DataTable({
 

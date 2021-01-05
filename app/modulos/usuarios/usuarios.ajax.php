@@ -13,9 +13,6 @@
  */
 include_once '../../../config.php';
 
-if (!isset($_SESSION)) {
-    session_start();
-}
 
 require_once DOCUMENT_ROOT . 'app/lib/phpMailer/Exception.php';
 require_once DOCUMENT_ROOT . 'app/lib/phpMailer/PHPMailer.php';
@@ -69,11 +66,8 @@ class UsuariosAjax
 
     public function ajaxAgreagarUsuarios()
     {
-
-
-        var_dump($_SESSION);
-        // $respuesta = UsuariosControlador::ctrAgregarUsuariosAjax();
-        // echo json_encode($respuesta, true);
+        $respuesta = UsuariosControlador::ctrAgregarUsuariosAjax();
+        echo json_encode($respuesta, true);
     }
 }
 if (isset($_POST['btnEliminarUsuario'])) {
