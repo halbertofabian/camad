@@ -1,3 +1,4 @@
+<?php @session_start(); ?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 
@@ -231,7 +232,7 @@
                                         </span><span class="user-status"><?php echo $_SESSION['session_usr']['usr_rol'] ?></span></div><span><img class="round" src="https://i.pinimg.com/originals/ff/a0/9a/ffa09aec412db3f54deadf1b3781de2a.png" alt="avatar" height="40" width="40"></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="<?php  echo HTTP_HOST.'mi-perfil' ?>"><i class="feather icon-user"></i> Editar perfil</a>
+                                    <a class="dropdown-item" href="<?php echo HTTP_HOST . 'mi-perfil' ?>"><i class="feather icon-user"></i> Editar perfil</a>
                                     <!-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My -->
                                     <!-- Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a> -->
                                     <!-- <div class="dropdown-divider"></div> -->
@@ -482,7 +483,7 @@
                             $listaBlanca = AppControlador::obtenerListaBlancaAlumno();
                         }
 
-                       
+
 
                         //Guardad en la variable la ruta que venga de GET
 
@@ -508,7 +509,7 @@
                         $page = $_404 ? '404' : $ruta_get;
 
                         //Cargar la pagina solicitada
-                        
+
                         cargarPagina($page, $rutas);
                     } else {
                         var_dump($_SESSION);
