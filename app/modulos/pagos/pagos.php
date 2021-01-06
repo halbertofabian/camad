@@ -1144,7 +1144,11 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 $vfch_class = "bg-warning";
                                 $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
                             } elseif ($ppg['vfch_solicitud_cancelacion'] == 2) {
-                                $vfch_class = "background-color: green ";
+                                $vfch_class = "bg-success";
+                                $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
+                            }
+                            elseif ($ppg['vfch_solicitud_cancelacion'] == 3) {
+                                $vfch_class = "bg-danger";
                                 $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
                             }
                             ?>
@@ -1163,12 +1167,17 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 <td style="width: 150px;">
 
 
+                                    <?php if ($ppg['vfch_solicitud_cancelacion'] == 2) : ?>
 
-                                    <select class="form-control btnCambioEstadoSolicitud" vfch_id="<?php echo $ppg['vfch_id'] ?>" name="vfch_solicitud_cancelacion" id="vfch_solicitud_cancelacion">
-                                        <option value="1">Pendiente</option>
-                                        <option value="2">Aprobar</option>
-                                        <option value="3">Rechazar</option>
-                                    </select>
+                                    <strong>APROBADA</strong>
+
+                                    <?php else : ?>
+                                        <select class="form-control btnCambioEstadoSolicitud" vfch_id="<?php echo $ppg['vfch_id'] ?>" name="vfch_solicitud_cancelacion" id="vfch_solicitud_cancelacion">
+                                            <option value="1">Pendiente</option>
+                                            <option value="2">Aprobar</option>
+                                            <option value="3">Rechazar</option>
+                                        </select>
+                                    <?php endif; ?>
 
                                 </td>
 

@@ -670,7 +670,7 @@ class PagosControlador
                 if ($cancelacion) {
 
                     return array(
-                        'mensaje' => "cancelación aprobada",
+                        'mensaje' => "Cancelación aprobada",
                         'status' => true,
                         'pagina' => HTTP_HOST . 'pagos/fichas-canceladas'
                     );
@@ -683,6 +683,26 @@ class PagosControlador
                     );
                 }
             } else {
+
+                $_POST['vfch_usuario_aprobo'] = $_SESSION['session_usr']['usr_nombre'];
+                $_POST['vfch_fecha_aprobacion'] = FECHA;
+                $cancelacion = PagosModelo::mdlSolicitudCancelacion3($_POST);
+
+                if ($cancelacion) {
+
+                    return array(
+                        'mensaje' => "Cancelación rechazada",
+                        'status' => true,
+                        'pagina' => HTTP_HOST . 'pagos/fichas-canceladas'
+                    );
+                } else {
+                    return array(
+                        'mensaje' => 'Ocurrio un error, recarga la página e intenta de nuevo',
+                        'status' => false,
+                        'pagina' => HTTP_HOST . 'pagos/fichas-canceladas'
+
+                    );
+                }
             }
         }
     }

@@ -398,7 +398,7 @@ class PagosModelo
         try {
             //code...
             if ($vfch_ficha_pago != "" && $vfch_id == "") {
-                $sql = "SELECT * FROM tbl_ficha_venta_vfch WHERE vfch_ficha_pago = ?";
+                $sql = "SELECT * FROM tbl_ficha_venta_vfch WHERE vfch_ficha_pago = ? AND vfch_estado = 'PAGADO' ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $vfch_ficha_pago);
@@ -470,6 +470,28 @@ class PagosModelo
             $pps->bindValue(2, $vfch['vfch_fecha_aprobacion']);
             $pps->bindValue(3, $vfch['vfch_usuario_aprobo']);
             $pps->bindValue(4, $vfch['vfch_id']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlSolicitudCancelacion3($vfch)
+    {
+        try {
+            //code...
+
+            $sql = " UPDATE tbl_ficha_venta_vfch SET  vfch_solicitud_cancelacion = 3 , vfch_fecha_aprobacion = ?, vfch_usuario_aprobo = ? WHERE vfch_id = ? ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $vfch['vfch_fecha_aprobacion']);
+            $pps->bindValue(2, $vfch['vfch_usuario_aprobo']);
+            $pps->bindValue(3, $vfch['vfch_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

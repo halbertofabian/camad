@@ -806,8 +806,38 @@ $(".btnCambioEstadoSolicitud").on("change", function () {
 
                         if (res.status) {
 
-                        }else{
-                            
+                            swal({
+                                title: "!Muy bien¡",
+                                text: res.mensaje,
+                                icon: "success",
+                                buttons: [false, "Continuar"],
+                                dangerMode: true,
+                                closeOnClickOutside: false,
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        location.href = res.pagina
+                                    } else {
+                                        location.href = res.pagina
+                                    }
+                                });
+
+                        } else {
+                            swal({
+                                title: "!Error¡",
+                                text: res.mensaje,
+                                icon: "error",
+                                buttons: [false, "Continuar"],
+                                dangerMode: true,
+                                closeOnClickOutside: false,
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        location.href = res.pagina
+                                    } else {
+                                        location.href = res.pagina
+                                    }
+                                });
                         }
                     }
                 })

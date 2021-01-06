@@ -6,6 +6,8 @@ require_once DOCUMENT_ROOT . 'app/modulos/pagos/pagos.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/pagos/pagos.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.controlador.php';
+require_once DOCUMENT_ROOT . 'app/modulos/sucursales/sucursales.modelo.php';
+require_once DOCUMENT_ROOT . 'app/modulos/sucursales/sucursales.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 
 
@@ -80,6 +82,7 @@ $vfch = PagosModelo::mdlConsultarFichas($_GET['fpg_id']);
 $alumno = UsuariosModelo::mdlMostrarUsuarios('', '', true, $vfch['vfch_alumno']);
 $abonos = PagosModelo::mdlMostrarCarritoAlumno($vfch['vfch_ficha_pago'], $vfch['vfch_id']);
 
+$sucursal = SucursalesModelo::mdlMostrarSucursales($_SESSION['session_suc']['scl_id']);
 
 
 // preArray($vfch);
@@ -98,8 +101,10 @@ $header = <<<EOD
                     <br><br>   
                     PLANTEL EDUCATIVO CAMAD ABIERTO Y A DISTANCIA
                     
-                    <BR> Capitán Pérez 204, zona centro, Altamira Tamps., México CP. 89600.   
-                    <BR> PLANTEL: Altamira       
+                    <BR> $sucursal[scl_rfc] 
+                    <BR> $sucursal[scl_direccion] 
+                    <BR> $sucursal[scl_telefono] 
+                    <BR> PLANTEL: $sucursal[scl_nombre]      
                 </td>
                 
 

@@ -213,7 +213,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                 <div class="form-group">
                                     <?php
 
-                                    $usr_id = UsuariosControlador::ctrConsultarSiguienteUsuario();
+                                    $usr_id = UsuariosControlador::ctrConsultarSiguienteUsuario($_SESSION['session_suc']['scl_sub_fijo']);
 
                                     ?>
                                     <label for="usr_matricula">Matricula</label>

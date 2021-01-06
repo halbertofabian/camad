@@ -178,6 +178,23 @@ class UsuariosModelo
             $con = null;
         }
     }
+    public static function mdlMostrarAlumnosBySuc()
+    {
+        try {
+            $sql = "SELECT usr.*,scl.scl_nombre FROM tbl_usuarios_usr usr JOIN tbl_sucursal_scl scl ON usr.usr_id_sucursal = scl.scl_id  WHERE usr.usr_rol = 'Alumno'  AND usr_id_sucursal = ?   ORDER BY usr_id DESC ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
     public static function mdlMostrarUsuarios($usr_id = "", $usr_rol = "", $usr_searh = false, $usr_matricula = "")
     {
         try {
@@ -199,7 +216,7 @@ class UsuariosModelo
                 $pps->execute();
                 return $pps->fetch();
             } else if ($usr_id == "" && $usr_rol != "") {
-                $sql = "SELECT usr.*,scl.scl_nombre FROM tbl_usuarios_usr usr JOIN tbl_sucursal_scl scl ON usr.usr_id_sucursal = scl.scl_id  WHERE usr_rol = ?     ORDER BY usr_id DESC ";
+                $sql = "SELECT usr.*,scl.scl_nombre FROM tbl_usuarios_usr usr JOIN tbl_sucursal_scl scl ON usr.usr_id_sucursal = scl.scl_id  WHERE usr_rol = ?    ORDER BY usr_id DESC ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $usr_rol);
