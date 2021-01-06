@@ -2,10 +2,10 @@
     var pagina = ""
 </script>
 <?php
-if ($_SESSION['session_usr']['usr_rol'] != "Administrador") :
-    cargarComponente ('acceso-restringido', '', '');
-    return;
-endif;
+// if ($_SESSION['session_usr']['usr_rol'] != "Administrador") :
+//     cargarComponente ('acceso-restringido', '', '');
+//     return;
+// endif;
 cargarComponente ('breadcrumb', '', 'Listar Gastos'); ?>
 
 

@@ -24,10 +24,10 @@ if (isset($rutas[2]) && isset($rutas[3])) :
                     <label for="">Matricula</label><br>
                     <div class="input-group mb-3">
 
-                        <div class="input-group-prepend">
+                        <!-- <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><?php echo $_SESSION['session_suc']['scl_sub_fijo'] ?></span>
-                        </div>
-                        <input type="number" id="usr_matricula" readonly class="form-control" value="<?php echo str_replace($_SESSION['session_suc']['scl_sub_fijo'], '', $rutas[2]) ?>" placeholder="Dígite la matricula del alumno" aria-label="Username" aria-describedby="basic-addon1">
+                        </div> -->
+                        <input type="text" id="usr_matricula" readonly class="form-control" value="<?php echo $rutas[2]; ?>" placeholder="Dígite la matricula del alumno">
                     </div>
 
                 </div>
@@ -560,12 +560,27 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
 
                 <div class="col-md-5 col-12">
                     <!-- <button type="button" class="btn  float-right btn-link mb-1 ">Buscar alumno</button> -->
-
-                    <div class="input-group mb-3">
+                    <!-- <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><?php echo $_SESSION['session_suc']['scl_sub_fijo'] ?></span>
                         </div>
                         <input type="number" id="usr_matricula" class="form-control" placeholder="Dígite la matricula del alumno" aria-label="Username" aria-describedby="basic-addon1">
+                    </div> -->
+                    <div class="row">
+                        <div class="col-6">
+                            <select name="scl_sub_fijo" id="scl_sub_fijo" class="form-control">
+                                <option value="<?php echo $_SESSION['session_suc']['scl_sub_fijo'] ?>"><?php echo $_SESSION['session_suc']['scl_sub_fijo'] ?></option>
+                                <?php
+                                $sucursales = SucursalesModelo::mdlMostrarSucursales();
+                                foreach ($sucursales as $key => $scl) : ?>
+                                    <option value="<?php echo $scl['scl_sub_fijo'] ?>"><?php echo $scl['scl_sub_fijo'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <input type="number" id="usr_matricula" class="form-control" placeholder="Dígite la matricula del alumno" aria-label="Username" aria-describedby="basic-addon1">
+
+                        </div>
                     </div>
 
                 </div>
@@ -1054,6 +1069,10 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                             if ($ppg['vfch_solicitud_cancelacion'] == 1) {
                                 $vfch_class = "bg-warning";
                                 $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
+                            }
+                            if ($ppg['vfch_solicitud_cancelacion'] == 3) {
+                                $vfch_class = "bg-danger";
+                                $vfch_button = "<strong class='mt-1'>Solicitud rechazada</strong>";
                             } else {
                                 $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago mt-1" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
                             }
@@ -1146,8 +1165,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                             } elseif ($ppg['vfch_solicitud_cancelacion'] == 2) {
                                 $vfch_class = "bg-success";
                                 $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
-                            }
-                            elseif ($ppg['vfch_solicitud_cancelacion'] == 3) {
+                            } elseif ($ppg['vfch_solicitud_cancelacion'] == 3) {
                                 $vfch_class = "bg-danger";
                                 $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
                             }
@@ -1169,7 +1187,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
 
                                     <?php if ($ppg['vfch_solicitud_cancelacion'] == 2) : ?>
 
-                                    <strong>APROBADA</strong>
+                                        <strong>APROBADA</strong>
 
                                     <?php else : ?>
                                         <select class="form-control btnCambioEstadoSolicitud" vfch_id="<?php echo $ppg['vfch_id'] ?>" name="vfch_solicitud_cancelacion" id="vfch_solicitud_cancelacion">

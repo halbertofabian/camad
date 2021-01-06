@@ -43,6 +43,7 @@ class PaquetesControlador
 
             $crearPaquete = PaquetesModelo::mdlAgregarPaquetes($_POST);
 
+           
             if($crearPaquete){
 
                 AppControlador::msj('success','¡Muy bien!','Paquete creado con éxito', HTTP_HOST.'paquetes' );

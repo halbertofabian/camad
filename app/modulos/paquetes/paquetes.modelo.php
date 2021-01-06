@@ -27,7 +27,7 @@ class PaquetesModelo
             $pps->bindValue(4, $pqt['pqt_duracion']);
             $pps->bindValue(5, $pqt['pqt_descripcion']);
             $pps->bindValue(6, $pqt['pqt_costo']);
-            $pps->bindValue(7, $_SESSION['session_usr']['usr_nombre']);
+            $pps->bindValue(7, $_SESSION['session_usr']['usr_id']);
             $pps->bindValue(8, FECHA);
             $pps->bindValue(9, $_SESSION['session_suc']['scl_id']);
 
@@ -102,6 +102,4 @@ class PaquetesModelo
             $con = null;
         }
     }
-
-    
 }

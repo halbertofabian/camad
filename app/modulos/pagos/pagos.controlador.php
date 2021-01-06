@@ -246,7 +246,7 @@ class PagosControlador
     {
         if (isset($_POST['btnRevisarPagos'])) {
 
-            $_POST['usr_matricula'] =  $_SESSION['session_suc']['scl_sub_fijo'] . $_POST['usr_matricula'];
+            $_POST['usr_matricula'] =  $_POST['usr_matricula'];
             // Consultar si existe el alumno
             $alumno_pgo = UsuariosModelo::mdlMostrarUsuarios('', '', true, $_POST['usr_matricula']);
             if ($alumno_pgo == null) {

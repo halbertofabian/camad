@@ -515,19 +515,19 @@
 
 
                                     <td>
-                                        <a href="<?php echo HTTP_HOST.'alumnos/view/'.$usr['usr_id'] ?>" class="btn btn-dark "><i class="fa fa-eye"></i>
+                                        <a href="<?php echo HTTP_HOST . 'alumnos/view/' . $usr['usr_id'] ?>" class="btn btn-dark "><i class="fa fa-eye"></i>
                                             <?php echo $usr['usr_matricula'] ?>
                                         </a>
 
                                     </td>
 
-                                    <td><?php echo $usr['usr_nombre'].' '.$usr['usr_app'].' '.$usr['usr_apm'] ?></td>
+                                    <td><?php echo $usr['usr_nombre'] . ' ' . $usr['usr_app'] . ' ' . $usr['usr_apm'] ?></td>
                                     <td><?php echo $usr['usr_telefono'] ?></td>
                                     <td><?php echo $usr['usr_correo'] ?></td>
                                     <td><?php echo $usr['usr_usuario_registro'] ?></td>
                                     <td><?php echo $usr['usr_fecha_registro'] ?></td>
                                     <td> <strong> <?php echo $usr['scl_nombre'] ?> </strong> </td>
-                                    
+
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -535,8 +535,9 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <button type="button" class="dropdown-item text-dark btnMandarEmailActivacion" usr_correo="<?php echo $usr['usr_correo'] ?>" usr_nombre="<?php echo $usr['usr_nombre'] ?>"> <i class="fa fa-exclamation-circle"></i> Enviar activación</button>
-                                                <button type="button" class="dropdown-item text-dark btnEliminarUsuario" usr_id="<?php echo $usr['usr_id'] ?>"><i class="fa fa-trash"></i>
-                                                    Eliminar </button>
+                                                <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
+                                                    <button type="button" class="dropdown-item text-dark btnEliminarUsuario" usr_id="<?php echo $usr['usr_id'] ?>"><i class="fa fa-trash"></i>Eliminar </button>
+                                                <?php endif; ?>
                                                 <a class="dropdown-item text-dark" href="<?php echo HTTP_HOST . 'alumnos/update/' . $usr['usr_id'] ?>">
                                                     <i class="fa fa-edit" aria-hidden="true"></i> Editar</a>
                                                 <!-- <div class="dropdown-divider"></div>

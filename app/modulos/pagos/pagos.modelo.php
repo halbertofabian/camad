@@ -233,13 +233,13 @@ class PagosModelo
     {
         try {
             //code...
-            $sql = "SELECT SUM(ppg_monto) AS ppg_adeudo_s  FROM tbl_paquetes_pagos_ppg ppg JOIN tbl_ficha_pago_fpg fpg ON fpg.fpg_id = ppg.ppg_ficha_pago WHERE ppg.ppg_ficha_pago = ? AND ppg.ppg_concepto = ? AND ppg.ppg_estado_pagado = 'PAGADO' AND ppg_id_sucursal = ?  ";
+            $sql = "SELECT SUM(ppg_monto) AS ppg_adeudo_s  FROM tbl_paquetes_pagos_ppg ppg JOIN tbl_ficha_pago_fpg fpg ON fpg.fpg_id = ppg.ppg_ficha_pago WHERE ppg.ppg_ficha_pago = ? AND ppg.ppg_concepto = ? AND ppg.ppg_estado_pagado = 'PAGADO' ";
 
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $ppg['ppg_ficha_pago']);
             $pps->bindValue(2, $ppg['ppg_concepto']);
-            $pps->bindValue(3, $_SESSION['session_suc']['scl_id']);
+            // $pps->bindValue(3, $_SESSION['session_suc']['scl_id']);
             $pps->execute();
             return $pps->fetch();
         } catch (PDOException $th) {
@@ -486,12 +486,13 @@ class PagosModelo
         try {
             //code...
 
-            $sql = " UPDATE tbl_ficha_venta_vfch SET  vfch_solicitud_cancelacion = 3 , vfch_fecha_aprobacion = ?, vfch_usuario_aprobo = ? WHERE vfch_id = ? ";
+            $sql = " UPDATE tbl_ficha_venta_vfch SET  vfch_solicitud_cancelacion = ? , vfch_fecha_aprobacion = ?, vfch_usuario_aprobo = ? WHERE vfch_id = ? ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
-            $pps->bindValue(1, $vfch['vfch_fecha_aprobacion']);
-            $pps->bindValue(2, $vfch['vfch_usuario_aprobo']);
-            $pps->bindValue(3, $vfch['vfch_id']);
+            $pps->bindValue(1, $vfch['vfch_solicitud_cancelacion']);
+            $pps->bindValue(2, $vfch['vfch_fecha_aprobacion']);
+            $pps->bindValue(3, $vfch['vfch_usuario_aprobo']);
+            $pps->bindValue(4, $vfch['vfch_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

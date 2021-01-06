@@ -25,7 +25,8 @@ $("#formBuscarAlumnoPagos").on("submit", function (e) {
 
     e.preventDefault();
     var usr_matricula = $("#usr_matricula").val()
-    buscarAlumnoMatricula(usr_matricula)
+    var scl_sub_fijo = $("#scl_sub_fijo").val();
+    buscarAlumnoMatricula(scl_sub_fijo + "" + usr_matricula)
 })
 
 function buscarAlumnoMatricula(usr_matricula = "") {

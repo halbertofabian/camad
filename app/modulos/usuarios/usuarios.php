@@ -60,10 +60,8 @@
 
                                     <option value="<?php echo $usr['usr_rol'] ?>"><?php echo $usr['usr_rol'] ?></option>
                                     <option value="Administrador">Administrador</option>
-                                    <option value="Ejecutivo">Ejecutivo</option>
+                                    <option value="Responsable de sucursal">Responsable de sucursal</option>
                                     <option value="Asesor Educativo">Asesor Educativo</option>
-                                    <option value="Caja">Caja</option>
-                                    <option value="Auditor">Auditor</option>
                                 </select>
                             </div>
                         </div>
@@ -151,10 +149,8 @@
                                 <label for="usr_rol">Perfil</label>
                                 <select name="usr_rol" id="usr_rol" class="form-control">
                                     <option value="Administrador">Administrador</option>
-                                    <option value="Ejecutivo">Ejecutivo</option>
+                                    <option value="Responsable de sucursal">Responsable de sucursal</option>
                                     <option value="Asesor Educativo">Asesor Educativo</option>
-                                    <option value="Caja">Caja</option>
-                                    <option value="Auditor">Auditor</option>
                                 </select>
                             </div>
                         </div>
@@ -188,7 +184,9 @@
                 <div class="row">
                     <div class="col-12">
                         <!-- <a href="" class="btn btn-success"><i class="fa fa-upload"></i> Importar</a> -->
-                        <a href="<?php echo HTTP_HOST . 'usuarios/new' ?>" class="btn btn-primary float-right"> <i class="fa fa-plus"></i> Nuevo usuario</a>
+                        <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
+                            <a href="<?php echo HTTP_HOST . 'usuarios/new' ?>" class="btn btn-primary float-right"> <i class="fa fa-plus"></i> Nuevo usuario</a>
+                        <?php endif; ?>
                     </div>
                     <div class="col-12">
                         <div class="table-responsive">
@@ -201,7 +199,10 @@
                                         <th>Rol</th>
                                         <th>Usuario registro</th>
                                         <th>Fecha registro</th>
-                                        <th>Acciones</th>
+                                        <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
+
+                                            <th>Acciones</th>
+                                        <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -216,20 +217,22 @@
                                             <td><?php echo $usr['usr_rol'] ?></td>
                                             <td><?php echo $usr['usr_usuario_registro'] ?></td>
                                             <td><?php echo $usr['usr_fecha_registro'] ?></td>
+                                            <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
 
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fa fa-filter" aria-hidden="true"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <button class="dropdown-item text-dark btnEliminarUsuario" usr_id="<?php echo $usr['usr_id'] ?>"><i class="fa fa-trash"></i> Eliminar </button>
-                                                        <a class="dropdown-item text-dark" href="<?php echo HTTP_HOST . 'usuarios/update/' . $usr['usr_id'] ?>"> <i class="fa fa-edit" aria-hidden="true"></i> Editar</a>
-                                                        <!-- <div class="dropdown-divider"></div>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fa fa-filter" aria-hidden="true"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <button class="dropdown-item text-dark btnEliminarUsuario" usr_id="<?php echo $usr['usr_id'] ?>"><i class="fa fa-trash"></i> Eliminar </button>
+                                                            <a class="dropdown-item text-dark" href="<?php echo HTTP_HOST . 'usuarios/update/' . $usr['usr_id'] ?>"> <i class="fa fa-edit" aria-hidden="true"></i> Editar</a>
+                                                            <!-- <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="#">Separated link</a> -->
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
+                                                </td>
+                                            <?php endif; ?>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
