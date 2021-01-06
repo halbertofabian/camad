@@ -101,9 +101,9 @@ $header = <<<EOD
                     <br><br>   
                     PLANTEL EDUCATIVO CAMAD ABIERTO Y A DISTANCIA
                     
-                    <BR> $sucursal[scl_rfc] 
+                    <BR> RFC:<strong>$sucursal[scl_rfc]</strong>
                     <BR> $sucursal[scl_direccion] 
-                    <BR> $sucursal[scl_telefono] 
+                    <BR> TEL: $sucursal[scl_telefono] 
                     <BR> PLANTEL: $sucursal[scl_nombre]      
                 </td>
                 
