@@ -22,8 +22,8 @@ class ConfiguracionModelo
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
 
-            $pps -> execute();
-            return $pps -> rowCount()>0;
+            $pps->execute();
+            return $pps->rowCount() > 0;
         } catch (PDOException $th) {
             //throw $th;
         } finally {
@@ -39,8 +39,8 @@ class ConfiguracionModelo
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
 
-            $pps -> execute();
-            return $pps -> rowCount()>0;
+            $pps->execute();
+            return $pps->rowCount() > 0;
         } catch (PDOException $th) {
             //throw $th;
         } finally {
@@ -56,8 +56,8 @@ class ConfiguracionModelo
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
 
-            $pps -> execute();
-            return $pps ->fetchAll();
+            $pps->execute();
+            return $pps->fetchAll();
         } catch (PDOException $th) {
             //throw $th;
         } finally {
@@ -73,8 +73,8 @@ class ConfiguracionModelo
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
 
-            $pps -> execute();
-            return $pps -> rowCount()>0;
+            $pps->execute();
+            return $pps->rowCount() > 0;
         } catch (PDOException $th) {
             //throw $th;
         } finally {
@@ -82,6 +82,24 @@ class ConfiguracionModelo
             $con = null;
         }
     }
+
+    public static function mdlAccesoSucursalUsr($scl_acceso_usr, $scl_id)
+    {
+        try {
+            //code...
+            $sql = "UPDATE tbl_sucursal_scl SET scl_acceso_usr = ? WHERE scl_id = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $scl_acceso_usr);
+            $pps->bindValue(2, $scl_id);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $e) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 }
-
-

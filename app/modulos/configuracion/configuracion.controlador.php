@@ -929,5 +929,26 @@ class ConfiguracionControlador
   {
   }
 
+  public static function ctrAccesoSucursalUsr()
+  {
+    if (isset($_POST['btnAccesoSucursalUsr'])) {
 
+      $acceso = ConfiguracionModelo::mdlAccesoSucursalUsr(json_encode($_POST['scl_acceso_usr'],true), $_SESSION['session_suc']['scl_id']);
+
+      if ($acceso) {
+        $_SESSION['session_suc'] = SucursalesModelo::mdlMostrarSucursales($_SESSION['session_suc']['scl_id']);
+        return array(
+          'status' => true,
+          'mensaje' => 'Accesos modificados',
+          'pagina' => ''
+        );
+      } else {
+        return array(
+          'status' => false,
+          'mensaje' => 'Ocurrio un error, intente de nuevo',
+          'pagina' => HTTP_HOST . 'configuracion'
+        );
+      }
+    }
+  }
 }
