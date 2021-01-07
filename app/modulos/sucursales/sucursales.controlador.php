@@ -19,6 +19,7 @@ class SucursalesControlador
             $_POST['scl_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['scl_fecha_registro'] = FECHA;
             $_POST['scl_id'] = md5($_POST['scl_nombre']);
+            $_POST['scl_acceso_usr'] = '["' . $_SESSION['session_usr']['usr_matricula'] . '"]';
 
             $crearSuc = SucursalesModelo::mdlAgregarSucursales($_POST);
 
