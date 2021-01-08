@@ -47,18 +47,21 @@ class SucursalesControlador
             $sucursal = SucursalesModelo::mdlMostrarSucursales($_POST['scl_id']);
 
             $accesos_usr =  json_decode($sucursal['scl_acceso_usr'], true);
+            $bandera = false;
 
             if ($accesos_usr != NULL) {
                 for ($i = 0; $i < sizeof($accesos_usr); $i++) {
                     if ($_SESSION['session_usr']['usr_matricula'] == $accesos_usr[$i]) {
-                        $_SESSION['session_suc'] = $sucursal;
-                        AppControlador::msj('success', '¡Bienvenido(a)!', 'A sucursal ' . $_SESSION['session_suc']['scl_nombre'], HTTP_HOST);
-                    } else {
-                        AppControlador::msj('warning', '¡Upss!', 'No tienes permiso para entrar a esta sucursal');
+                        $bandera = true;
                     }
                 }
+            }
+
+            if ($bandera) {
+                $_SESSION['session_suc'] = $sucursal;
+                AppControlador::msj('success', '¡Bienvenido(a)!', 'A sucursal ' . $_SESSION['session_suc']['scl_nombre'], HTTP_HOST);
             } else {
-                AppControlador::msj('warning', '¡Upss!', 'No tienes permiso para entrar a esta sucursal');
+                AppControlador::msj('warning', '¡Upss!', 'No tienes acceso a está sucursal, intenta con otra');
             }
 
 
