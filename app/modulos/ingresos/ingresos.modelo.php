@@ -18,7 +18,7 @@ class IngresosModelo
     {
         try {
             //code...
-            $sql = "INSERT INTO tbl_ingresos_igs (igs_concepto,igs_monto,igs_fecha_registro,igs_usuario_registro,igs_mp) VALUES(?,?,?,?,?)";
+            $sql = "INSERT INTO tbl_ingresos_igs (igs_concepto,igs_monto,igs_fecha_registro,igs_usuario_registro,igs_mp,igs_id_sucursal,igs_id_corte) VALUES(?,?,?,?,?,?,?)";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $igs['igs_concepto']);
@@ -26,6 +26,8 @@ class IngresosModelo
             $pps->bindValue(3, $igs['igs_fecha_registro']);
             $pps->bindValue(4, $igs['igs_usuario_registro']);
             $pps->bindValue(5, $igs['igs_mp']);
+            $pps->bindValue(6, $igs['igs_id_sucursal']);
+            $pps->bindValue(7, $igs['igs_id_corte']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -53,11 +55,12 @@ class IngresosModelo
     {
         try {
             //code...
-            $sql = "SELECT * FROM tbl_ingresos_igs ORDER BY igs_id DESC";
+            $sql = "SELECT * FROM tbl_ingresos_igs WHERE igs_id_sucursal =? ORDER BY igs_id DESC";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
-            $pps -> execute();
-            return $pps -> fetchAll();
+            $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+            $pps->execute();
+            return $pps->fetchAll();
         } catch (PDOException $th) {
             //throw $th;
         } finally {

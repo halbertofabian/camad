@@ -15,6 +15,7 @@ require_once 'app/modulos/inscripciones/inscripciones.controlador.php';
 require_once 'app/modulos/gastos/gastos.controlador.php';
 require_once 'app/modulos/ingresos/ingresos.controlador.php';
 require_once 'app/modulos/sucursales/sucursales.controlador.php';
+require_once 'app/modulos/cortes/cortes.controlador.php';
 
 require_once 'app/modulos/login/login.modelo.php';
 require_once 'app/modulos/usuarios/usuarios.modelo.php';
@@ -29,9 +30,10 @@ require_once 'app/modulos/inscripciones/inscripciones.modelo.php';
 require_once 'app/modulos/gastos/gastos.modelo.php';
 require_once 'app/modulos/ingresos/ingresos.modelo.php';
 require_once 'app/modulos/sucursales/sucursales.modelo.php';
+require_once 'app/modulos/cortes/cortes.modelo.php';
 
-require_once DOCUMENT_ROOT. 'app/lib/phpMailer/Exception.php';
-require_once DOCUMENT_ROOT. 'app/lib/phpMailer/PHPMailer.php';
-require_once DOCUMENT_ROOT. 'app/lib/phpMailer/SMTP.php';
+require_once DOCUMENT_ROOT . 'app/lib/phpMailer/Exception.php';
+require_once DOCUMENT_ROOT . 'app/lib/phpMailer/PHPMailer.php';
+require_once DOCUMENT_ROOT . 'app/lib/phpMailer/SMTP.php';
 
 iniciarApp();

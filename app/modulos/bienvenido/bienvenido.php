@@ -1,6 +1,16 @@
 <?php
-if ($_SESSION['session_usr']['usr_rol'] != "Alumno") :
+if ($_SESSION['session_usr']['usr_rol'] == "Administrador") :
     cargarComponente('breadcrumb', '', 'Panel de control');
+
+    cargarPagina('adminpanel', $rutas);
+?>
+
+
+
+<?php
+elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador" &&  $_SESSION['session_usr']['usr_rol'] != "Alumno") :
+    cargarComponente('breadcrumb', '', 'Panel de control');
+
 
 ?>
     <div class="container">

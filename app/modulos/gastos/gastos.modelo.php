@@ -50,7 +50,7 @@ class GastosModelo
     {
 
         try {
-            $sql = "INSERT INTO tbl_gastos_tgts (tgts_categoria,tgts_concepto,tgts_fecha_gasto,tgts_cantidad,tgts_mp,tgts_nota,tgts_usuario_registro) VALUES(?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO tbl_gastos_tgts (tgts_categoria,tgts_concepto,tgts_fecha_gasto,tgts_cantidad,tgts_mp,tgts_nota,tgts_usuario_registro,tgts_id_sucursal,tgts_id_corte) VALUES(?,?,?,?,?,?,?,?,?)";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $gasto['tgts_categoria']);
@@ -60,6 +60,8 @@ class GastosModelo
             $pps->bindValue(5, $gasto['tgts_mp']);
             $pps->bindValue(6, $gasto['tgts_nota']);
             $pps->bindValue(7, $gasto['tgts_usuario_registro']);
+            $pps->bindValue(8, $gasto['tgts_id_sucursal']);
+            $pps->bindValue(9, $gasto['tgts_id_corte']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -78,23 +80,27 @@ class GastosModelo
 
             if ($tgts_id == "" &&  $gts_categoria != "") {
 
-                $sql = "SELECT tgts.* FROM tbl_gastos_tgts tgts  WHERE tgts.tgts_categoria = ? ";
+                $sql = "SELECT tgts.* FROM tbl_gastos_tgts tgts  WHERE tgts.tgts_categoria = ? AND tgts.tgts_id_sucursal = ? ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $gts_categoria);
+                $pps->bindValue(2, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             } else if ($tgts_id == "") {
-                $sql = "SELECT tgts.*,gts.gts_nombre FROM tbl_gastos_tgts tgts JOIN tbl_categoria_gastos_gts gts ON tgts.tgts_categoria = gts.gts_id ORDER BY tgts.tgts_id DESC ";
+                $sql = "SELECT tgts.*,gts.gts_nombre FROM tbl_gastos_tgts tgts JOIN tbl_categoria_gastos_gts gts ON tgts.tgts_categoria = gts.gts_id WHERE  tgts.tgts_id_sucursal = ?  ORDER BY tgts.tgts_id DESC ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
+                $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+                
                 $pps->execute();
                 return $pps->fetchAll();
             } elseif ($tgts_id != "") {
-                $sql = "SELECT tgts.*,gts.gts_nombre FROM tbl_gastos_tgts tgts JOIN tbl_categoria_gastos_gts gts ON tgts.tgts_categoria = gts.gts_id WHERE tgts.tgts_id  = ? ";
+                $sql = "SELECT tgts.*,gts.gts_nombre FROM tbl_gastos_tgts tgts JOIN tbl_categoria_gastos_gts gts ON tgts.tgts_categoria = gts.gts_id WHERE tgts.tgts_id  = ? AND tgts.tgts_id_sucursal = ? ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $tgts_id);
+                $pps->bindValue(2, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetch();
             }

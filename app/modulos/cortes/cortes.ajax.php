@@ -3,7 +3,7 @@
 
 /**
  *  Desarrollador: ifixitmor
- *  Fecha de creación: 09/11/2020 13:08
+ *  Fecha de creación: 09/01/2021 03:01
  *  Desarrollado por: Softmor
  *  Software de Morelos SA.DE.CV 
  *  Sitio web: https://softmor.com
@@ -12,14 +12,13 @@
  *  Twitter: https://twitter.com/softmormx
  */
 
+session_start();
 include_once '../../../config.php';
 
-require_once DOCUMENT_ROOT . 'app/modulos/ingresos/ingresos.modelo.php';
-require_once DOCUMENT_ROOT . 'app/modulos/ingresos/ingresos.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cortes/cortes.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cortes/cortes.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
-class IngresosAjax
+class CortesAjax
 {
 }
 

@@ -306,13 +306,14 @@ class PagosModelo
     {
         try {
             //code...
-            $sql = "INSERT INTO tbl_ficha_venta_vfch (vfch_id,vfch_fecha_registro,vfch_usuario_registro, vfch_id_sucursal) VALUES(?,?,?,?)";
+            $sql = "INSERT INTO tbl_ficha_venta_vfch (vfch_id,vfch_fecha_registro,vfch_usuario_registro, vfch_id_sucursal,vfch_id_corte) VALUES(?,?,?,?,?)";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $vfch['vfch_id']);
             $pps->bindValue(2, $vfch['vfch_fecha_registro']);
             $pps->bindValue(3, $vfch['vfch_usuario_registro']);
             $pps->bindValue(4, $vfch['vfch_id_sucursal']);
+            $pps->bindValue(5, $vfch['vfch_id_corte']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -328,7 +329,7 @@ class PagosModelo
     {
         try {
             //...
-            $sql = "UPDATE tbl_ficha_venta_vfch SET vfch_referencia = ?, vfch_monto = ?, vfch_mp = ?, vfch_sub_monto = ?, vfch_descuento = ?, vfch_fecha_pagada = ?, vfch_alumno = ?, vfch_ficha_pago = ?, vfch_estado = ? WHERE vfch_id = ?   ";
+            $sql = "UPDATE tbl_ficha_venta_vfch SET vfch_referencia = ?, vfch_monto = ?, vfch_mp = ?, vfch_sub_monto = ?, vfch_descuento = ?, vfch_fecha_pagada = ?, vfch_alumno = ?, vfch_ficha_pago = ?, vfch_estado = ?, vfch_id_corte = ? WHERE vfch_id = ?   ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $vfch['vfch_referencia']);
@@ -340,7 +341,8 @@ class PagosModelo
             $pps->bindValue(7, $vfch['vfch_alumno']);
             $pps->bindValue(8, $vfch['vfch_ficha_pago']);
             $pps->bindValue(9, $vfch['vfch_estado']);
-            $pps->bindValue(10, $vfch['vfch_id']);
+            $pps->bindValue(10, $vfch['vfch_id_corte']);
+            $pps->bindValue(11, $vfch['vfch_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

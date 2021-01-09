@@ -16,6 +16,9 @@ class IngresosControlador
     {
         if (isset($_POST['btnAgregarIngreso'])) {
             $_POST['igs_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
+            $_POST['igs_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
+            $_POST['igs_id_corte'] = CortesControlador::crtConsultarUltimoCorte();
+            
             $_POST['igs_monto'] = str_replace(",", "", $_POST['igs_monto']);
 
             $crearIngreso = IngresosModelo::mdlAgregarIngresos($_POST);

@@ -101,6 +101,8 @@ class PagosControlador
             $_POST['vfch_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['vfch_estado'] = 'PAGADO';
             $_POST['vfch_descuento'] = $_POST['vfch_cupon'];
+            $_POST['vfch_id_corte'] = CortesControlador::crtConsultarUltimoCorte();
+
 
             $terminarVenta = PagosModelo::mdlTerminarVenta($_POST);
             if ($terminarVenta) {
@@ -528,6 +530,8 @@ class PagosControlador
             $_POST['vfch_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['vfch_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
             $_POST['vfch_id'] = $vfch_id['vfch_id'];
+            $_POST['vfch_id_corte'] = CortesControlador::crtConsultarUltimoCorte();
+
 
             $empezarVentaFicha = PagosModelo::mdlEmpezarVenta($_POST);
             // preArray($empezarVentaFicha);

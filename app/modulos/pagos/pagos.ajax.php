@@ -20,6 +20,8 @@ require_once DOCUMENT_ROOT . 'app/modulos/cupones/cupones.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/pagos/pagos.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cupones/cupones.controlador.php';
+require_once DOCUMENT_ROOT . 'app/modulos/cortes/cortes.modelo.php';
+require_once DOCUMENT_ROOT . 'app/modulos/cortes/cortes.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 class PagosAjax
 
