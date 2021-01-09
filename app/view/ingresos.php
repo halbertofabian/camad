@@ -12,18 +12,18 @@
                 <input type="text" name="igs_monto" id="igs_monto" class="form-control inputN" placeholder="">
             </div>
         </div>
-        <div class="col-md-5 col-6">
+        <div class="col-md-7 col-6">
             <div class="form-group">
                 <label for="igs_concepto">Concepto</label>
                 <input type="text" name="igs_concepto" id="igs_concepto" class="form-control " required placeholder="">
             </div>
         </div>
-        <div class="col-md-2 col-6">
+        <!-- <div class="col-md-2 col-6">
             <div class="form-group">
                 <label for="igs_fecha_registro">Fecha</label>
                 <input type="date" name="igs_fecha_registro" id="igs_fecha_registro" class="form-control theDate" required placeholder="">
             </div>
-        </div>
+        </div> -->
         <div class="form-group col-md-3 col-6">
             <label for="igs_mp">Método de pago</label>
             <select name="igs_mp" id="igs_mp" class="form-control">

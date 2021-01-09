@@ -18,10 +18,10 @@
                 <label for="tgts_concepto">Concepto</label>
                 <input type="text" name="tgts_concepto" id="tgts_concepto" class="form-control" placeholder="Escriba el concepto de este gasto">
             </div>
-            <div class="form-group col-md-4 col-12">
+            <!-- <div class="form-group col-md-4 col-12">
                 <label for="tgts_fecha_gasto">Fecha de gasto</label>
                 <input type="date" name="tgts_fecha_gasto" id="tgts_fecha_gasto" class="form-control theDate">
-            </div>
+            </div> -->
             <div class="form-group col-md-4 col-12">
                 <label for="tgts_cantidad">Cantidad</label>
                 <input type="text" name="tgts_cantidad" id="tgts_cantidad" class="form-control inputN" placeholder="0.00">

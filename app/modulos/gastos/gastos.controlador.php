@@ -34,7 +34,7 @@ class GastosControlador
             $_POST['tgts_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
             $_POST['tgts_id_corte'] = CortesControlador::crtConsultarUltimoCorte();
             $_POST['tgts_cantidad'] = str_replace(",", "", $_POST['tgts_cantidad']);
-
+            $_POST['tgts_fecha_gasto'] = FECHA;
 
             $crearGasto = GastosModelo::mdlCrearGasto($_POST);
 
