@@ -99,7 +99,7 @@ $header = <<<EOD
                 <td style="text-align: center; width:$impresion px;">
                     <img src="{$ruta}app/assets/images/img-app/logo_sead_1.png" width="180" />
                     <br><br>   
-                    PLANTEL EDUCATIVO CAMAD ABIERTO Y A DISTANCIA
+                    PLANTEL EDUCATIVO SEAD ABIERTO Y A DISTANCIA
                     
                     <BR> RFC:<strong>$sucursal[scl_rfc]</strong>
                     <BR> $sucursal[scl_direccion] 
@@ -111,14 +111,15 @@ $header = <<<EOD
             </tr>
             <tr>
                 <td style="text-align: center; width:$impresion px;">
-                    FECHA:$vfch[vfch_fecha_registro]
+                    FECHA:$vfch[vfch_fecha_registro] <br>
+                    <span>No es un comprobante fiscal</span>
                 </td>
                 
             </tr>
             <tr style="">
                 <td style="text-align: center; padding:5px; width:$impresion px;">
                 ---------------------------------
-                    COMPROBANTE DE PAGO #$vfch[vfch_id]
+                    DONATIVO DE RECUPERACIÓN #$vfch[vfch_id]
                 ---------------------------------
 
                 </td>

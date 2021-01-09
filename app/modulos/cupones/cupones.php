@@ -25,11 +25,11 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                         <select name="cps_asociado" class="form-control" id="cps_asociado">
                             <option value="sin_vendedor">Sin asociar</option>
                             <?php
-                            $vendedores = UsuariosModelo::mdlMostrarUsuarios('', 'Vendedor');
+                            $vendedores = UsuariosModelo::mdlMostrarUsuarios('', 'Asesor Educativo');
                             foreach ($vendedores as $key => $vdr) :  # code...
 
                             ?>
-                            <option value="<?php echo $vdr['usr_matricula'].' - '.$vdr['usr_nombre']  ?>"><?php echo $vdr['usr_matricula'].' - '.$vdr['usr_nombre']  ?></option>
+                                <option value="<?php echo $vdr['usr_matricula'] . ' - ' . $vdr['usr_nombre']  ?>"><?php echo $vdr['usr_matricula'] . ' - ' . $vdr['usr_nombre']  ?></option>
 
                             <?php endforeach; ?>
                             <!-- <option value="all_productos">Todos los productos</option> -->

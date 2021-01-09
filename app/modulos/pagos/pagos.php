@@ -1070,7 +1070,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 $vfch_class = "bg-warning";
                                 $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
                             }
-                            if ($ppg['vfch_solicitud_cancelacion'] == 3) {
+                            else if ($ppg['vfch_solicitud_cancelacion'] == 3) {
                                 $vfch_class = "bg-danger";
                                 $vfch_button = "<strong class='mt-1'>Solicitud rechazada</strong>";
                             } else {

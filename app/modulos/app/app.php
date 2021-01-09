@@ -491,21 +491,21 @@
 
                         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Inscribir</span></a>
                             <ul class="dropdown-menu">
-                                <!-- <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'inscripciones/new' ?>" data-toggle="dropdown" data-i18n="Registrar inscripción"><i class="feather icon-plus"></i>Registrar inscripción</a> -->
-                        </li>
-                        <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'inscripciones' ?>" data-toggle="dropdown" data-i18n="Inscripciones"><i class="feather icon-plus"></i>Listar Inscripciones</a>
-                        </li>
-                        </ul>
+                                <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'inscripciones/new' ?>" data-toggle="dropdown" data-i18n="Registrar inscripción"><i class="feather icon-plus"></i>Registrar inscripción</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'inscripciones' ?>" data-toggle="dropdown" data-i18n="Inscripciones"><i class="feather icon-plus"></i>Listar Inscripciones</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Pagos</span></a>
                             <ul class="dropdown-menu">
-                                <!-- <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/new' ?>" data-toggle="dropdown" data-i18n="Nuevo pago"><i class="feather icon-plus"></i>Nuevo pago</a> -->
-                        </li>
-                        <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/fichas' ?>" data-toggle="dropdown" data-i18n="Historial de pagos"><i class="feather icon-plus"></i>Historial de fichas</a>
-                        </li>
-                        <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/fichas-canceladas' ?>" data-toggle="dropdown" data-i18n="Historial de fichas canceladas"><i class="feather icon-plus"></i>Fichas canceladas</a>
-                        </li>
-                        </ul>
+                                <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/new' ?>" data-toggle="dropdown" data-i18n="Nuevo pago"><i class="feather icon-plus"></i>Nuevo pago</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/fichas' ?>" data-toggle="dropdown" data-i18n="Historial de pagos"><i class="feather icon-plus"></i>Historial de fichas</a>
+                                </li>
+                                <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/fichas-canceladas' ?>" data-toggle="dropdown" data-i18n="Historial de fichas canceladas"><i class="feather icon-plus"></i>Fichas canceladas</a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Gestión de tienda">Gestión de tienda</span></a>
