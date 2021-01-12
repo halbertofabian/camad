@@ -27,9 +27,6 @@ class CortesControlador
 
     public static function crtConsultarUltimoCorte()
     {
-        $lastCorte = CortesModelo::mdlMostrarCortes("", true);
-        $numCorte = 0;
-        $numCorte = $lastCorte != NULL ? $numCorte + 1 : 1;
-        return $numCorte;
+        return $_SESSION['session_usr']['usr_caja'];
     }
 }

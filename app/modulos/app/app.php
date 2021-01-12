@@ -569,9 +569,11 @@
 
                             <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown"><i class="feather icon-home"></i><span data-i18n="Panel de control">Panel de control</span></a>
                                 <ul class="dropdown-menu">
-                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-home"></i>Inicio</a>
-                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'sucursales' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-home"></i>Sucursales</a>
-                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'configuracion' ?>" data-toggle="dropdown" data-i18n="Configuraciones"><i class="feather icon-home"></i>Configuraciones</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-grid"></i>Inicio</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'sucursales' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-grid"></i>Sucursales</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'configuracion' ?>" data-toggle="dropdown" data-i18n="Configuraciones"><i class="feather icon-grid"></i>Configuraciones</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cajas' ?>" data-toggle="dropdown" data-i18n="cajas"><i class="feather icon-grid"></i>Cajas</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cortes' ?>" data-toggle="dropdown" data-i18n="cortes"><i class="feather icon-grid"></i>Cortes</a>
                                         <!-- 
                             </li>
                             <li data-menu=""><a class="dropdown-item" href="Panel de control-ecommerce.html" data-toggle="dropdown" data-i18n="eCommerce"><i class="feather icon-shopping-cart"></i>eCommerce</a>
@@ -794,6 +796,7 @@
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/ingresos/ingresos.js"></script>
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/configuracion/configuracion.js"></script>
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/cortes/cortes.js"></script>
+        <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/cajas/cajas.js"></script>
     </body>
 <?php else :
 

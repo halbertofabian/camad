@@ -1,12 +1,30 @@
 <?php
 if (isset($rutas[2]) && isset($rutas[3])) :
     cargarComponente('breadcrumb', '', 'Pagos');
+
+    if ($_SESSION['session_usr']['usr_caja'] == 0) {
+        AppControlador::msj('warning', '¡Ups!', 'Necesitas abrir caja para cobrar', HTTP_HOST . 'abrir-caja');
+        return;
+    }
+
+    $copn = CajasModelo::mdlMostrarCajasById($_SESSION['session_usr']['usr_caja']);
+    if ($_SESSION['session_suc']['scl_id'] != $copn['cja_id_sucursal']) {
+        AppControlador::msj('warning', '¡Ups!', 'Esta caja esta registrada para que operé en otra sucursal, para continuar cierra caja en ' . $copn['scl_nombre'] . '', HTTP_HOST);
+        return;
+    }
+
+
 ?>
     <script>
         pagina = "pagos/new"
     </script>
 
     <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <strong class="float-right" style="font-size: 18px;"><?php echo $copn['cja_nombre'] ?></strong>
+            </div>
+        </div>
         <form id="formBuscarAlumnoPago" method="post">
             <div class="row">
 
@@ -1069,8 +1087,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                             if ($ppg['vfch_solicitud_cancelacion'] == 1) {
                                 $vfch_class = "bg-warning";
                                 $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
-                            }
-                            else if ($ppg['vfch_solicitud_cancelacion'] == 3) {
+                            } else if ($ppg['vfch_solicitud_cancelacion'] == 3) {
                                 $vfch_class = "bg-danger";
                                 $vfch_button = "<strong class='mt-1'>Solicitud rechazada</strong>";
                             } else {

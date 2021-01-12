@@ -372,4 +372,24 @@ class UsuariosModelo
             $con = null;
         }
     }
+
+    public static function mdlActualizarCajaUsuario($usr_id, $usr_caja)
+    {
+        try {
+            //code...
+            $sql = "UPDATE tbl_usuarios_usr SET usr_caja = ? WHERE usr_id = ? ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $usr_caja);
+            $pps->bindValue(2, $usr_id);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 }

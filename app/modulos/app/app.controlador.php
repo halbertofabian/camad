@@ -23,7 +23,11 @@ class AppControlador
             'listar-ingresos',
             'categorias',
             'mi-perfil',
-            'sucursales'
+            'sucursales',
+            'cortes',
+            'cajas',
+            'abrir-caja',
+            'cerrar-caja'
         );
     }
     public static function obtenerListaBlancaAlumno()

@@ -1,9 +1,42 @@
 <?php
 
-$cts_id = CortesControlador::crtConsultarUltimoCorte();
+$cjas = CajasModelo::mdlMostrarCajasDisponibles($_SESSION['session_suc']['scl_id'], 1);
 
+if (isset($_POST['btnBuscarByCorteCaja'])) {
+    $cts_id = $_POST['cja_copn_id'];
+    $caja = CajasModelo::mdlMostrarCajasById($cts_id);
+    $option = '<option value="' . $cts_id . '">' . $caja['cja_nombre'] . '</option>';
+} else {
+    $cts_id = 0;
+    $option = '<option value="0">Elije una caja para consultar</option>';
+}
 ?>
+
 <div class="container">
+    <form method="post" action="#id_corte">
+        <div class="row">
+
+            <div class="col-12 col-md-5">
+
+                <div class="form-group">
+                    <label for="cja_copn_id"> <strong class="text-primary"> CAJAS ACTIVAS </strong> </label>
+                    <select class="form-control" name="cja_copn_id" id="cja_copn_id">
+                        <?php echo $option; ?>
+                        <?php foreach ($cjas as $key => $cja) : ?>
+
+                            <option value="<?php echo $cja['cja_copn_id'] ?>"> <?php echo $cja['cja_nombre'] ?> </option>
+
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-md-4 col-12 mt-1 ">
+                <input type="submit" class="btn btn-primary" name="btnBuscarByCorteCaja" value="Consultar">
+            </div>
+
+        </div>
+    </form>
     <section id="dashboard-ecommerce">
         <div class="row match-height">
             <!-- Medal Card -->
@@ -169,7 +202,7 @@ $cts_id = CortesControlador::crtConsultarUltimoCorte();
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-xl-8 col-sm-6 col-12">
                                 <div class="media">
                                     <div class="avatar bg-light-success mr-2">
@@ -179,12 +212,12 @@ $cts_id = CortesControlador::crtConsultarUltimoCorte();
                                     </div>
                                     <div class="media-body my-auto">
                                         <?php
-                                         $total = ($totalCaja + $totalBanco) - ($totalCajaG + $totalBancoG);
+                                        $total = ($totalCaja + $totalBanco) - ($totalCajaG + $totalBancoG);
 
                                         ?>
                                         <hr>
                                         <h6 class="font-weight-bolder mb-0 text-primary">$ <?php echo number_format($total, 2);  ?> MXN</h6>
-                                        <p class="card-text font-small-3 mb-0">TOTAL  FICHAS  + INGRESOS  - GASTOS  </p>
+                                        <p class="card-text font-small-3 mb-0">TOTAL FICHAS + INGRESOS - GASTOS </p>
                                     </div>
                                 </div>
                             </div>
