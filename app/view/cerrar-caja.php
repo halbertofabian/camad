@@ -15,6 +15,9 @@ cargarComponente('breadcrumb', '', 'Cierre de caja');
                     <div class="card-body">
                         <h4 class="card-title text-success">Caja abierta</h4>
                         <?php $copn = CajasModelo::mdlMostrarCajasById($_SESSION['session_usr']['usr_caja']); ?>
+                        <input type="hidden" value="<?php echo $copn['cja_id_caja'] ?>" name="cja_id_caja">
+                        <input type="hidden" value="<?php echo $copn['copn_id'] ?>" name="copn_id">
+                        <input type="hidden" value="<?php echo $copn['copn_ingreso_inicio'] ?>" name="copn_ingreso_inicio">
                         <p class="card-text">Responsable <strong><?php echo $copn['usr_nombre']; ?> </strong> </p>
                         <p class="card-text">Caja <strong><?php echo $copn['cja_nombre']; ?> </strong> </p>
                         <p class="card-text">Sucursal <strong><?php echo $copn['scl_nombre']; ?> </strong> </p>

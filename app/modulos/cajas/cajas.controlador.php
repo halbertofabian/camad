@@ -66,10 +66,9 @@ class CajasControlador
                 if ($asignarCajaUsuario) {
                     CajasModelo::mdlActualizarDisponibilidadCaja(1, $_POST['copn_id_caja'], $ultimaCajaAbierta['copn_id']);
                     $_SESSION['session_usr']['usr_caja'] =  $ultimaCajaAbierta['copn_id'];
+                    AppControlador::msj('success', 'CAJA ABIERTA', '', HTTP_HOST);
                 } else {
                 }
-
-                preArray($ultimaCajaAbierta);
             }
         }
     }
@@ -105,8 +104,37 @@ class CajasControlador
             $_POST['copn_ingreso_efectivo'] = str_replace(",", "", $_POST['copn_ingreso_efectivo']);
             $_POST['copn_ingreso_banco'] = str_replace(",", "", $_POST['copn_ingreso_banco']);
 
+            $_POST['copn_usuario_cerro'] = $_SESSION['session_usr']['usr_nombre'];
+            $_POST['copn_efectivo_real'] = $totalEfectivo;
+            $_POST['copn_banco_real'] = $totalBanco;
+            $_POST['copn_fecha_cierre'] = FECHA;
 
-            preArray($_POST);
+
+
+            $ActaulizarCajaCierre = CajasModelo::mdlCerrarCaja($_POST);
+
+            if ($ActaulizarCajaCierre) {
+                $cerrarCajaUsuario = UsuariosModelo::mdlActualizarCajaUsuario($_SESSION['session_usr']['usr_id'], 0);
+                if ($cerrarCajaUsuario) {
+                    $cerrarCaja = CajasModelo::mdlActualizarDisponibilidadCaja(0, $_POST['cja_id_caja'], 0);
+                    if ($cerrarCaja) {
+                        $_SESSION['session_usr']['usr_caja'] =  0;
+
+                        return array(
+                            'mensaje' => 'Corte realizado',
+                            'status' => true,
+                            'pagina' => HTTP_HOST
+                        );
+                    } else {
+                        return array(
+                            'mensaje' => 'Ocurrio un error',
+                            'status' => false,
+                            'pagina' => HTTP_HOST
+                        );
+                    }
+                }
+            }
+
 
             // var_dump($totalEfectivo);
             // echo "<br>";

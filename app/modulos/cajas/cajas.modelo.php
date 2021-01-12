@@ -52,7 +52,7 @@ class CajasModelo
             $con = null;
         }
     }
-    public static function mdlMostrarCajasDisponibles($scl_id = "",$cja_uso = 0)
+    public static function mdlMostrarCajasDisponibles($scl_id = "", $cja_uso = 0)
     {
         try {
             //code...
@@ -73,7 +73,7 @@ class CajasModelo
             $con = null;
         }
     }
-    
+
 
     public static function mdlMostrarCajasById($copn_id = "")
     {
@@ -87,6 +87,13 @@ class CajasModelo
                 $pps->bindValue(1, $copn_id);
                 $pps->execute();
                 return $pps->fetch();
+            }elseif($copn_id == ""){
+                $sql = "SELECT copn.*,usr.*,cja.*,scl.* FROM tbl_caja_open_copn copn  JOIN  tbl_usuarios_usr usr ON usr.usr_id = copn.copn_usuario_abrio JOIN tbl_caja_cja cja ON cja.cja_id_caja = copn.copn_id_caja JOIN tbl_sucursal_scl scl ON scl.scl_id = copn.copn_id_sucursal   WHERE copn.copn_id_sucursal = ?  ORDER BY copn_id DESC ";
+                $con = Conexion::conectar();
+                $pps = $con->prepare($sql);
+                $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+                $pps->execute();
+                return $pps->fetchAll();
             }
         } catch (PDOException $th) {
             //throw $th;
@@ -156,7 +163,7 @@ class CajasModelo
             $con = null;
         }
     }
-    public static function mdlActualizarDisponibilidadCaja($cja_uso, $cja_id_caja,$cja_copn_id)
+    public static function mdlActualizarDisponibilidadCaja($cja_uso, $cja_id_caja, $cja_copn_id)
     {
         try {
             //code...
@@ -166,6 +173,32 @@ class CajasModelo
             $pps->bindValue(1, $cja_uso);
             $pps->bindValue(2, $cja_copn_id);
             $pps->bindValue(3, $cja_id_caja);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlCerrarCaja($copn)
+    {
+        try {
+            //code...
+            $sql = "UPDATE tbl_caja_open_copn SET copn_usuario_cerro = ?, copn_ingreso_efectivo = ?, 
+            copn_ingreso_banco = ?, copn_efectivo_real = ?, copn_banco_real = ?, copn_fecha_cierre = ? WHERE copn_id = ? ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $copn['copn_usuario_cerro']);
+            $pps->bindValue(2, $copn['copn_ingreso_efectivo']);
+            $pps->bindValue(3, $copn['copn_ingreso_banco']);
+            $pps->bindValue(4, $copn['copn_efectivo_real']);
+            $pps->bindValue(5, $copn['copn_banco_real']);
+            $pps->bindValue(6, $copn['copn_fecha_cierre']);
+            $pps->bindValue(7, $copn['copn_id']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

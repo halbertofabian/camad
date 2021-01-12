@@ -18,6 +18,7 @@ include_once '../../../config.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cajas/cajas.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cajas/cajas.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cortes/cortes.modelo.php';
+require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.modelo.php';
 
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 class CajasAjax
