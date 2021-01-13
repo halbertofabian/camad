@@ -66,7 +66,7 @@ class UsuariosControlador
 
                     //$aleatorio = mt_rand(100, 999);
 
-                    $ruta = $directorio.'/'. $_POST['usr_matricula'] . ".jpg";
+                    $ruta = $directorio . '/' . $_POST['usr_matricula'] . ".jpg";
 
                     $origen = imagecreatefromjpeg($_FILES["usr_firma"]["tmp_name"]);
 
@@ -88,7 +88,7 @@ class UsuariosControlador
 						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
 						=============================================*/
 
-                    $ruta = $directorio.'/'. $_POST['usr_matricula'] . ".png";
+                    $ruta = $directorio . '/' . $_POST['usr_matricula'] . ".png";
 
                     $origen = imagecreatefrompng($_FILES["usr_firma"]["tmp_name"]);
 
@@ -125,7 +125,7 @@ class UsuariosControlador
     public static  function ctrAgregarUsuariosAjax()
     {
         if (isset($_POST['btnGuardarUsuario'])) {
-            $_POST['usr_matricula'] = UsuariosControlador::ctrConsultarSiguienteUsuario();
+            $_POST['usr_matricula'] = UsuariosControlador::ctrConsultarSiguienteUsuario($_SESSION['session_suc']['scl_sub_fijo']);
 
 
 
@@ -211,7 +211,7 @@ class UsuariosControlador
 
                     //$aleatorio = mt_rand(100, 999);
 
-                    $ruta = $directorio.'/'. $_POST['usr_matricula'] . ".jpg";
+                    $ruta = $directorio . '/' . $_POST['usr_matricula'] . ".jpg";
 
                     $origen = imagecreatefromjpeg($_FILES["usr_firma"]["tmp_name"]);
 
@@ -227,7 +227,7 @@ class UsuariosControlador
 						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
 						=============================================*/
 
-                    $ruta = $directorio.'/'. $_POST['usr_matricula'] . ".png";
+                    $ruta = $directorio . '/' . $_POST['usr_matricula'] . ".png";
 
 
                     $origen = imagecreatefrompng($_FILES["usr_firma"]["tmp_name"]);

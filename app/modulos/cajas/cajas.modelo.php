@@ -87,7 +87,7 @@ class CajasModelo
                 $pps->bindValue(1, $copn_id);
                 $pps->execute();
                 return $pps->fetch();
-            }elseif($copn_id == ""){
+            } elseif ($copn_id == "") {
                 $sql = "SELECT copn.*,usr.*,cja.*,scl.* FROM tbl_caja_open_copn copn  JOIN  tbl_usuarios_usr usr ON usr.usr_id = copn.copn_usuario_abrio JOIN tbl_caja_cja cja ON cja.cja_id_caja = copn.copn_id_caja JOIN tbl_sucursal_scl scl ON scl.scl_id = copn.copn_id_sucursal   WHERE copn.copn_id_sucursal = ?  ORDER BY copn_id DESC ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
