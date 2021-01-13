@@ -36,10 +36,10 @@
 
         $vfch_efectivo = CortesModelo::mdlConsultarTodoFichasPEByCorte($corte['copn_id']);
         $vfch_banco = CortesModelo::mdlConsultarTodoFichasPBByCorte($corte['copn_id']);
-       
+
         $ingreso_efectivo = CortesModelo::mdlConsultarTodoIngresosPEByCorte($corte['copn_id']);
         $ingreso_banco = CortesModelo::mdlConsultarTodoIngresosPBByCorte($corte['copn_id']);
-       
+
         $gastos_efectivo = CortesModelo::mdlConsultarTodoGastosPEByCorte($corte['copn_id']);
         $gastos_banco = CortesModelo::mdlConsultarTodoGastosPBByCorte($corte['copn_id']);
 
@@ -139,6 +139,14 @@
         </div>
         <table class="table">
             <thead>
+                <tr>
+                    <td>
+                        Cantidad de inicio:
+                    </td>
+                    <td>
+                        <strong><?php echo number_format($corte['copn_ingreso_inicio'], 2) ?></strong>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         Cantidad reportada:

@@ -98,7 +98,9 @@ class CajasControlador
 
             $monto_g_b = $montos['monto_gastos_b']['monto_total'];
 
-            $totalEfectivo = $monto_e - $monto_g_e;
+            $ingreso_caja = $_POST['copn_ingreso_inicio'];
+
+            $totalEfectivo = $monto_e +  $ingreso_caja - $monto_g_e;
             $totalBanco = $monto_b - $monto_g_b;
 
             $_POST['copn_ingreso_efectivo'] = str_replace(",", "", $_POST['copn_ingreso_efectivo']);
