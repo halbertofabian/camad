@@ -98,7 +98,7 @@ class CajasControlador
 
             $monto_g_b = $montos['monto_gastos_b']['monto_total'];
 
-            $ingreso_caja = $_POST['copn_ingreso_inicio'];
+            $ingreso_caja = str_replace(",", "", $_POST['copn_ingreso_inicio']);
 
             $totalEfectivo = $monto_e +  $ingreso_caja - $monto_g_e;
             $totalBanco = $monto_b - $monto_g_b;
@@ -125,7 +125,7 @@ class CajasControlador
                         return array(
                             'mensaje' => 'Corte realizado',
                             'status' => true,
-                            'pagina' => HTTP_HOST
+                            'pagina' => HTTP_HOST . 'cortes/view-t/' . $crt_id
                         );
                     } else {
                         return array(

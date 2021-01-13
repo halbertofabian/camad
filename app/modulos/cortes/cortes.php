@@ -318,7 +318,11 @@
 
     <?php elseif (isset($rutas[1]) && $rutas[1] == 'view-t') : ?>
 
+        <div class="container">
 
+            <embed src="<?php echo HTTP_HOST ?>/app/report/corte.php?copn_id=<?php echo $rutas[2] ?>" width="100%" height="1200px" />
+
+        </div>
 
         <? 
     else:
@@ -360,12 +364,15 @@
                                 <td><?php echo $cts['copn_fecha_cierre'] ?></td>
                                 <td><?php echo $cts['copn_usuario_cerro'] ?></td>
                                 <td>
-                                    <a href="" class="btn btn-secondary mb-1"><i class="fa fa-file-text" aria-hidden="true"></i>
-                                    </a>
 
                                     <a href="<?php echo HTTP_HOST . 'cortes/view-r/' . $cts['copn_id'] ?>" class="btn btn-secondary mt-1"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                                         </i>
                                     </a>
+                                    <a href="<?php echo HTTP_HOST . 'cortes/view-t/' . $cts['copn_id'] ?>" class="btn btn-secondary mt-1"><i class="fa fa-file-text" aria-hidden="true"></i>
+                                        </i>
+                                    </a>
+
+
                                 </td>
 
 
