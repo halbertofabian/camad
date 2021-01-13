@@ -10,7 +10,10 @@
                         <input type="text" name="cja_nombre" id="cja_nombre" class="form-control" placeholder="">
                     </div>
 
-                    <div class="form-group col-12">
+                    <input type="hidden" value="<?php echo $_SESSION['session_suc']['scl_id'] ?>" name="cja_id_sucursal">
+
+                    <!-- <div class="form-group col-12">
+
                         <label for="cja_id_sucursal">Sucursal a la que se le asignará está caja</label>
                         <select class="form-control" name="cja_id_sucursal" id="cja_id_sucursal">
                             <option value="<?php echo $_SESSION['session_suc']['scl_id'] ?>"><?php echo $_SESSION['session_suc']['scl_nombre'] ?></option>
@@ -21,7 +24,7 @@
                                 <option value="<?php echo $scl['scl_id']  ?>"><?php echo $scl['scl_nombre']  ?></option>
                             <?php endforeach; ?>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="col-12">
                         <button class="btn btn-primary float-right" name="btnRegistrarCaja"> Registrar caja </button>
                     </div>
@@ -42,27 +45,25 @@
 
                             <hr>
                             <div class="row ">
-                                <div class="col-md-4">
-                                    <P> <strong class="text-primary"> CAJA #1 </strong> </P>
-                                    <span>Usuario registro</span> <br>
-                                    <span>Fecha registro</span>
-                                </div>
-                                <div class="col-8">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Estado</th>
-                                                <th>Usuario</th>
-                                                <th>Fecha abrio</th>
-                                                <th>Fecha cerro</th>
-                                                <th>Acceso</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                <?php
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                $cajas = CajasModelo::mdlMostrarCajas();
+                                foreach ($cajas as $key => $cja) :
+                                ?>
+                                    <div class="col-md-6">
+                                        <P> <strong class="text-primary"> <?php echo $cja['cja_nombre'] ?></strong> </P>
+                                        <span><?php echo $cja['cja_usuario_registro'] ?></span> <br>
+                                        <span><?php echo $cja['cja_fecha_registro'] ?></span>
+                                        <br>
+                                        <hr>
+                                        <?php if ($cja['cja_uso'] == 0) : ?>
+                                            <strong class="text-danger">Cerrada</strong>
+                                        <?php else : ?>
+                                            <a href="<?php echo HTTP_HOST.'cortes/view-r/'.$cja['cja_copn_id'] ?>" class="btn btn-success">Abierta</a>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+
 
                             </div>
                             <hr>

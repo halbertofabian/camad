@@ -74,6 +74,26 @@ class CajasModelo
         }
     }
 
+    public static function mdlMostrarCajas()
+    {
+        try {
+            //code...
+
+
+            $sql = "SELECT * FROM tbl_caja_cja WHERE cja_id_sucursal = ? ";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (PDOException $th) {
+            //throw $th;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
 
     public static function mdlMostrarCajasById($copn_id = "")
     {

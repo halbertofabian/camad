@@ -8,6 +8,13 @@ cargarComponente('breadcrumb', '', 'Abir caja');
 <div class="container">
     <div class="row">
 
+    <?php $cajas = CajasModelo::mdlMostrarCajasDisponibles($_SESSION['session_suc']['scl_id']);
+       
+        if(sizeof($cajas) ==0 ){
+            AppControlador::msj('warning', 'No hay cajas disponibles', 'Necesitan crear una caja o cerrar una ya existente', HTTP_HOST);
+        }
+    ?>
+
         <div class="col-md-4 col-12">
             <form method="post">
                 <div class="row">
@@ -16,7 +23,7 @@ cargarComponente('breadcrumb', '', 'Abir caja');
                         <label for="copn_id_caja">Cajas disponibles para <strong class="text-primary"><?php echo $_SESSION['session_suc']['scl_nombre'] ?> </strong> </label>
                         <select name="copn_id_caja" id="copn_id_caja" class="form-control">
                             <?php
-                            $cajas = CajasModelo::mdlMostrarCajasDisponibles($_SESSION['session_suc']['scl_id']);
+                            
                             foreach ($cajas as $key => $cjs) :
 
                             ?>

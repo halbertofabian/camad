@@ -653,6 +653,17 @@
 
                                 </ul>
                             </li>
+
+                            <?php
+                            if ($_SESSION['session_usr']['usr_caja'] != 0) :
+                            ?>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'cerrar-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Cerrar caja</a></li>
+
+                            <?php else : ?>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'abrir-caja'  ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Abrir caja</a></li>
+
+                            <?php endif; ?>
+
                         </ul>
                     </div>
                 </div>
