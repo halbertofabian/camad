@@ -15,6 +15,13 @@ class IngresosControlador
     public function ctrAgregarIngresos()
     {
         if (isset($_POST['btnAgregarIngreso'])) {
+
+            if ($_SESSION['session_usr']['usr_caja'] == 0) {
+                AppControlador::msj('warning', '¡Ups!', 'Necesitas abrir caja para cobrar', HTTP_HOST . 'abrir-caja');
+                return;
+            }
+
+
             $_POST['igs_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['igs_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
             $_POST['igs_id_corte'] = CortesControlador::crtConsultarUltimoCorte();

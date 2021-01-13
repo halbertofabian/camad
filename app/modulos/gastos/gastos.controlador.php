@@ -29,6 +29,10 @@ class GastosControlador
     public function ctrCrearGasto()
     {
         if (isset($_POST['btnGuardarGasto'])) {
+            if ($_SESSION['session_usr']['usr_caja'] == 0) {
+                AppControlador::msj('warning', '¡Ups!', 'Necesitas abrir caja para cobrar', HTTP_HOST . 'abrir-caja');
+                return;
+            }
 
             $_POST['tgts_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['tgts_id_sucursal'] = $_SESSION['session_suc']['scl_id'];

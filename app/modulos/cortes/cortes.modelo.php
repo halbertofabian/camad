@@ -330,6 +330,26 @@ class CortesModelo
         }
     }
 
+    public static function mdlConsultarTodoFichasPBByCorte($vfch_id_corte)
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_ficha_venta_vfch WHERE vfch_mp != 'EFECTIVO' AND vfch_estado = 'PAGADO' AND vfch_id_corte = ?";
+
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $vfch_id_corte);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
 
     public static function mdlConsultarMontoIngresosPEByCorte($igs_id_corte)
     {
@@ -350,7 +370,25 @@ class CortesModelo
             $con = null;
         }
     }
+    public static function mdlConsultarTodoIngresosPEByCorte($igs_id_corte)
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_ingresos_igs WHERE igs_mp = 'EFECTIVO' AND igs_id_corte = ?";
 
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $igs_id_corte);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
     public static function mdlConsultarMontoIngresosPBByCorte($igs_id_corte)
     {
         try {
@@ -361,6 +399,25 @@ class CortesModelo
             $pps->bindValue(1, $igs_id_corte);
             $pps->execute();
             return $pps->fetch();
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlConsultarTodoIngresosPBByCorte($igs_id_corte)
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_ingresos_igs WHERE igs_mp != 'EFECTIVO' AND igs_id_corte = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $igs_id_corte);
+            $pps->execute();
+            return $pps->fetchAll();
         } catch (PDOException $th) {
             throw $th;
             return false;
@@ -391,6 +448,26 @@ class CortesModelo
         }
     }
 
+    public static function mdlConsultarTodoGastosPEByCorte($tgts_id_corte)
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_gastos_tgts WHERE tgts_mp = 'EFECTIVO' AND tgts_id_corte = ?";
+
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $tgts_id_corte);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
     public static function mdlConsultarMontoGastosPBByCorte($tgts_id_corte)
     {
         try {
@@ -401,6 +478,25 @@ class CortesModelo
             $pps->bindValue(1, $tgts_id_corte);
             $pps->execute();
             return $pps->fetch();
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlConsultarTodoGastosPBByCorte($tgts_id_corte)
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_gastos_tgts WHERE tgts_mp != 'EFECTIVO' AND tgts_id_corte = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $tgts_id_corte);
+            $pps->execute();
+            return $pps->fetchAll();
         } catch (PDOException $th) {
             throw $th;
             return false;
