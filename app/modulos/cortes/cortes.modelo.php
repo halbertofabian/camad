@@ -290,6 +290,25 @@ class CortesModelo
             $con = null;
         }
     }
+    public static function mdlConsultarTodoFichasPEByCorte($vfch_id_corte)
+    {
+        try {
+            //code...
+            $sql = "SELECT *  FROM tbl_ficha_venta_vfch WHERE vfch_mp = 'EFECTIVO' AND vfch_estado = 'PAGADO' AND vfch_id_corte = ?";
+
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $vfch_id_corte);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (PDOException $th) {
+            throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 
     public static function mdlConsultarMontoFichasPBByCorte($vfch_id_corte)
     {
