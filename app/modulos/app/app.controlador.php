@@ -27,7 +27,8 @@ class AppControlador
             'cortes',
             'cajas',
             'abrir-caja',
-            'cerrar-caja'
+            'cerrar-caja',
+            'informes'
         );
     }
     public static function obtenerListaBlancaAlumno()

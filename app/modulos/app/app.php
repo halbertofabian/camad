@@ -34,7 +34,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/core/menu/menu-types/horizontal-menu.css">
     <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/pages/Panel de control-analytics.css">
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/pages/Panel de control-analytics.css"> -->
     <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/pages/card-analytics.css">
     <link rel="stylesheet" type="text/css" href="<?php echo  HTTP_HOST . 'app/assets/' ?>css/plugins/tour/tour.css">
     <!-- END: Page CSS-->
@@ -96,7 +96,7 @@
     <!-- Toastr -->
     <script src="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/toastr/build/toastr.min.js"></script>
     <!-- BEGIN: Page JS-->
-    <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>js/scripts/pages/Panel de control-analytics.js"></script>
+    <!-- <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>js/scripts/pages/Panel de control-analytics.js"></script> -->
 
     <!-- <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>plugin/select2/select2.full.min.js"></script> -->
     <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>plugin/select2-c/js/select2.min.js"></script>
@@ -152,6 +152,7 @@
                                         <!-- <i class="ficon feather icon-check-square"></i> -->
                                     </a>
                                 </li>
+
                                 <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon feather icon-message-square"></i></a></li>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calender.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon feather icon-calendar"></i></a></li> -->
@@ -362,7 +363,7 @@
                 <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-without-dd-arrow navbar-shadow menu-border" role="navigation" data-menu="menu-wrapper">
                     <div class="navbar-header">
                         <ul class="nav navbar-nav flex-row">
-                            <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/horizontal-menu-template/index.html">
+                            <li class="nav-item mr-auto"><a class="navbar-brand" href="<?php echo HTTP_HOST  ?>">
                                     <div class="brand-logo"></div>
                                     <h2 class="brand-text mb-0">S.E.A.D</h2>
                                 </a></li>
@@ -455,7 +456,7 @@
                 <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-without-dd-arrow navbar-shadow menu-border" role="navigation" data-menu="menu-wrapper">
                     <div class="navbar-header">
                         <ul class="nav navbar-nav flex-row">
-                            <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/horizontal-menu-template/index.html">
+                            <li class="nav-item mr-auto"><a class="navbar-brand" href="<?php echo HTTP_HOST  ?>">
                                     <div class="brand-logo"></div>
                                     <h2 class="brand-text mb-0">S.E.A.D</h2>
                                 </a></li>
@@ -569,7 +570,7 @@
                 <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-without-dd-arrow navbar-shadow menu-border" role="navigation" data-menu="menu-wrapper">
                     <div class="navbar-header">
                         <ul class="nav navbar-nav flex-row">
-                            <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/horizontal-menu-template/index.html">
+                            <li class="nav-item mr-auto"><a class="navbar-brand" href="<?php echo HTTP_HOST  ?>">
                                     <div class="brand-logo"></div>
                                     <h2 class="brand-text mb-0">S.E.A.D</h2>
                                 </a></li>
@@ -588,10 +589,8 @@
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'configuracion' ?>" data-toggle="dropdown" data-i18n="Configuraciones"><i class="feather icon-grid"></i>Configuraciones</a>
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cajas' ?>" data-toggle="dropdown" data-i18n="cajas"><i class="feather icon-grid"></i>Cajas</a>
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cortes' ?>" data-toggle="dropdown" data-i18n="cortes"><i class="feather icon-grid"></i>Cortes</a>
-                                        <!-- 
-                            </li>
-                            <li data-menu=""><a class="dropdown-item" href="Panel de control-ecommerce.html" data-toggle="dropdown" data-i18n="eCommerce"><i class="feather icon-shopping-cart"></i>eCommerce</a>
-                            </li> -->
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'informes' ?>" data-toggle="dropdown" data-placement="informes"><i class="feather icon-file"></i>Informes</a></li>
+
                                 </ul>
                             </li>
                             <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Users">Alumnos</span></a>
@@ -691,7 +690,7 @@
                 <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-without-dd-arrow navbar-shadow menu-border" role="navigation" data-menu="menu-wrapper">
                     <div class="navbar-header">
                         <ul class="nav navbar-nav flex-row">
-                            <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/horizontal-menu-template/index.html">
+                            <li class="nav-item mr-auto"><a class="navbar-brand" href="<?php echo HTTP_HOST  ?>">
                                     <div class="brand-logo"></div>
                                     <h2 class="brand-text mb-0">S.E.A.D</h2>
                                 </a></li>
@@ -822,6 +821,7 @@
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/configuracion/configuracion.js"></script>
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/cortes/cortes.js"></script>
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/cajas/cajas.js"></script>
+        <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/informes/informes.js"></script>
     </body>
 <?php else :
 

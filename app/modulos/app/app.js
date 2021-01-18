@@ -3,6 +3,31 @@ var session = $(".session").attr("session")
 
 // alert(session);
 
+var date = new Date();
+
+var day = date.getDate();
+var month = date.getMonth() + 1;
+var year = date.getFullYear();
+
+
+
+if (month < 10) month = "0" + month;
+if (day < 10) day = "0" + day;
+var today = year + "-" + month + "-" + day;
+
+
+$(".theDate").val(today)
+
+function startLoadButton() {
+    $(".btn-load").attr("disabled", true);
+    $(".btn-load").html(` <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Por favor espere...`)
+}
+function stopLoadButton(label) {
+    $(".btn-load").attr("disabled", false);
+    $(".btn-load").html(`${label}`)
+}
+
 $(".tablas").DataTable({
 
 
@@ -106,7 +131,7 @@ $("#pds_porcentaje_precio_rebajado").keyup(function () {
 function calcularPrecioPublico() {
 
     var pds_porcentaje_precio_publico = parseFloat($("#pds_porcentaje_precio_publico").val()) == 0 ? parseFloat($("#pds_porcentaje_precio_publico").val(0)) : parseFloat($("#pds_porcentaje_precio_publico").val())
-    
+
 
 
 
@@ -115,9 +140,9 @@ function calcularPrecioPublico() {
 
 
     var total_precio_publico = (pds_precio_compra * (pds_porcentaje_precio_publico / 100)) + pds_precio_compra
-    
 
-    $("#pds_precio_publico").val( Math.round(total_precio_publico))
+
+    $("#pds_precio_publico").val(Math.round(total_precio_publico))
 
 
 
@@ -148,7 +173,7 @@ function calcularPorcentajePublico() {
 
 
     var total_porcentaje_publico = (pds_precio_publico / pds_precio_compra * 100) - 100
-  
+
 
     $("#pds_porcentaje_precio_publico").val(Math.round(total_porcentaje_publico))
     // $("#pds_porcentaje_precio_publico").number(true, 2);
@@ -166,8 +191,8 @@ function calcularPorcentajeMayoreo() {
 
 
     var total_porcentaje_mayoreo = (pds_precio_mayoreo / pds_precio_compra * 100) - 100
-  
-    
+
+
     $("#pds_porcentaje_precio_mayoreo").val(Math.round(total_porcentaje_mayoreo))
     // $("#pds_porcentaje_precio_mayoreo").number(true, 2);
 
@@ -201,8 +226,8 @@ function calcularPorcentajeRebajado() {
 
 
     var total_porcentaje_rebajado = (pds_precio_promocion / pds_precio_compra * 100) - 100
-  
-    
+
+
     $("#pds_porcentaje_precio_rebajado").val(Math.round(total_porcentaje_rebajado))
     $("#pds_porcentaje_precio_rebajado").number(true, 2);
 
@@ -218,11 +243,11 @@ function calcularPorcentajeDescuentoRebajado() {
 
 
 
-    var total_porcentaje_descuento =  pds_precio_publico - pds_precio_promocion;
+    var total_porcentaje_descuento = pds_precio_publico - pds_precio_promocion;
     total_porcentaje_descuento = total_porcentaje_descuento / pds_precio_publico;
     total_porcentaje_descuento = total_porcentaje_descuento * 100;
-  
-    
+
+
     $("#pds_porcentaje_descuento").val(Math.round(total_porcentaje_descuento))
     $("#pds_porcentaje_descuento").number(true, 2);
 }
@@ -235,11 +260,11 @@ function calcularPorcentajeDescuentoMayoreo() {
 
 
 
-    var total_porcentaje_descuento =  pds_precio_publico - pds_precio_mayoreo;
+    var total_porcentaje_descuento = pds_precio_publico - pds_precio_mayoreo;
     total_porcentaje_descuento = total_porcentaje_descuento / pds_precio_publico;
     total_porcentaje_descuento = total_porcentaje_descuento * 100;
-  
-    
+
+
     $("#pds_porcentaje_descuento_mayoreo").val(Math.round(total_porcentaje_descuento))
     $("#pds_porcentaje_descuento_mayoreo").number(true, 2);
 }
