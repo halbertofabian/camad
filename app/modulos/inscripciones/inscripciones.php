@@ -179,9 +179,11 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <?php if ($_SESSION['session_usr']['usr_rol'] != "Responsable de sucursal") : ?>
-                                            <a href="<?php echo HTTP_HOST . 'pagos/new/' . $fpg['usr_matricula'] . '/' . $fpg['fpg_id'] ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Abonar"><i class="fa fa-money" aria-hidden="true"></i></a>
-                                        <?php endif; ?>
+                                        <?php //if ($_SESSION['session_usr']['usr_rol'] != "Responsable de sucursal") : 
+                                        ?>
+                                        <a href="<?php echo HTTP_HOST . 'pagos/new/' . $fpg['usr_matricula'] . '/' . $fpg['fpg_id'] ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Abonar"><i class="fa fa-money" aria-hidden="true"></i></a>
+                                        <!-- <?php //endif; 
+                                                ?> -->
                                         <a class="btn btn-info" href="<?php echo HTTP_HOST . 'inscripciones/fichas/' . $fpg['fpg_id'] ?> " data-toggle="tooltip" data-placement="top" title="Ver ficha de inscripcón" "><i class=" fa fa-file-pdf-o"></i></a>
                                     </div>
                                 </td>
