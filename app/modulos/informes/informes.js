@@ -81,7 +81,11 @@ $("#formInforme_1").on("submit", function (e) {
                     $("#text-cert").html(`TOTAL  ${$("#ifs_concepto").val().replace('PPG_', '')} PAGADOS(AS): <strong class="text-primary">${total_pago}</strong>`);
 
                 }
-                $("#text-total").html(`TOTAL PAGADO <strong class="text-primary">${monto_total}</strong>`)
+                $("#text-total").html(`TOTAL PAGADO <strong class="text-primary">${new Intl.NumberFormat().format(monto_total)}</strong>`)
+
+                $("#btn_export_result").removeClass("d-none")
+
+                $("#btn_export_result").attr("href", urlApp + "app/lib/export/informe-1-fichas.php?ifs_fecha_inicio=" + $("#ifs_fecha_inicio").val() + "&ifs_fecha_fin=" + $("#ifs_fecha_fin").val() + "&ifs_concepto=" + $("#ifs_concepto").val());
             }
         },
     })

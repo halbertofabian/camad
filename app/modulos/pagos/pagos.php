@@ -1091,7 +1091,13 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 $vfch_class = "bg-danger";
                                 $vfch_button = "<strong class='mt-1'>Solicitud rechazada</strong>";
                             } else {
-                                $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago mt-1" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
+                                if ($_SESSION['session_usr']['usr_rol'] == 'Administrador') {
+                                    $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago mt-1" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
+                                } elseif ($_SESSION['session_usr']['usr_caja'] == $ppg['vfch_id_corte']) {
+                                    $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago mt-1" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
+                                } else {
+                                    $vfch_button = '';
+                                }
                             }
                             ?>
                             <tr class="<?php echo $vfch_class  ?>">

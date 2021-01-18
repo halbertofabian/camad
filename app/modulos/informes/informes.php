@@ -49,6 +49,10 @@ cargarComponente('breadcrumb', '', 'Gestión de informes');
                 <div class="col-md-3">
                     <p id="text-total"></p>
                 </div>
+                <div class="col-md-3">
+                    <a href="" id="btn_export_result" class="btn btn-success waves-effect waves-light d-none" data-toggle="tooltip" data-placement="top" title="" data-original-title="Exportar resultados a Excel"> <i class="fa fa-file-excel-o"></i> </a>
+
+                </div>
             </div>
         </div>
     </div>
