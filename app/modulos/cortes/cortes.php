@@ -359,8 +359,8 @@
                                 <td><?php echo $cts['copn_fecha_abrio'] ?></td>
                                 <td><?php echo $cts['copn_ingreso_efectivo'] ?></td>
                                 <td><?php echo $cts['copn_ingreso_banco'] ?></td>
-                                <td><?php echo $cts['copn_efectivo_real'] ?></td>
-                                <td><?php echo $cts['copn_banco_real'] ?></td>
+                                <td> <strong class="text-primary"> <?php echo $cts['copn_efectivo_real'] ?> </strong> </td>
+                                <td> <strong class="text-primary"> <?php echo $cts['copn_banco_real'] ?> </strong> </td>
                                 <td><?php echo $cts['copn_fecha_cierre'] ?></td>
                                 <td><?php echo $cts['copn_usuario_cerro'] ?></td>
                                 <td>

@@ -99,7 +99,7 @@ $header = <<<EOD
                 <td style="text-align: center; width:$impresion px;">
                     <img src="{$ruta}app/assets/images/img-app/logo_sead_1.png" width="180" />
                     <br><br>   
-                    PLANTEL EDUCATIVO SEAD ABIERTO Y A DISTANCIA
+                    GRUPO EDUCATIVO SEAD
                     
                     <BR> RFC:<strong>$sucursal[scl_rfc]</strong>
                     <BR> $sucursal[scl_direccion] 

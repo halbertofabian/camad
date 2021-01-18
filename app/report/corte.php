@@ -130,7 +130,7 @@ $header = <<<EOD
                 <td style="text-align: center; width:$impresion px;">
                     <img src="{$ruta}app/assets/images/img-app/logo_sead_1.png" width="180" />
                     <br><br>   
-                    PLANTEL EDUCATIVO SEAD ABIERTO Y A DISTANCIA
+                    GRUPO EDUCATIVO SEAD
                     
                     <BR> RFC:<strong>$sucursal[scl_rfc]</strong>
                     <BR> $sucursal[scl_direccion] 
@@ -201,12 +201,12 @@ $header = <<<EOD
             </tr>
             <tr>
                 <td>
-                    TOTAL GATOS EFECTIVO: $gts_e
+                    TOTAL GASTOS EFECTIVO: $gts_e
                 </td>
             </tr>
             <tr>
                 <td>
-                    TOTAL GATOS BANCO: $gts_b
+                    TOTAL GASTOS BANCO: $gts_b
                 </td>
             </tr>
             
@@ -221,7 +221,7 @@ $header = <<<EOD
         <tr>
                 <td style="text-align: center; padding:5px; width:$impresion px;">
                 --------------------------------
-                TOTAL REPORTADO
+               <strong style="color:#1259AC"> TOTAL REPORTADO </strong>
                 --------------------------------
                 </td>
             </tr>
@@ -247,7 +247,7 @@ $header = <<<EOD
         <tr>
                 <td style="text-align: center; padding:5px; width:$impresion px;">
                 --------------------------------
-                TOTAL REAL
+                <strong style="color:#1259AC"> TOTAL REAL </strong>
                 --------------------------------
                 </td>
             </tr>
