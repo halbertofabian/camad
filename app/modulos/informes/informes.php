@@ -46,6 +46,9 @@ cargarComponente('breadcrumb', '', 'Gestión de informes');
                 <div class="col-md-3">
                     <p id="text-cert"></p>
                 </div>
+                <div class="col-md-3">
+                    <p id="text-total"></p>
+                </div>
             </div>
         </div>
     </div>

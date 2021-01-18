@@ -38,6 +38,7 @@ $("#formInforme_1").on("submit", function (e) {
 
             var total_pago = 0;
             var bandera_pago = true;
+            var monto_total = 0;
             $("#text-cert").html("")
             if (res != null) {
                 res.forEach(ifs => {
@@ -52,6 +53,7 @@ $("#formInforme_1").on("submit", function (e) {
                         bandera_pago = false;
                     }
 
+                    monto_total += Number(ifs.ppg_total);
                     html +=
                         `
                             <tr>
@@ -75,10 +77,11 @@ $("#formInforme_1").on("submit", function (e) {
                 });
 
                 $("#tbodyInforme_1").html(html)
-                if(bandera_pago){
+                if (bandera_pago) {
                     $("#text-cert").html(`TOTAL  ${$("#ifs_concepto").val().replace('PPG_', '')} PAGADOS(AS): <strong class="text-primary">${total_pago}</strong>`);
 
                 }
+                $("#text-total").html(`TOTAL PAGADO <strong class="text-primary">${monto_total}</strong>`)
             }
         },
     })
