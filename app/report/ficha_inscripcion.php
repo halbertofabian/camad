@@ -118,7 +118,7 @@ EOF;
     $pdf->writeHTMLCell(0, 0, '', '', $header, 0, 1, 0, true, '', true);
 
 
-    $body = <<<EOF
+    $body = <<<EOD
     <table style ="font-size:16px; border: 1px solid #000">
         <thead>
             <tr style ="border: 1px solid #000; ">
@@ -164,7 +164,7 @@ EOF;
 
                 </td>
                 <td style="text-align: center;border: 1px solid #000">
-                $incripcion[pqt_modalidad]
+                 $incripcion[pqt_modalidad]
 
                 </td>
                 <td style="text-align: center;border: 1px solid #000">
@@ -187,6 +187,7 @@ EOF;
             <tr style ="border: 1px solid #000;background-color:#A7D3F3; ">
                 <td style="text-align: center;border: 1px solid #000">
                 $incripcion[usr_nombre]
+                <label for="name">name:</label> <input type="text" name="name" value="" size="20" maxlength="30" /><br />
 
                 </td>
                 <td style="text-align: center;border: 1px solid #000">
@@ -210,7 +211,7 @@ EOF;
     </table>
     <br>
   
-EOF;
+EOD;
 
     // Print text using writeHTMLCell()
     $pdf->writeHTMLCell(0, 0, '', '', $body, 0, 1, 0, true, '', true);

@@ -6,7 +6,7 @@
 //     cargarComponente ('acceso-restringido', '', '');
 //     return;
 // endif;
-cargarComponente ('breadcrumb', '', 'Listar Gastos'); ?>
+cargarComponente('breadcrumb', '', 'Listar Gastos'); ?>
 
 
 <div class="container">
@@ -15,6 +15,7 @@ cargarComponente ('breadcrumb', '', 'Listar Gastos'); ?>
 
     <div class="row d-none" id="lista-gastos-categoria">
         <div class="col-12">
+            <a href="<?php echo HTTP_HOST . 'gastos' ?>" class="btn btn-primary float-right ml-1">Agregar gasto</a>
             <button class="btn btn-dark float-right mb-1 btnListarGastos"><i class="fa fa-list" aria-hidden="true"></i> Lista</button>
         </div>
         <?php
@@ -68,7 +69,9 @@ cargarComponente ('breadcrumb', '', 'Listar Gastos'); ?>
                                                                 <i class="fa fa-filter" aria-hidden="true"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <button class="dropdown-item text-dark btnEliminarGasto" tgts_id="<?php echo $tgts['tgts_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar gasto </button>
+                                                                <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") :  ?>
+                                                                    <button class="dropdown-item text-dark btnEliminarGasto" tgts_id="<?php echo $tgts['tgts_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar gasto </button>
+                                                                <?php endif; ?>
                                                                 <button class="dropdown-item text-dark btnEditarNota" nota="<?php echo $tgts['tgts_nota'] ?>" idNota="<?php echo $tgts['tgts_id'] ?>" data-toggle="modal" data-target="#mdlEditarNota"> <i class="fa fa-edit" aria-hidden="true"></i> Editar nota</button>
 
 
@@ -99,6 +102,8 @@ cargarComponente ('breadcrumb', '', 'Listar Gastos'); ?>
 
     <div class="row " id="lista-gastos">
         <div class="col-12">
+            <a href="<?php echo HTTP_HOST . 'gastos' ?>" class="btn btn-primary float-right ml-1">Agregar gasto</a>
+
             <button class="btn btn-dark float-right mb-1 btnListarGastosCat "><i class="fa fa-th" aria-hidden="true"></i> Categoría</button>
         </div>
         <div class="col-12">
@@ -140,7 +145,9 @@ cargarComponente ('breadcrumb', '', 'Listar Gastos'); ?>
                                             <i class="fa fa-filter" aria-hidden="true"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <button class="dropdown-item text-dark btnEliminarGasto" tgts_id="<?php echo $tgts['tgts_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar gasto </button>
+                                            <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") :  ?>
+                                                <button class="dropdown-item text-dark btnEliminarGasto" tgts_id="<?php echo $tgts['tgts_id'] ?>"><i class="fa fa-trash-o" aria-hidden="true"></i> Eliminar gasto </button>
+                                            <?php endif; ?>
                                             <button class="dropdown-item text-dark btnEditarNota" nota="<?php echo $tgts['tgts_nota'] ?>" idNota="<?php echo $tgts['tgts_id'] ?>" data-toggle="modal" data-target="#mdlEditarNota"> <i class="fa fa-edit" aria-hidden="true"></i> Editar nota</button>
 
 
@@ -159,31 +166,31 @@ cargarComponente ('breadcrumb', '', 'Listar Gastos'); ?>
 
 <!-- Modal -->
 <div class="modal fade" id="mdlEditarNota" tabindex="-1" aria-labelledby="mdlEditarNotaLabel" aria-hidden="true">
-     <div class="modal-dialog">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <h5 class="modal-title" id="mdlEditarNotaLabel">Editar nota</h5>
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                 </button>
-             </div>
-             <form method="post">
-                 <div class="modal-body">
-                     <div class="form-group col-12 col-md-12">
-                         <label for="nota">Nota</label>
-                         <textarea class="form-control" name="nota" id="nota" cols="30" rows="5"></textarea>
-                         <input type="hidden" name="id" id="idNota">
-                     </div>
-                 </div>
-                 <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-                     <button type="submit" name="btnEditarNota" class="btn btn-primary">Editar nota</button>
-                 </div>
-                 <?php 
-                    $editarNota = new GastosControlador();
-                    $editarNota -> ctrEditarNota('tbl_gastos_tgts','tgts_nota','tgts_id','listar-gastos');
-                 ?>
-             </form>
-         </div>
-     </div>
- </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mdlEditarNotaLabel">Editar nota</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <div class="form-group col-12 col-md-12">
+                        <label for="nota">Nota</label>
+                        <textarea class="form-control" name="nota" id="nota" cols="30" rows="5"></textarea>
+                        <input type="hidden" name="id" id="idNota">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+                    <button type="submit" name="btnEditarNota" class="btn btn-primary">Editar nota</button>
+                </div>
+                <?php
+                $editarNota = new GastosControlador();
+                $editarNota->ctrEditarNota('tbl_gastos_tgts', 'tgts_nota', 'tgts_id', 'listar-gastos');
+                ?>
+            </form>
+        </div>
+    </div>
+</div>

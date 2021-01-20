@@ -401,6 +401,9 @@
                                     </li>
                                 </ul>
                             </li>
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'listar-gastos' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Gastos</a></li>
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'ingresos' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Ingresos</a></li>
+
                             <?php
                             if ($_SESSION['session_usr']['usr_caja'] != 0) :
                             ?>
@@ -410,40 +413,6 @@
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'abrir-caja'  ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Abrir caja</a></li>
 
                             <?php endif; ?>
-
-                            <!-- <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Gestión de tienda">Gestión de tienda</span></a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Cupones"><i class="feather icon-grid"></i>Cupones</a>
-                                        <ul class="dropdown-menu">
-                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cupones/new' ?>" data-toggle="dropdown" data-i18n="Nuevo cupon"><i class="feather icon-circle"></i>Nuevo cupon</a>
-                                            </li>
-                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cupones' ?>" data-toggle="dropdown" data-i18n="Gestión de cupones"><i class="feather icon-circle"></i>Gestión de cupones</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Cupones"><i class="feather icon-grid"></i>Usuarios</a>
-                                        <ul class="dropdown-menu">
-                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'usuarios/new' ?>" data-toggle="dropdown" data-i18n="Nuevo usuario"><i class="feather icon-circle"></i>Nuevo usuario</a>
-                                            </li>
-                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'usuarios' ?>" data-toggle="dropdown" data-i18n="Gestión de usuarios"><i class="feather icon-circle"></i>Gestión de usuarios</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Cupones"><i class="feather icon-grid"></i>Gastos</a>
-                                        <ul class="dropdown-menu">
-                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'gastos' ?>" data-toggle="dropdown" data-i18n="Nuevo usuario"><i class="feather icon-circle"></i>Nuevo gasto</a>
-                                            </li>
-                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'listar-gastos' ?>" data-toggle="dropdown" data-i18n="Nuevo usuario"><i class="feather icon-circle"></i>Listar gastos</a>
-                                            </li>
-                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'categorias' ?>" data-toggle="dropdown" data-i18n="Gestión de usuarios"><i class="feather icon-circle"></i>Gestión de categorías </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'ingresos'  ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Ingresos</a></li>
-
-
-                                </ul>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
