@@ -62,7 +62,7 @@ class PaquetesModelo
         try {
             //code...
             if ($pqt_sku == "") {
-                $sql = "SELECT * FROM tbl_paquete_pqt WHERE pqt_estado_actividad = 1  ";
+                $sql = "SELECT pqt.*, usr.usr_nombre FROM tbl_paquete_pqt pqt  JOIN tbl_usuarios_usr usr ON pqt.pqt_usuario_registro = usr.usr_id WHERE pqt_estado_actividad = 1  ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 // $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
