@@ -187,7 +187,7 @@ EOF;
             <tr style ="border: 1px solid #000;background-color:#A7D3F3; ">
                 <td style="text-align: center;border: 1px solid #000">
                 $incripcion[usr_nombre]
-                <label for="name">name:</label> <input type="text" name="name" value="" size="20" maxlength="30" /><br />
+               
 
                 </td>
                 <td style="text-align: center;border: 1px solid #000">
