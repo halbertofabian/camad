@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['session_usr']['usr_rol'] == "Administrador") :
+if ($_SESSION['session_usr']['usr_rol'] == "Administrador" || $_SESSION['session_usr']['usr_rol'] == "Auditor externo") :
     cargarComponente('breadcrumb', '', 'Panel de control');
 
     cargarPagina('adminpanel', $rutas);
@@ -8,7 +8,7 @@ if ($_SESSION['session_usr']['usr_rol'] == "Administrador") :
 
 
 <?php
-elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador" &&  $_SESSION['session_usr']['usr_rol'] != "Alumno") :
+elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador"  &&  $_SESSION['session_usr']['usr_rol'] != "Alumno") :
     cargarComponente('breadcrumb', '', 'Panel de control');
 
 
@@ -31,7 +31,7 @@ elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador" &&  $_SESSION['se
                             <p class="card-text">Sucursal <strong><?php echo $copn['scl_nombre']; ?> </strong> </p>
                             <p class="card-text">Fecha de apertura <strong><?php echo $copn['copn_fecha_abrio']; ?> </strong> </p>
 
-                            <a href="<?php echo HTTP_HOST.'cerrar-caja' ?>" class="btn btn-danger float-right">Cerrar caja</a>
+                            <a href="<?php echo HTTP_HOST . 'cerrar-caja' ?>" class="btn btn-danger float-right">Cerrar caja</a>
                         </div>
                     </div>
                 </div>

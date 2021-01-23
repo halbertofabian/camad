@@ -62,6 +62,7 @@
                                     <option value="Administrador">Administrador</option>
                                     <option value="Responsable de sucursal">Responsable de sucursal</option>
                                     <option value="Asesor Educativo">Asesor Educativo</option>
+                                    <option value="Auditor externo">Auditor externo</option>
                                 </select>
                             </div>
                         </div>
@@ -151,6 +152,7 @@
                                     <option value="Administrador">Administrador</option>
                                     <option value="Responsable de sucursal">Responsable de sucursal</option>
                                     <option value="Asesor Educativo">Asesor Educativo</option>
+                                    <option value="Auditor externo">Auditor externo</option>
                                 </select>
                             </div>
                         </div>

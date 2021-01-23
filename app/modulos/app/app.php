@@ -651,7 +651,124 @@
                 </div>
             </div>
 
+        <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Auditor externo") : ?>
+            <!-- BEGIN: Header-->
 
+            <div class="horizontal-menu-wrapper">
+                <div class="header-navbar navbar-expand-sm navbar navbar-horizontal floating-nav navbar-light navbar-without-dd-arrow navbar-shadow menu-border" role="navigation" data-menu="menu-wrapper">
+                    <div class="navbar-header">
+                        <ul class="nav navbar-nav flex-row">
+                            <li class="nav-item mr-auto"><a class="navbar-brand" href="<?php echo HTTP_HOST  ?>">
+                                    <div class="brand-logo"></div>
+                                    <h2 class="brand-text mb-0">S.E.A.D</h2>
+                                </a></li>
+                            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="icon-disc"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- Horizontal menu content-->
+                    <div class="navbar-container main-menu-content" data-menu="menu-container">
+                        <!-- include ../../../includes/mixins-->
+                        <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
+
+                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown"><i class="feather icon-home"></i><span data-i18n="Panel de control">Panel de control</span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-grid"></i>Inicio</a>
+                                    <!-- <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'sucursales' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-grid"></i>Sucursales</a> -->
+                                    <!-- <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'configuracion' ?>" data-toggle="dropdown" data-i18n="Configuraciones"><i class="feather icon-grid"></i>Configuraciones</a> -->
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cajas' ?>" data-toggle="dropdown" data-i18n="cajas"><i class="feather icon-grid"></i>Cajas</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cortes' ?>" data-toggle="dropdown" data-i18n="cortes"><i class="feather icon-grid"></i>Cortes</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'informes' ?>" data-toggle="dropdown" data-placement="informes"><i class="feather icon-file"></i>Informes</a></li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-users"></i><span data-i18n="Users">Alumnos</span></a>
+                                <ul class="dropdown-menu">
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'alumnos/new' ?>" data-toggle="dropdown" data-i18n="Nuevo alumno"><i class="feather icon-plus"></i>Nuevo alumno</a>
+                                    </li>
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'alumnos' ?>" data-toggle="dropdown" data-i18n="Listar alumno"><i class="feather icon-check"></i>Listar alumno</a>
+                                    </li>
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'alumnos/importar' ?>" data-toggle="dropdown" data-i18n="Importar alumnos"><i class="feather icon-file"></i>Importar alumnos</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Paquetes</span></a>
+                                <ul class="dropdown-menu">
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'paquetes/new' ?>" data-toggle="dropdown" data-i18n="Crear nuevo"><i class="feather icon-plus"></i>Crear nuevo</a>
+                                    </li>
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'paquetes' ?>" data-toggle="dropdown" data-i18n="Listar paquetes"><i class="feather icon-check"></i>Listar paquetes</a>
+
+
+                                </ul>
+                            </li>
+
+                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Inscribir</span></a>
+                                <ul class="dropdown-menu">
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'inscripciones/new' ?>" data-toggle="dropdown" data-i18n="Registrar inscripción"><i class="feather icon-plus"></i>Registrar inscripción</a>
+                                    </li>
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'inscripciones' ?>" data-toggle="dropdown" data-i18n="Inscripciones"><i class="feather icon-plus"></i>Listar Inscripciones</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Pagos</span></a>
+                                <ul class="dropdown-menu">
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/new' ?>" data-toggle="dropdown" data-i18n="Nuevo pago"><i class="feather icon-plus"></i>Nuevo pago</a>
+                                    </li>
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/fichas' ?>" data-toggle="dropdown" data-i18n="Historial de pagos"><i class="feather icon-plus"></i>Historial de fichas</a>
+                                    </li>
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'pagos/fichas-canceladas' ?>" data-toggle="dropdown" data-i18n="Historial de fichas canceladas"><i class="feather icon-plus"></i>Fichas canceladas</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Gestión de tienda">Gestión de tienda</span></a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Cupones"><i class="feather icon-grid"></i>Cupones</a>
+                                        <ul class="dropdown-menu">
+                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cupones/new' ?>" data-toggle="dropdown" data-i18n="Nuevo cupon"><i class="feather icon-circle"></i>Nuevo cupon</a>
+                                            </li>
+                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cupones' ?>" data-toggle="dropdown" data-i18n="Gestión de cupones"><i class="feather icon-circle"></i>Gestión de cupones</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!-- <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Cupones"><i class="feather icon-grid"></i>Usuarios</a>
+                                        <ul class="dropdown-menu">
+                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'usuarios/new' ?>" data-toggle="dropdown" data-i18n="Nuevo usuario"><i class="feather icon-circle"></i>Nuevo usuario</a>
+                                            </li>
+                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'usuarios' ?>" data-toggle="dropdown" data-i18n="Gestión de usuarios"><i class="feather icon-circle"></i>Gestión de usuarios</a>
+                                            </li>
+                                        </ul>
+                                    </li> -->
+                                    <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Cupones"><i class="feather icon-grid"></i>Gastos</a>
+                                        <ul class="dropdown-menu">
+                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'gastos' ?>" data-toggle="dropdown" data-i18n="Nuevo usuario"><i class="feather icon-circle"></i>Nuevo gasto</a>
+                                            </li>
+                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'listar-gastos' ?>" data-toggle="dropdown" data-i18n="Nuevo usuario"><i class="feather icon-circle"></i>Listar gastos</a>
+                                            </li>
+                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'categorias' ?>" data-toggle="dropdown" data-i18n="Gestión de usuarios"><i class="feather icon-circle"></i>Gestión de categorías </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'ingresos'  ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Ingresos</a></li>
+
+
+                                </ul>
+                            </li>
+
+                            <?php
+                            if ($_SESSION['session_usr']['usr_caja'] != 0) :
+                            ?>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'cerrar-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Cerrar caja</a></li>
+
+                            <?php else : ?>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'abrir-caja'  ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Abrir caja</a></li>
+
+                            <?php endif; ?>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
         <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Alumno") : ?>
             <!-- BEGIN: Header-->
 
