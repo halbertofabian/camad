@@ -57,15 +57,15 @@ class PaquetesModelo
             $con = null;
         }
     }
-    public static function mdlMostrarPaquetes($pqt_sku = "")
+    public static function mdlMostrarPaquetes($pqt_sku = "", $pqt_id_sucursal = "")
     {
         try {
             //code...
             if ($pqt_sku == "") {
-                $sql = "SELECT pqt.*, usr.usr_nombre FROM tbl_paquete_pqt pqt  JOIN tbl_usuarios_usr usr ON pqt.pqt_usuario_registro = usr.usr_id WHERE pqt_estado_actividad = 1  ";
+                $sql = "SELECT pqt.*, usr.usr_nombre FROM tbl_paquete_pqt pqt  JOIN tbl_usuarios_usr usr ON pqt.pqt_usuario_registro = usr.usr_id WHERE pqt_estado_actividad = 1 AND pqt_id_sucursal = ?   ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
-                // $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+                $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             } elseif ($pqt_sku != "") {

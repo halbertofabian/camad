@@ -194,9 +194,9 @@ elseif (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "update") : ?>
                                 <span><?php echo $pqt['pqt_sku'] ?></span>
                             </div>
                             <div class="">
-                            <span>Usuario registro: <?php echo '<strong>'.$pqt['usr_nombre'].'</strong>'; ?></span>
-                            <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
-                                <!-- <div class="btn-group float-right">
+                                <span>Usuario registro: <?php echo '<strong>' . $pqt['usr_nombre'] . '</strong>'; ?></span>
+                                <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
+                                    <!-- <div class="btn-group float-right">
                                     <a href="<?php echo HTTP_HOST . 'paquetes/update/' . $pqt['pqt_sku'] ?>" class="btn btn-warning btn-sm btnEditarPaquete" pqt_sku="<?php echo $pqt['pqt_sku']; ?>"><i class="fa fa-edit"></i></a>
 
                                     <button class="btn btn-danger btn-sm btnEliminarPaquete" pqt_sku="<?php echo $pqt['pqt_sku']; ?>"><i class="fa fa-trash"></i></button>
