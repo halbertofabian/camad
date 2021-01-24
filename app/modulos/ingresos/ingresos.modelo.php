@@ -68,13 +68,16 @@ class IngresosModelo
             $con = null;
         }
     }
-    public static function mdlEliminarIngresos()
+    public static function mdlEliminarIngresos($igs_id)
     {
         try {
             //code...
-            $sql = "";
+            $sql = "DELETE FROM tbl_ingresos_igs WHERE igs_id = ?";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
+            $pps->bindValue(1, $igs_id);
+            $pps->execute();
+            return $pps->rowCount() > 0;
         } catch (PDOException $th) {
             //throw $th;
         } finally {

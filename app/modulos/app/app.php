@@ -908,6 +908,7 @@
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/cortes/cortes.js"></script>
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/cajas/cajas.js"></script>
         <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/informes/informes.js"></script>
+        <script src="<?php echo HTTP_HOST . 'app/' ?>modulos/ingresos/ingresos.js"></script>
     </body>
 <?php else :
 

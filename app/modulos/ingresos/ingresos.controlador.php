@@ -77,7 +77,24 @@ class IngresosControlador
     public function ctrMostrarIngresos()
     {
     }
-    public function ctrEliminarIngresos()
+    public static function ctrEliminarIngresos()
     {
+        if ($_POST['btnEliminarIngreso']) {
+            $eliminarIngreso = IngresosModelo::mdlEliminarIngresos($_POST['igs_id']);
+
+            if ($eliminarIngreso) {
+                return array(
+                    'status' => true,
+                    'mensaje' => 'Ingreso eliminado con éxito',
+                    'pagina' => HTTP_HOST . 'ingresos'
+                );
+            } else {
+                return array(
+                    'status' => false,
+                    'mensaje' => 'INo se pudo eliminar este ingreso, intente de  nuevo',
+                    'pagina' => HTTP_HOST . 'ingresos'
+                );
+            }
+        }
     }
 }

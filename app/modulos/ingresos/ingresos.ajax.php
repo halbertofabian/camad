@@ -21,5 +21,15 @@ require_once DOCUMENT_ROOT . 'app/modulos/cortes/cortes.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 class IngresosAjax
 {
+    public function ajaxEliminarIngreso()
+    {
+        $res = IngresosControlador::ctrEliminarIngresos();
+        echo json_encode($res, true);
+    }
 }
 
+
+if (isset($_POST['btnEliminarIngreso'])) {
+    $eliminarIngreso = new IngresosAjax();
+    $eliminarIngreso->ajaxEliminarIngreso();
+}
