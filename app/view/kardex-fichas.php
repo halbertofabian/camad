@@ -1,4 +1,4 @@
-<?php if ($rutas[1] == $_SESSION['session_usr']['usr_id'] || $_SESSION['session_usr']['usr_rol'] != "Alumno" ) : ?>
+<?php if ($rutas[1] == $_SESSION['session_usr']['usr_id'] || $_SESSION['session_usr']['usr_rol'] != "Alumno") : ?>
 
     <div class="container">
 
@@ -50,7 +50,13 @@
                             </div>
                             <?php
                             $datosFicha = PagosControlador::ctrMostrarDatosFichaPagoByFicha($pqt['fpg_id']);
-                            // preArray($datosFicha);
+                            $adeudo = 0;
+                            $adeudo +=  $datosFicha['PPG_INSCRIPCION']['adeudo'];
+                            $adeudo += $datosFicha['PPG_EXAMEN']['adeudo'];
+                            $adeudo +=  $datosFicha['PPG_GUIA']['adeudo'];
+                            $adeudo +=  $datosFicha['PPG_INCORPORACION']['adeudo'];
+                            $adeudo +=  $datosFicha['PPG_CERTIFICADO']['adeudo'];
+                            $adeudo += $datosFicha['PPG_SEMANAL']['adeudo'];
                             ?>
                             <div class="row">
                                 <div class="col-md-4 col-12">
@@ -228,6 +234,11 @@
                     </div>
                     <div class="card-footer text-muted">
                         <div>
+                        <div class="row">
+                        <div class="col-4">
+                            <h5>ADEUDO TOTAL: <?php echo '$ <strong class="text-primary">'.number_format($adeudo,2).'</strong>'; ?></h5>
+                        </div>
+                        </div>
                             <div class=" float-right">
                                 <a href="#" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Abonar"><i class="fa fa-money" aria-hidden="true"></i></a>
                                 <a class="btn btn-info" href="<?php echo HTTP_HOST . 'app/report/ficha_inscripcion.php?fpg_id=' . $pqt['fpg_id'] ?>" target="framename" data-toggle="tooltip" data-placement="top" title="Ver ficha de inscripcón" "><i class=" fa fa-file-pdf-o"></i></a>

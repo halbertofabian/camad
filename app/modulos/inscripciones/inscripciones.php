@@ -147,7 +147,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
     <div class="container">
         <div class="row">
             <div class="col-12 table-responsive ">
-                <table class="table tablas table-bordered tablaPagosAlumno table-striped table-hover">
+                <table class="table tablas table-bordered tablaPagosAlumno table-striped table-hover text-center">
                     <thead>
                         <tr>
                             <th>Número de inscripción</th>
@@ -156,6 +156,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                             <th>Paquete</th>
                             <th>Usuario registro</th>
                             <th>Fecha registro</th>
+                            <th>Adeudo <br> Total</th>
                             <th>Kardex</th>
                             <th>Acciones</th>
                         </tr>
@@ -174,6 +175,21 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                 <td><?php echo $fpg['pqt_nombre'] ?></td>
                                 <td><?php echo $fpg['fpg_usuario_registro'] ?></td>
                                 <td><?php echo $fpg['fpg_fecha_registro'] ?></td>
+                                <td>
+                                    <?php
+                                    $datosFicha = PagosControlador::ctrMostrarDatosFichaPagoByFicha($fpg['fpg_id']);
+
+                                    $adeudo = 0;
+                                    $adeudo +=  $datosFicha['PPG_INSCRIPCION']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_EXAMEN']['adeudo'];
+                                    $adeudo +=  $datosFicha['PPG_GUIA']['adeudo'];
+                                    $adeudo +=  $datosFicha['PPG_INCORPORACION']['adeudo'];
+                                    $adeudo +=  $datosFicha['PPG_CERTIFICADO']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_SEMANAL']['adeudo'];
+
+                                    echo '$ <strong class="text-primary">'.number_format($adeudo,2).'</strong>';
+                                    ?>
+                                </td>
                                 <td>
                                     <a href="<?php echo HTTP_HOST . 'alumno/' . $fpg['usr_id'] . '/kerdex-fichas' ?>" class="btn btn-dark">Ver</a>
                                 </td>
