@@ -306,7 +306,7 @@ elseif (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "update") :
 
             ?>
 
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-12">
                     <div class="card">
                         <div class="card-header ">
                             <?php if ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
