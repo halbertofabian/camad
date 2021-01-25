@@ -76,3 +76,73 @@ $(".btngenerarSKU").on("click", function () {
 
     $("#pqt_sku").val(pqt_sku);
 })
+
+$(".btnEliminarPaquete").on("click", function () {
+    var pqt_sku = $(this).attr("pqt_sku");
+
+    swal({
+        title: "¿Seguro de querer eliminar este paquete?",
+        text: "Será eliminado. ¿Deseas continuar?",
+        icon: "warning",
+        buttons: ["No, cancelar", "Si, eliminar el paquete con sku " + pqt_sku],
+        dangerMode: false,
+        closeOnClickOutside: false,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                var datos = new FormData();
+                datos.append("pqt_sku", pqt_sku);
+                datos.append("btnEliminarPaquete", true);
+
+                $.ajax({
+                    type: "POST",
+                    url: urlApp + 'app/modulos/paquetes/paquetes.ajax.php',
+                    data: datos,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+
+                    },
+                    success: function (res) {
+
+                        if (res.status) {
+                            swal({
+                                title: "Muy bien",
+                                text: res.mensaje,
+                                icon: "success",
+                                buttons: [false, "Continuar"],
+                                dangerMode: true,
+                                closeOnClickOutside: false,
+
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        location.href = res.pagina
+                                    } else {
+                                        location.href = res.pagina
+                                    }
+                                });
+                        } else {
+                            swal({
+                                title: "Error",
+                                text: res.mensaje,
+                                icon: "error",
+                                buttons: [false, "Continuar"],
+                                dangerMode: true,
+                                closeOnClickOutside: false,
+
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        location.href = res.pagina
+                                    } else {
+                                        location.href = res.pagina
+                                    }
+                                });
+                        }
+                    }
+                });
+            }
+        });
+})

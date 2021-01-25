@@ -25,10 +25,20 @@ class PaquetesAjax
         $res = PaquetesModelo::mdlMostrarPaquetes($this->pqt_sku);
         echo json_encode($res, true);
     }
+    public function ajaxEliminarPaqueteBySku()
+    {
+        $res = PaquetesControlador::ctrEliminarPaquetes();
+        echo json_encode($res, true);
+    }
 }
 
 if (isset($_POST['btnBuscarPaquete'])) {
     $listarPaquete = new PaquetesAjax();
     $listarPaquete->pqt_sku = $_POST['pqt_sku'];
     $listarPaquete->ajaxListarPaqueteBySku();
+}
+
+if (isset($_POST['btnEliminarPaquete'])) {
+    $eliminarPaquete = new PaquetesAjax();
+    $eliminarPaquete->ajaxEliminarPaqueteBySku();
 }

@@ -65,8 +65,8 @@ $(".tablas").DataTable({
 $('.select2').select2();
 
 
-$('#pds_descripcion_corta').summernote({
-    placeholder: 'Descripción corta del producto',
+$('#pqt_descripcion1').summernote({
+    placeholder: 'Descripción del paquete',
     fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
     tabsize: 2,
     height: 150,
@@ -81,11 +81,11 @@ $('#pds_descripcion_corta').summernote({
         ['view', ['fullscreen', 'codeview', 'help']],
     ]
 });
-$('#pds_descripcion_larga').summernote({
-    placeholder: 'Descripción larga del producto',
+$('#pqt_descripcion').summernote({
+    placeholder: 'Descripción del paquete',
     fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New'],
     tabsize: 2,
-    height: 350,
+    height: 150,
 });
 
 // $('.select2').select2();

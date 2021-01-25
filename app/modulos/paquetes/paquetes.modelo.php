@@ -40,13 +40,20 @@ class PaquetesModelo
             $con = null;
         }
     }
-    public static function mdlActualizarPaquetes()
+    public static function mdlActualizarPaquetes($pqt)
     {
         try {
             //code...
-            $sql = "";
+            $sql = "UPDATE  tbl_paquete_pqt SET pqt_nombre = ? , pqt_modalidad = ? , pqt_duracion = ? , pqt_descripcion = ? , pqt_costo = ?, pqt_usuario_registro = ? WHERE pqt_sku = ?";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
+            $pps->bindValue(1, $pqt['pqt_nombre']);
+            $pps->bindValue(2, $pqt['pqt_modalidad']);
+            $pps->bindValue(3, $pqt['pqt_duracion']);
+            $pps->bindValue(4, $pqt['pqt_descripcion']);
+            $pps->bindValue(5, $pqt['pqt_costo']);
+            $pps->bindValue(6, $_SESSION['session_usr']['usr_id']);
+            $pps->bindValue(7, $pqt['pqt_sku']);
 
             $pps->execute();
             return $pps->rowCount() > 0;
@@ -85,14 +92,14 @@ class PaquetesModelo
             $con = null;
         }
     }
-    public static function mdlEliminarPaquetes()
+    public static function mdlEliminarPaquetes($pqt_sku)
     {
         try {
             //code...
-            $sql = "";
+            $sql = "UPDATE tbl_paquete_pqt SET pqt_estado_actividad = 0 WHERE pqt_sku = ? ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
-
+            $pps->bindValue(1, $pqt_sku);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

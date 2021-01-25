@@ -43,7 +43,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo HTTP_HOST . 'app/assets-app/' ?>css/style.css">
 
     <!-- END: Custom CSS-->
-
+    <link href="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/summernote-2/summernote-lite.min.css" rel="stylesheet">
     <!-- fonts -->
 
 
@@ -89,7 +89,7 @@
 
 
     <!-- Summernote -->
-    <script src="<?php echo HTTP_HOST . 'app/'  ?>assets/js/plugin/summernote/summernote-bs4.min.js"></script>
+    <script src="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/summernote-2/summernote-lite.min.js"></script>
     <!-- Number Jquery -->
     <script src="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/jquery-number/jquery.number.js"></script>
 
@@ -673,8 +673,8 @@
                             <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown"><i class="feather icon-home"></i><span data-i18n="Panel de control">Panel de control</span></a>
                                 <ul class="dropdown-menu">
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-grid"></i>Inicio</a>
-                                    <!-- <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'sucursales' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-grid"></i>Sucursales</a> -->
-                                    <!-- <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'configuracion' ?>" data-toggle="dropdown" data-i18n="Configuraciones"><i class="feather icon-grid"></i>Configuraciones</a> -->
+                                        <!-- <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'sucursales' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-grid"></i>Sucursales</a> -->
+                                        <!-- <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'configuracion' ?>" data-toggle="dropdown" data-i18n="Configuraciones"><i class="feather icon-grid"></i>Configuraciones</a> -->
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cajas' ?>" data-toggle="dropdown" data-i18n="cajas"><i class="feather icon-grid"></i>Cajas</a>
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cortes' ?>" data-toggle="dropdown" data-i18n="cortes"><i class="feather icon-grid"></i>Cortes</a>
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'informes' ?>" data-toggle="dropdown" data-placement="informes"><i class="feather icon-file"></i>Informes</a></li>
