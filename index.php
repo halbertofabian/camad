@@ -17,6 +17,7 @@ require_once 'app/modulos/ingresos/ingresos.controlador.php';
 require_once 'app/modulos/sucursales/sucursales.controlador.php';
 require_once 'app/modulos/cortes/cortes.controlador.php';
 require_once 'app/modulos/cajas/cajas.controlador.php';
+require_once 'app/modulos/informes/informes.controlador.php';
 
 require_once 'app/modulos/login/login.modelo.php';
 require_once 'app/modulos/usuarios/usuarios.modelo.php';
@@ -33,6 +34,7 @@ require_once 'app/modulos/ingresos/ingresos.modelo.php';
 require_once 'app/modulos/sucursales/sucursales.modelo.php';
 require_once 'app/modulos/cortes/cortes.modelo.php';
 require_once 'app/modulos/cajas/cajas.modelo.php';
+require_once 'app/modulos/informes/informes.modelo.php';
 
 require_once DOCUMENT_ROOT . 'app/lib/phpMailer/Exception.php';
 require_once DOCUMENT_ROOT . 'app/lib/phpMailer/PHPMailer.php';

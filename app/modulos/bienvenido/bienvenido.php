@@ -43,7 +43,17 @@ elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador"  &&  $_SESSION['s
 <?php else : ?>
     <div class="container">
         <h4>Hola <strong class="text-primary"><?php echo $_SESSION['session_usr']['usr_nombre'] . ' ' . $_SESSION['session_usr']['usr_app']  ?></strong> bienvenido(a) al sistema</h4>
-
-
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Estamos en vivo</strong>
+                </div>
+            </div>
+            <div class="col-12">
+                <center>
+                    <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGrupoEducativoSEADoficial%2Fvideos%2F788742338656552%2F&width=720" width="720" height="820" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                </center>
+            </div>
+        </div>
     </div>
 <?php endif; ?>
