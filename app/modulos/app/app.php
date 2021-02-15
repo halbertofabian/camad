@@ -63,6 +63,7 @@
     <link href="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/toastr/build/toastr.min.css" rel="stylesheet" />
 
     <link href="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/select2-c/css/select2.min.css" rel="stylesheet" />
+    
 
     <!-- BEGIN: Vendor JS-->
     <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>vendors/js/vendors.min.js"></script>
@@ -101,7 +102,7 @@
     <!-- <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>plugin/select2/select2.full.min.js"></script> -->
     <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>plugin/select2-c/js/select2.min.js"></script>
 
-
+    
 
 </head>
 <!-- END: Head-->

@@ -142,6 +142,34 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                             <option value="all_productos">Todos los productos</option>
                         </select> -->
                     </div>
+                    <H5>PARCIALIDADES / DESCUENTOS</H5>
+                    <div class="form-group">
+                        <label for="">1 PAGO</label>
+                        <input type="text" name="cps_descuento_pagos[]" id="" class="form-control" placeholder="Dejar en blanco en caso de no aplicar">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">2 PAGOS</label>
+                        <input type="text" name="cps_descuento_pagos[]" id="" class="form-control" placeholder="Dejar en blanco en caso de no aplicar">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">3 PAGOS</label>
+                        <input type="text" name="cps_descuento_pagos[]" id="" class="form-control" placeholder="Dejar en blanco en caso de no aplicar">
+                    </div>
+                    <div class="form-group">
+                        <label for="">4 PAGOS</label>
+                        <input type="text" name="cps_descuento_pagos[]" id="" class="form-control" placeholder="Dejar en blanco en caso de no aplicar">
+                    </div>
+                    <div class="form-group">
+                        <label for="">5 PAGOS</label>
+                        <input type="text" name="cps_descuento_pagos[]" id="" class="form-control" placeholder="Dejar en blanco en caso de no aplicar">
+                    </div>
+                    <div class="form-group">
+                        <label for="">6 PAGOS</label>
+                        <input type="text" name="cps_descuento_pagos[]" id="" class="form-control" placeholder="Dejar en blanco en caso de no aplicar">
+                    </div>
+
                     <div class="form-group">
                         <label for=""></label>
                         <button type="submit" class="btn btn-primary btn-block btnCrearCupon" name="btnCrearCupon" id="btnCrearCupon">Crear cupón</button>

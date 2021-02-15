@@ -18,7 +18,7 @@ class CuponesModelo
     {
         try {
             //code...
-            $sql = "INSERT INTO tbl_cupones_cps (cps_codigo,cps_nombre,cps_asociado,cps_fecha_inicio,cps_fecha_fin,cps_tope,cps_usuario_registro,cps_fecha_registro,cps_sku_producto,cps_restricciones)  VALUES(?,?,?,?,?,?,?,?,?,?) ";
+            $sql = "INSERT INTO tbl_cupones_cps (cps_codigo,cps_nombre,cps_asociado,cps_fecha_inicio,cps_fecha_fin,cps_tope,cps_usuario_registro,cps_fecha_registro,cps_sku_producto,cps_restricciones,cps_descuento_pagos)  VALUES(?,?,?,?,?,?,?,?,?,?,?) ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $cps['cps_codigo']);
@@ -31,6 +31,7 @@ class CuponesModelo
             $pps->bindValue(8, $cps['cps_fecha_registro']);
             $pps->bindValue(9, $cps['cps_sku_producto']);
             $pps->bindValue(10, $cps['cps_restricciones']);
+            $pps->bindValue(11, $cps['cps_descuento_pagos']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

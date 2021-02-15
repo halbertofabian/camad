@@ -44,6 +44,36 @@ class InscripcionesModelo
             $con = null;
         }
     }
+    public static function mdlAgregarInscripcionesOnline($ins)
+    {
+        try {
+            //code...
+            $sql = "INSERT INTO tbl_ficha_pago_fpg(fpg_alumno,fpg_paquete,fpg_inscripcion,fpg_examen,fpg_guia,fpg_incorporacion,fpg_certificado,fpg_semana,fpg_numero_semana,fpg_pago_online,fpg_liga,fpg_usuario_registro,fpg_fecha_registro,fpg_id_sucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $ins['fpg_alumno']);
+            $pps->bindValue(2, $ins['fpg_paquete']);
+            $pps->bindValue(3, $ins['fpg_inscripcion']);
+            $pps->bindValue(4, $ins['fpg_examen']);
+            $pps->bindValue(5, $ins['fpg_guia']);
+            $pps->bindValue(6, $ins['fpg_incorporacion']);
+            $pps->bindValue(7, $ins['fpg_certificado']);
+            $pps->bindValue(8, $ins['fpg_semana']);
+            $pps->bindValue(9, $ins['fpg_numero_semana']);
+            $pps->bindValue(10, $ins['fpg_pago_online']);
+            $pps->bindValue(11, $ins['fpg_liga']);
+            $pps->bindValue(12, $ins['fpg_usuario_registro']);
+            $pps->bindValue(13, FECHA);
+            $pps->bindValue(14, $_SESSION['session_suc']['scl_id']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
     public static function mdlActualizarInscripciones()
     {
         try {

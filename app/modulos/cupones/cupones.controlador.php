@@ -60,6 +60,7 @@ class CuponesControlador
 
             $_POST['cps_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['cps_fecha_registro'] = FECHA;
+            $_POST['cps_descuento_pagos'] = json_encode($_POST['cps_descuento_pagos'], true);
 
             $crearCupon = CuponesModelo::mdlAgregarCupones($_POST);
 

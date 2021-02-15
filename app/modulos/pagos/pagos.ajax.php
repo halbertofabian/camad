@@ -22,6 +22,8 @@ require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cupones/cupones.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cortes/cortes.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/cortes/cortes.controlador.php';
+require_once DOCUMENT_ROOT . 'app/modulos/inscripciones/inscripciones.modelo.php';
+require_once DOCUMENT_ROOT . 'app/modulos/inscripciones/inscripciones.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 class PagosAjax
 
@@ -98,6 +100,12 @@ class PagosAjax
         $res = PagosControlador::ctrCambioEstadoSolicitud();
         echo json_encode($res, true);
     }
+    public function ajaxPagarOpenPay()
+    {
+        
+        $res = PagosControlador::ctrPagarOpenPay();
+        echo json_encode($res, true);
+    }
 }
 
 if (isset($_POST['btnRevisarPagos'])) {
@@ -165,3 +173,7 @@ if (isset($_POST['btnCambioEstadoSolicitud'])) {
     $cancelarFicha->ajaxCambioEstadoSolicitud();
 }
 
+if (isset($_POST['btnPagoOpenPay'])) {
+    $agergarPagoOpen = new PagosAjax();
+    $agergarPagoOpen->ajaxPagarOpenPay();
+}

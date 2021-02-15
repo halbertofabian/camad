@@ -1,5 +1,6 @@
 
 <?php
+require_once DOCUMENT_ROOT . "app/lib/openpay-php/Openpay.php";
 /**
  *  Desarrollador: ifixitmor
  *  Fecha de creación: 01/12/2020 12:00
@@ -12,6 +13,7 @@
  */
 class PagosControlador
 {
+
     // public static function ctrAgregarPagos()
     // {
     //     if (isset($_POST['btnRegistrarAbono'])) {
@@ -265,6 +267,28 @@ class PagosControlador
                 'alumno' => $alumno_pgo['usr_nombre']
             );
         }
+    }
+
+    public static function ctrMostrarDatosFichaPagoOnline($fpg_id)
+    {
+        $dt_ficha = PagosModelo::mdlMostrarAbonosAlumno($fpg_id);
+
+        $dt_online = PagosModelo::mdlMostrarDatosFichaPagoOnline(array(
+            'ppg_ficha_pago' => $dt_ficha['fpg_id'],
+            'ppg_concepto' => 'PPG_ONLINE',
+            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
+        ));
+
+        $dt_pago_online = json_decode($dt_ficha['fpg_pago_online'], true);
+        $dt_pago_online = str_replace(",", "", $dt_pago_online['TOTAL-PAGO']);
+
+        $dt_online_adeudo = $dt_online['ppg_adeudo_s'] == 0 ? $dt_pago_online : $dt_pago_online - $dt_online['ppg_adeudo_s'];
+        return array(
+            'PPG_ONLINE' => array(
+                'total' => $dt_pago_online,
+                'adeudo' => $dt_online_adeudo
+            )
+        );
     }
     public static function ctrMostrarDatosFichaPago()
     {
@@ -553,6 +577,43 @@ class PagosControlador
         }
     }
 
+    public static function ctrEmpezarVentaFichaOnline()
+    {
+        if (isset($_POST['btnEmpezarFichaVenta'])) {
+            $vfch_id = PagosModelo::mdlConsultarVentaSiguienteFicha();
+
+            $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 0 ? "0001"  : $vfch_id['vfch_id'];
+            $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 1 ? "000" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+            $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 2 ? "00" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+            $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 3 ? "0" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+
+            $_POST['vfch_fecha_registro'] = FECHA;
+            $_POST['vfch_usuario_registro'] = 'REGISTRO ONLINE';
+            $_POST['vfch_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
+            $_POST['vfch_id'] = $vfch_id['vfch_id'];
+            $_POST['vfch_id_corte'] = CortesControlador::crtConsultarUltimoCorteOnline();
+
+
+            $empezarVentaFicha = PagosModelo::mdlEmpezarVenta($_POST);
+            // preArray($empezarVentaFicha);
+            // return;
+            if ($empezarVentaFicha) {
+
+                return array(
+                    'mensaje' => 'Ficha creada, llena la demas información',
+                    'status' => true,
+                    'vfch_id' => $_POST['vfch_id']
+                );
+            } else {
+                return array(
+                    'mensaje' => 'Ocurrio un error, intenta de nuevo',
+                    'status' => false,
+                    'vfch_id' => $_POST['vfch_id']
+                );
+            }
+        }
+    }
+
     public static function ctrAplicarCupon()
     {
         if (isset($_POST['btnAplicarCupon'])) {
@@ -708,6 +769,126 @@ class PagosControlador
                     );
                 }
             }
+        }
+    }
+
+    public static function ctrPagarOpenPay()
+    {
+        if (isset($_POST['btnPagoOpenPay'])) {
+
+            $incripcion = InscripcionesModelo::mdlMostrarInscripciones($_SESSION['session_usr']['usr_id']);
+            $incripcion = $incripcion[0];
+            $dt_pago_online_ins = json_decode($incripcion['fpg_pago_online'], true);
+
+            $vfch_monto = str_replace(",", "", $dt_pago_online_ins['TOTAL-DESCUENTO']);
+            $vfch_sub_monto = str_replace(",", "", $dt_pago_online_ins['TOTAL']);
+            $vfch_sub_monto = $vfch_sub_monto / $dt_pago_online_ins['PAGOS'];
+            $vfch_descuento = $dt_pago_online_ins['DESCUENTO'];
+
+
+            $dt_pago_online = PagosControlador::ctrMostrarDatosFichaPagoOnline($incripcion['fpg_id']);
+
+            $ppg_adeudo = $dt_pago_online['PPG_ONLINE']['adeudo'];
+
+            /**
+             * 
+             * {"PAGOS":3,"TOTAL":"14,700.00","DESCUENTO":"30","TOTAL-DESCUENTO":"3,430.00","TOTAL-PAGO":"10,290.00"}
+             */
+
+            $openpay = Openpay::getInstance(
+                'mzumskvckxazgxy6l9xu',
+                'sk_0080b17fd88748fb95fe844f6dee0900'
+            );
+
+            $customer = array(
+                'name' => $_SESSION['session_usr']['usr_nombre'],
+                'last_name' => $_SESSION['session_usr']['usr_app'],
+                'phone_number' => $_SESSION['session_usr']['usr_telefono'],
+                'email' => $_SESSION['session_usr']['usr_correo'],
+            );
+
+            try {
+                $chargeData = array(
+                    'method' => 'card',
+                    'source_id' => $_POST["token_id"],
+                    'amount' => $vfch_monto, // formato númerico con hasta dos dígitos decimales. 
+                    'description' => $incripcion['pqt_nombre'],
+                    'device_session_id' => $_POST["deviceSessionId"],
+                    'customer' => $customer
+                );
+
+                $charge = $openpay->charges->create($chargeData);
+
+
+
+                if ($charge != NULL) {
+
+                    $datos = array();
+
+                    $vfch_id = PagosModelo::mdlConsultarVentaSiguienteFicha();
+
+                    $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 0 ? "0001"  : $vfch_id['vfch_id'];
+                    $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 1 ? "000" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+                    $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 2 ? "00" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+                    $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 3 ? "0" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+
+                    $datos = array(
+                        'vfch_fecha_registro' => FECHA,
+                        'vfch_usuario_registro' => 'REGISTRO ONLINE',
+                        'vfch_id_sucursal' => $_SESSION['session_suc']['scl_id'],
+                        'vfch_id' => $vfch_id['vfch_id'],
+                        'vfch_id_corte' => CortesControlador::crtConsultarUltimoCorteOnline(),
+                        'vfch_referencia' => $_POST["token_id"],
+                        'vfch_monto' => $vfch_monto,
+                        'vfch_mp' => 'Tarjeta',
+                        'vfch_sub_monto' => $vfch_sub_monto,
+                        'vfch_descuento' => $vfch_descuento,
+                        'vfch_alumno' => $_SESSION['session_usr']['usr_matricula'],
+                        'vfch_ficha_pago' => $incripcion['fpg_id'],
+                        'vfch_estado' => 'PAGADO',
+                        'vfch_fecha_pagada' => FECHA
+
+                    );
+                    $empezarVentaFicha = PagosModelo::mdlEmpezarVentaOnline($datos);
+                    if ($empezarVentaFicha) {
+
+                        $crearPago = PagosModelo::mdlAgregarCarritoOnline(
+                            array(
+                                'ppg_ficha_pago' => $incripcion['fpg_id'],
+                                'ppg_ficha_venta' => $vfch_id['vfch_id'],
+                                'ppg_monto' => $vfch_sub_monto,
+                                'ppg_descuento' => $vfch_descuento,
+                                'ppg_total' => $vfch_monto,
+                                'ppg_fecha_registro' => FECHA,
+                                'ppg_concepto' => 'PPG_ONLINE',
+                                'ppg_usuario_registro' => 'REGISTRO ONLINE',
+                                'ppg_adeudo' => $ppg_adeudo - $vfch_monto,
+                                'ppg_estado_pagado' => 'PAGADO',
+                                'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
+
+                            )
+                        );
+                        if ($crearPago) {
+                            return array(
+                                'status' => true,
+                                'mensaje' => 'Pago realizado con éxito',
+                                'pagina' => HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-pagos'
+                            );
+                        }
+                    }
+                }
+            } catch (Exception $th) {
+                return array(
+                    'status' => false,
+                    'mensaje' => $th->getMessage() . '. Intente con otra tarjeta',
+                );
+            }
+
+
+            // 
+
+
+            return;
         }
     }
 }

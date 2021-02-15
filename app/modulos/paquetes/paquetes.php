@@ -39,11 +39,18 @@ if (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "new") :
                     <!-- <input type="text" name="pqt_descripcion" id="pqt_descripcion" class="form-control" placeholder="Descripción"> -->
                     <textarea id="pqt_descripcion" class="form-control" name="pqt_descripcion"></textarea>
                 </div>
+
+                <div class="col-md-6 col-12 form-group">
+                    <label for="pqt_cupon_default"><strong>Cupón por default</strong></label>
+                    <input type="text" name="pqt_cupon_default" id="pqt_cupon_default" class="form-control" placeholder="Cupón por default (Solo aplicará en pagos de parcializades 1-6)" required>
+                </div>
+
                 <div class="col-12">
                     <div class="alert alert-dark" role="alert">
                         <strong>Costos:</strong>
                     </div>
                 </div>
+
 
 
                 <div class="col-md-3 col-12 form-group">
@@ -188,6 +195,10 @@ elseif (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "update") :
                     <!-- <input type="text" name="pqt_descripcion" id="pqt_descripcion" class="form-control" placeholder="Descripción"> -->
                     <textarea id="pqt_descripcion" class="form-control" name="pqt_descripcion"><?php echo $paquetes['pqt_descripcion'] ?></textarea>
                 </div>
+                <div class="col-md-6 col-12 form-group">
+                    <label for="pqt_cupon_default"><strong>Cupón por default</strong></label>
+                    <input type="text" name="pqt_cupon_default" id="pqt_cupon_default" class="form-control" value="<?php echo $paquetes['pqt_cupon_default'] ?>" placeholder="Cupón por default (Solo aplicará en pagos de parcializades 1-6)" required>
+                </div>
                 <div class="col-12">
                     <div class="alert alert-dark" role="alert">
                         <strong>Costos:</strong>
@@ -201,6 +212,7 @@ elseif (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "update") :
                 //preArray($costo);
 
                 ?>
+
                 <div class="col-md-3 col-12 form-group">
                     <label for="pqt_duracion_semana">SEMANAS</label>
                     <input type="text" name="pqt_duracion_semana" value="<?php echo  $costo['duracion_semana'] ?>" id="pqt_duracion_semana" class="form-control" placeholder="Número de semanas">

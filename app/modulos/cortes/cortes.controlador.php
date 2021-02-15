@@ -29,4 +29,10 @@ class CortesControlador
     {
         return $_SESSION['session_usr']['usr_caja'];
     }
+
+
+    public static function crtConsultarUltimoCorteOnline()
+    {
+        return 'ONLINE';
+    }
 }

@@ -18,7 +18,7 @@ class PaquetesModelo
     {
         try {
             //code...
-            $sql = "INSERT INTO tbl_paquete_pqt (pqt_sku,pqt_nombre,pqt_modalidad,pqt_duracion,pqt_descripcion,pqt_costo,pqt_usuario_registro,pqt_fecha_registro,pqt_id_sucursal) VALUES(?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO tbl_paquete_pqt (pqt_sku,pqt_nombre,pqt_modalidad,pqt_duracion,pqt_descripcion,pqt_costo,pqt_usuario_registro,pqt_fecha_registro,pqt_cupon_default,pqt_id_sucursal) VALUES(?,?,?,?,?,?,?,?,?,?)";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $pqt['pqt_sku']);
@@ -29,7 +29,8 @@ class PaquetesModelo
             $pps->bindValue(6, $pqt['pqt_costo']);
             $pps->bindValue(7, $_SESSION['session_usr']['usr_id']);
             $pps->bindValue(8, FECHA);
-            $pps->bindValue(9, $_SESSION['session_suc']['scl_id']);
+            $pps->bindValue(9, $pqt['pqt_cupon_default']);
+            $pps->bindValue(10, $_SESSION['session_suc']['scl_id']);
 
             $pps->execute();
             return $pps->rowCount() > 0;
@@ -44,7 +45,7 @@ class PaquetesModelo
     {
         try {
             //code...
-            $sql = "UPDATE  tbl_paquete_pqt SET pqt_nombre = ? , pqt_modalidad = ? , pqt_duracion = ? , pqt_descripcion = ? , pqt_costo = ?, pqt_usuario_registro = ? WHERE pqt_sku = ?";
+            $sql = "UPDATE  tbl_paquete_pqt SET pqt_nombre = ? , pqt_modalidad = ? , pqt_duracion = ? , pqt_descripcion = ? , pqt_costo = ?, pqt_usuario_registro = ?, pqt_cupon_default = ? WHERE pqt_sku = ?";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $pqt['pqt_nombre']);
@@ -53,7 +54,8 @@ class PaquetesModelo
             $pps->bindValue(4, $pqt['pqt_descripcion']);
             $pps->bindValue(5, $pqt['pqt_costo']);
             $pps->bindValue(6, $_SESSION['session_usr']['usr_id']);
-            $pps->bindValue(7, $pqt['pqt_sku']);
+            $pps->bindValue(7, $pqt['pqt_cupon_default']);
+            $pps->bindValue(8, $pqt['pqt_sku']);
 
             $pps->execute();
             return $pps->rowCount() > 0;
