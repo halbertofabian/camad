@@ -126,7 +126,7 @@ elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador"  &&  $_SESSION['s
 
                                                         if ($cupon[$i] != "") {
                                                             $descuento = $totalCurso_ - ($totalCurso_ * $cupon[$i] / 100);
-                                                            $descuento = ceil($descuento / ($i + 1));
+                                                            $descuento = ($descuento / ($i + 1));
                                                             $_SESSION['cupon_pagos'][$i] = array(
                                                                 'PAGOS' => ($i + 1),
                                                                 'TOTAL' => $totalCurso,
