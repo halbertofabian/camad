@@ -20,5 +20,6 @@ require_once DOCUMENT_ROOT . 'app/modulos/bienvenido/bienvenido.controlador.php'
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 class BienvenidoAjax
 {
+    
 }
 
