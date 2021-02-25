@@ -362,8 +362,10 @@ if ($incripcion != NULL) :
                                     ?>
                                 </form>
                             <?php else : ?>
-                                <div class="alert alert-danger" role="alert">
-                                    <strong>Estamos preparando tu certificado</strong>
+                                <div class="row justify-content-center">
+                                    <div class="col-8">
+                                        <img src="<?php echo HTTP_HOST . 'app/assets/images/img-app/en-proceso-de-certificacion.gif' ?>" width="300" height="300" alt="" srcset="">
+                                    </div>
                                 </div>
                             <?php endif; ?>
                         </div>
