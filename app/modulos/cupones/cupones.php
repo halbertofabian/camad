@@ -25,7 +25,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                         <select name="cps_asociado" class="form-control" id="cps_asociado">
                             <option value="sin_vendedor">Sin asociar</option>
                             <?php
-                            $vendedores = UsuariosModelo::mdlMostrarUsuarios('', 'Asesor Educativo');
+                            $vendedores = UsuariosModelo::mdlMostrarUsuarios();
                             foreach ($vendedores as $key => $vdr) :  # code...
 
                             ?>

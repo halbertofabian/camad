@@ -22,6 +22,9 @@ require_once DOCUMENT_ROOT . 'app/modulos/configuracion/configuracion.modelo.php
 require_once DOCUMENT_ROOT . 'app/modulos/configuracion/configuracion.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.controlador.php';
+
+require_once DOCUMENT_ROOT . 'app/modulos/sucursales/sucursales.modelo.php';
+require_once DOCUMENT_ROOT . 'app/modulos/sucursales/sucursales.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 require_once DOCUMENT_ROOT . 'app/lib/PHPExcel/Classes/PHPExcel/IOFactory.php';
 

@@ -568,6 +568,7 @@
                                     <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'alumnos/new' ?>" data-toggle="dropdown" data-i18n="Nuevo alumno"><i class="feather icon-plus"></i>Nuevo alumno</a>
                                     </li>
                                     <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'alumnos' ?>" data-toggle="dropdown" data-i18n="Listar alumno"><i class="feather icon-check"></i>Listar alumno</a>
+                                    <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'prospectos' ?>" data-toggle="dropdown" data-i18n="Listar alumno"><i class="feather icon-check"></i>Listar prospectos</a>
                                     </li>
                                     <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'alumnos/importar' ?>" data-toggle="dropdown" data-i18n="Importar alumnos"><i class="feather icon-file"></i>Importar alumnos</a>
                                     </li>

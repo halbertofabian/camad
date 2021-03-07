@@ -34,7 +34,7 @@ class InscripcionesModelo
             $pps->bindValue(10, $ins['fpg_liga']);
             $pps->bindValue(11, $ins['fpg_usuario_registro']);
             $pps->bindValue(12, FECHA);
-            $pps->bindValue(13, $_SESSION['session_suc']['scl_id']);
+            $pps->bindValue(13, $ins['fpg_id_sucursal']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

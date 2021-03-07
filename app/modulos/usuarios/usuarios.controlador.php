@@ -19,6 +19,7 @@ class UsuariosControlador
             $_POST['usr_clave'] = password_hash($_POST['usr_clave'], PASSWORD_DEFAULT);
             $_POST['usr_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['usr_fecha_registro'] = FECHA;
+            $_POST['usr_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
 
             $agregarUsuario = UsuariosModelo::mdlAgregarUsuarios($_POST);
 
@@ -110,6 +111,7 @@ class UsuariosControlador
             $_POST['usr_clave'] = password_hash($_POST['usr_clave'], PASSWORD_DEFAULT);
             $_POST['usr_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['usr_fecha_registro'] = FECHA;
+            $_POST['usr_id_sucursal'] = $_SESSION['session_suc']['scl_id'];
 
             $agregarUsuario = UsuariosModelo::mdlAgregarUsuarios2($_POST);
 
@@ -125,7 +127,11 @@ class UsuariosControlador
     public static  function ctrAgregarUsuariosAjax()
     {
         if (isset($_POST['btnGuardarUsuario'])) {
-            $_POST['usr_matricula'] = UsuariosControlador::ctrConsultarSiguienteUsuario($_SESSION['session_suc']['scl_sub_fijo']);
+
+
+            $usr_id_sucursal = SucursalesModelo::mdlMostrarSucursales($_POST['usr_id_sucursal']);
+
+            $_POST['usr_matricula'] = UsuariosControlador::ctrConsultarSiguienteUsuario($usr_id_sucursal['scl_sub_fijo']);
 
 
 
@@ -133,7 +139,6 @@ class UsuariosControlador
             $_POST['usr_clave'] = "";
             $_POST['usr_usuario_registro'] = $_SESSION['session_usr']['usr_nombre'];
             $_POST['usr_fecha_registro'] = FECHA;
-
 
             $agregarUsuario = UsuariosModelo::mdlAgregarUsuarios($_POST);
 

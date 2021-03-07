@@ -1,11 +1,4 @@
 <?php
-
-// if ($_SESSION['session_usr']['usr_rol'] != "Administrador") :
-//     cargarComponente('acceso-restringido', '', '');
-//     return;
-// endif;
-
-
 ?>
 <div class="card">
 

@@ -17,6 +17,8 @@ include_once '../../../config.php';
 
 require_once DOCUMENT_ROOT . 'app/modulos/inscripciones/inscripciones.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/inscripciones/inscripciones.controlador.php';
+require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.modelo.php';
+require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 class InscripcionesAjax
 {

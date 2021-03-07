@@ -11,7 +11,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                     <div class="form-group">
                         <label for="usr_alumno">Alumno</label>
                         <select name="ins_alumno" class="form-control select2" id="usr_alumno" required>
-                            <option value="">Buscar alumno</option>
+                            <option value="">Buscar alumnos</option>
                         </select>
                         <button type="button" class="btn btn-link float-right" data-toggle="modal" data-target="#mdlAgregarAlumno">Registrar nuevo alumno</button>
                     </div>
@@ -157,6 +157,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                             <th>Usuario registro</th>
                             <th>Fecha registro</th>
                             <th>Adeudo <br> Total</th>
+                            <th>Total <br> Pagado</th>
                             <th>Kardex</th>
                             <th>Acciones</th>
                         </tr>
@@ -179,6 +180,8 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                     <?php
                                     $datosFicha = PagosControlador::ctrMostrarDatosFichaPagoByFicha($fpg['fpg_id']);
 
+                                   
+
                                     $adeudo = 0;
                                     $adeudo +=  $datosFicha['PPG_INSCRIPCION']['adeudo'];
                                     $adeudo += $datosFicha['PPG_EXAMEN']['adeudo'];
@@ -187,8 +190,25 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                     $adeudo +=  $datosFicha['PPG_CERTIFICADO']['adeudo'];
                                     $adeudo += $datosFicha['PPG_SEMANAL']['adeudo'];
 
-                                    echo '$ <strong class="text-primary">'.number_format($adeudo,2).'</strong>';
+                                    $total = 0;
+                                    $total +=  $datosFicha['PPG_INSCRIPCION']['total'];
+                                    $total += $datosFicha['PPG_EXAMEN']['total'];
+                                    $total +=  $datosFicha['PPG_GUIA']['total'];
+                                    $total +=  $datosFicha['PPG_INCORPORACION']['total'];
+                                    $total +=  $datosFicha['PPG_CERTIFICADO']['total'];
+                                    $total += $datosFicha['PPG_SEMANAL']['total'];
+
+                                    $total = $total - $adeudo;
+
+                                    echo '$ <strong class="text-primary">' . number_format($adeudo, 2) . '</strong>';
                                     ?>
+                                </td>
+                                <td>
+                                    
+                                <?php 
+                                
+                                echo '$ <strong class="text-primary">' . number_format($total, 2) . '</strong>';
+                                ?>
                                 </td>
                                 <td>
                                     <a href="<?php echo HTTP_HOST . 'alumno/' . $fpg['usr_id'] . '/kerdex-fichas' ?>" class="btn btn-dark">Ver</a>
@@ -217,7 +237,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
 
 <!-- Modal -->
 <div class="modal fade" id="mdlAgregarAlumno" tabindex="-1" aria-labelledby="mdlAgregarAlumnoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content ">
             <div class="modal-header">
                 <h5 class="modal-title" id="mdlAgregarAlumnoLabel">Registro de alumno</h5>
@@ -229,18 +249,35 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                 <div class="container">
                     <form method="post" id="formAgregarAlumno">
                         <div class="row">
-                            <div class="col-md-4 col-12">
+                            <div class="col-md-3 col-12">
+                                <div class="form-group">
+                                  <label for="usr_id_sucursal">Sucursal</label>
+                                  <select class="form-control" name="usr_id_sucursal" id="usr_id_sucursal">
+                                  <option value="<?php echo $_SESSION['session_suc']['scl_id']  ?>"><?php echo $_SESSION['session_suc']['scl_nombre'] ?></option>
+                                    <?php  
+                                        $sucursales = SucursalesModelo::mdlMostrarSucursales();
+                                        foreach ($sucursales as $key => $scl):
+                                    ?>
+
+                                    <option value="<?php echo $scl['scl_id'] ?>"><?php echo $scl['scl_nombre'] ?></option>
+
+                                    <?php endforeach; ?>
+                                  </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-12">
                                 <div class="form-group">
                                     <?php
 
-                                    $usr_id = UsuariosControlador::ctrConsultarSiguienteUsuario($_SESSION['session_suc']['scl_sub_fijo']);
+                                    $usr_id = UsuariosControlador::ctrConsultarSiguienteUsuario('');
 
                                     ?>
                                     <label for="usr_matricula">Matricula</label>
                                     <input type="text" name="usr_matricula" id="usr_matricula" class="form-control" placeholder="Escribe el nombre completo del alumno" value="<?php echo $usr_id ?>" readonly required>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-12">
+                            <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="usr_nombre">Nombre(s)</label>
                                     <input type="text" name="usr_nombre" id="usr_nombre" class="form-control" placeholder="Escribe el nombre completo del alumno" required>

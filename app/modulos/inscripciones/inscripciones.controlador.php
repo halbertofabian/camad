@@ -16,6 +16,9 @@ class InscripcionesControlador
     {
         if (isset($_POST['btnInscribirAlumnos'])) {
 
+            $alumno = UsuariosModelo::mdlMostrarUsuarios($_POST['ins_alumno']);
+            $_POST['fpg_id_sucursal'] = $alumno['usr_id_sucursal'];
+
 
             $dtl_pagos = json_decode($_POST['ins_costos'], true);
 
@@ -35,7 +38,7 @@ class InscripcionesControlador
             $crearInscripcion = InscripcionesModelo::mdlAgregarInscripciones($_POST);
 
             if ($crearInscripcion) {
-                $ruta = InscripcionesModelo::mdlMostrarUltimaInscripcionAlumno($_POST['ins_alumno']);
+                $ruta = InscripcionesModelo::mdlMostrarUltimaInscripcionAlumno($alumno['usr_id']);
                 return array(
                     'status' => true,
                     'mensaje' => 'Inscripción creada, a continuación completa tu pago',

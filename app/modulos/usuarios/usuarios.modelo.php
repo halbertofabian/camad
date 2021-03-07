@@ -38,7 +38,7 @@ class UsuariosModelo
             $pps->bindValue(15, $usr['usr_rol']);
             $pps->bindValue(16, $usr['usr_usuario_registro']);
             $pps->bindValue(17, $usr['usr_fecha_registro']);
-            $pps->bindValue(18, $_SESSION['session_suc']['scl_id']);
+            $pps->bindValue(18, $usr['usr_id_sucursal']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
@@ -181,10 +181,10 @@ class UsuariosModelo
     public static function mdlMostrarAlumnosBySuc()
     {
         try {
-            $sql = "SELECT usr.*,scl.scl_nombre FROM tbl_usuarios_usr usr JOIN tbl_sucursal_scl scl ON usr.usr_id_sucursal = scl.scl_id  WHERE usr.usr_rol = 'Alumno'  AND usr_id_sucursal = ?   ORDER BY usr_id DESC ";
+            $sql = "SELECT usr.*,scl.scl_nombre FROM tbl_usuarios_usr usr JOIN tbl_sucursal_scl scl ON usr.usr_id_sucursal = scl.scl_id  WHERE usr.usr_rol = 'Alumno'    ORDER BY usr_id DESC ";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
-            $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+            // $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
             $pps->execute();
             return $pps->fetchAll();
         } catch (PDOException $th) {
