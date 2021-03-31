@@ -244,11 +244,15 @@ if ($incripcion != NULL) :
     $dt_pago_online_ins = json_decode($incripcion['fpg_pago_online'], true);
     // preArray($dt_pago_online_ins);
 ?>
-    <link href="<?php echo HTTP_HOST . 'app/assets/css/openpay.css'  ?>" rel="stylesheet" />
+    <!-- <link href="<?php echo HTTP_HOST . 'app/assets/css/openpay.css'  ?>" rel="stylesheet" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://openpay.s3.amazonaws.com/openpay.v1.min.js"></script>
     <script type='text/javascript' src="https://openpay.s3.amazonaws.com/openpay-data.v1.min.js"></script>
-    <script type="text/javascript" src="<?php echo HTTP_HOST . 'app/assets/js/openpay.js' ?>"></script>
+    <script type="text/javascript" src="<?php echo HTTP_HOST . 'app/assets/js/openpay.js' ?>"></script> -->
+
+
+
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -274,7 +278,7 @@ if ($incripcion != NULL) :
                         </div>
                         <div class="col-md-8 col-12">
                             <?php if ($dt_pago_online['PPG_ONLINE']['adeudo'] > 0) : ?>
-                                <form method="post" action="<?php HTTP_HOST . 'app/modulos/pagos/pagos.controlador.php' ?>" id="customer-form">
+                                <!-- <form method="post" action="<?php HTTP_HOST . 'app/modulos/pagos/pagos.controlador.php' ?>" id="customer-form">
                                     <input type="hidden" name="token_id" id="token_id">
                                     <input type="hidden" name="use_card_points" id="use_card_points" value="false">
                                     <div class="card">
@@ -360,7 +364,151 @@ if ($incripcion != NULL) :
 
 
                                     ?>
-                                </form>
+                                </form> -->
+                                <script src="https://js.stripe.com/v3/"></script>
+                                <link rel="stylesheet" href="<?php echo HTTP_HOST . 'app/assets/css/stripe.css'  ?>" />
+
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <form method="post" id="payment-form">
+                                            <div class="">
+                                                <label for="card-element">
+                                                    Tarjeta de crédito o débito
+                                                </label>
+                                                <div id="card-element">
+                                                    <!-- A Stripe Element will be inserted here. -->
+                                                </div>
+
+                                                <!-- Used to display form errors. -->
+                                                <div id="card-errors" role="alert"></div>
+                                            </div>
+
+                                            <button class="btn btn-primary mt-2 btn-block mb-4 btnChargePayStripe btn-load" name="btnChargePayStripe">Pagar ahora MX$ <?php echo $dt_pago_online_ins['TOTAL-DESCUENTO']  ?></button>
+
+                                            <?php
+
+                                            $charge = new PagosControlador;
+                                            $charge->ctrPagarStripe();
+
+                                            ?>
+
+                                        </form>
+                                        <center>
+                                            <img src="https://chemspain.org/wp-content/uploads/2019/10/PAGO-SEGURO-STRIPE.png" class="img-fluid" alt="">
+                                        </center>
+                                    </div>
+
+                                </div>
+
+
+                                <script>
+                                    // Create a Stripe client.
+
+
+
+
+
+                                    var stripe = Stripe('pk_test_51Ib6ZVLLBkZC6OyUFsL5gtwshUAIglo3TmFEOpzY7pGYJJJan4YdQqZqL5dZefC8DGA1sqIUiJ8WfanVUQmQwzHO00NJFNbFww');
+
+                                    // Create an instance of Elements.
+                                    var elements = stripe.elements();
+
+                                    // Custom styling can be passed to options when creating an Element.
+                                    // (Note that this demo uses a wider set of styles than the guide below.)
+                                    var style = {
+                                        base: {
+                                            color: '#32325d',
+                                            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                                            fontSmoothing: 'antialiased',
+                                            fontSize: '16px',
+                                            '::placeholder': {
+                                                color: '#aab7c4'
+                                            }
+                                        },
+                                        invalid: {
+                                            color: '#fa755a',
+                                            iconColor: '#fa755a'
+                                        }
+                                    };
+
+                                    // Create an instance of the card Element.
+                                    var card = elements.create('card', {
+                                        style: style
+                                    });
+
+                                    // Add an instance of the card Element into the `card-element` <div>.
+                                    card.mount('#card-element');
+
+                                    // Handle real-time validation errors from the card Element.
+                                    card.addEventListener('change', function(event) {
+                                        var displayError = document.getElementById('card-errors');
+                                        if (event.error) {
+                                            displayError.textContent = event.error.message;
+                                        } else {
+                                            displayError.textContent = '';
+                                        }
+                                    });
+
+                                    // Handle form submission.
+                                    var form = document.getElementById('payment-form');
+                                    form.addEventListener('submit', function(event) {
+                                        event.preventDefault();
+                                        $(".btn-load").attr("disabled", true);
+                                        $(".btn-load").html(` <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Por favor espere...`)
+
+                                        stripe.createToken(card).then(function(result) {
+                                            if (result.error) {
+                                                // Inform the user if there was an error.
+                                                $(".btnChargePayStripe").attr("disabled", false);
+                                                $(".btnChargePayStripe").html("Pagar ahora");
+                                                var errorElement = document.getElementById('card-errors');
+                                                errorElement.textContent = result.error.message;
+                                            } else {
+                                                // Send the token to your server.
+                                                stripeTokenHandler(result.token);
+                                            }
+                                        });
+                                    });
+
+                                    // Submit the form with the token ID.
+                                    function stripeTokenHandler(token) {
+
+                                        $("#loadingPagen").modal('show')
+                                        $(".btnChargePayStripe").attr("disabled", true);
+                                        $(".btnChargePayStripe").html("Por favor espere, validando su pago");
+
+
+
+                                        // Insert the token ID into the form so it gets submitted to the server
+                                        var form = document.getElementById('payment-form');
+                                        var hiddenInput = document.createElement('input');
+                                        hiddenInput.setAttribute('type', 'hidden');
+                                        hiddenInput.setAttribute('name', 'stripeToken');
+                                        hiddenInput.setAttribute('value', token.id);
+
+
+                                        var btnCharge = document.createElement('input');
+                                        btnCharge.setAttribute('type', 'hidden');
+                                        btnCharge.setAttribute('name', 'btnChargePayStripe')
+                                        btnCharge.setAttribute('value', TextTrackCue)
+
+
+
+                                        form.appendChild(hiddenInput);
+                                        form.appendChild(btnCharge);
+
+
+
+
+
+
+
+                                        // Submit the form
+                                        form.submit();
+                                    }
+                                </script>
                             <?php else : ?>
                                 <div class="row justify-content-center">
                                     <div class="col-8">

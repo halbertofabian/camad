@@ -891,4 +891,111 @@ class PagosControlador
             return;
         }
     }
+    public static function ctrPagarStripe()
+    {
+        if (isset($_POST['btnChargePayStripe'])) {
+
+            startLoadButton();
+
+            $incripcion = InscripcionesModelo::mdlMostrarInscripciones($_SESSION['session_usr']['usr_id']);
+            $incripcion = $incripcion[0];
+            $dt_pago_online_ins = json_decode($incripcion['fpg_pago_online'], true);
+
+            $vfch_monto = str_replace(",", "", $dt_pago_online_ins['TOTAL-DESCUENTO']);
+            $vfch_sub_monto = str_replace(",", "", $dt_pago_online_ins['TOTAL']);
+            $vfch_sub_monto = $vfch_sub_monto / $dt_pago_online_ins['PAGOS'];
+            $vfch_descuento = $dt_pago_online_ins['DESCUENTO'];
+
+
+            $dt_pago_online = PagosControlador::ctrMostrarDatosFichaPagoOnline($incripcion['fpg_id']);
+
+            $ppg_adeudo = $dt_pago_online['PPG_ONLINE']['adeudo'];
+
+            // require_once('/path/to/stripe-php/init.php');
+            require_once DOCUMENT_ROOT . 'app/lib/stripe-php/autoload.php';
+
+            \Stripe\Stripe::setApiKey('sk_test_51Ib6ZVLLBkZC6OyUZw4lGE2JV9tnQniO0wMfFbfYQRNZwG6ZaZkHl4eC6dHT17AX9Upv02GvQwbvIWr1zIDVKgjZ00ROAE4ZI5');
+
+            $token = $_POST['stripeToken'];
+
+
+
+            $customer = \Stripe\Customer::create([
+                'email' => $_SESSION['session_usr']['usr_correo'],
+                'source' => $token
+            ]);
+
+
+            $charge = \Stripe\Charge::create([
+                'customer' => $customer->id,
+                'amount' => str_replace('.', '', $vfch_monto),
+                'currency' => 'mxn',
+                'description' => 'GRUPO SEAD - ' . $incripcion['pqt_nombre'],
+                'receipt_email' => $_SESSION['session_usr']['usr_correo'],
+            ]);
+
+
+
+
+            if ($charge['status'] == "succeeded") {
+
+                $datos = array();
+
+                $vfch_id = PagosModelo::mdlConsultarVentaSiguienteFicha();
+
+                $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 0 ? "0001"  : $vfch_id['vfch_id'];
+                $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 1 ? "000" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+                $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 2 ? "00" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+                $vfch_id['vfch_id'] =  strlen($vfch_id['vfch_id']) == 3 ? "0" . $vfch_id['vfch_id'] : $vfch_id['vfch_id'];
+
+                $datos = array(
+                    'vfch_fecha_registro' => FECHA,
+                    'vfch_usuario_registro' => 'REGISTRO ONLINE',
+                    'vfch_id_sucursal' => $_SESSION['session_suc']['scl_id'],
+                    'vfch_id' => $vfch_id['vfch_id'],
+                    'vfch_id_corte' => CortesControlador::crtConsultarUltimoCorteOnline(),
+                    'vfch_referencia' => $charge['id'],
+                    'vfch_monto' => $vfch_monto,
+                    'vfch_mp' => 'Tarjeta',
+                    'vfch_sub_monto' => $vfch_sub_monto,
+                    'vfch_descuento' => $vfch_descuento,
+                    'vfch_alumno' => $_SESSION['session_usr']['usr_matricula'],
+                    'vfch_ficha_pago' => $incripcion['fpg_id'],
+                    'vfch_estado' => 'PAGADO',
+                    'vfch_fecha_pagada' => FECHA
+
+                );
+                $empezarVentaFicha = PagosModelo::mdlEmpezarVentaOnline($datos);
+                if ($empezarVentaFicha) {
+
+                    $crearPago = PagosModelo::mdlAgregarCarritoOnline(
+                        array(
+                            'ppg_ficha_pago' => $incripcion['fpg_id'],
+                            'ppg_ficha_venta' => $vfch_id['vfch_id'],
+                            'ppg_monto' => $vfch_sub_monto,
+                            'ppg_descuento' => $vfch_descuento,
+                            'ppg_total' => $vfch_monto,
+                            'ppg_fecha_registro' => FECHA,
+                            'ppg_concepto' => 'PPG_ONLINE',
+                            'ppg_usuario_registro' => 'REGISTRO ONLINE',
+                            'ppg_adeudo' => $ppg_adeudo - $vfch_monto,
+                            'ppg_estado_pagado' => 'PAGADO',
+                            'ppg_id_sucursal' => $_SESSION['session_suc']['scl_id']
+
+                        )
+                    );
+                    if ($crearPago) {
+                        echo '<script>window.open("' . HTTP_HOST . 'app/report/ficha_pago.php?fpg_id=' . $vfch_id['vfch_id'] . '","_blank")</script>';
+                        AppControlador::msj('success', '¡Muy bien!', 'Pago realizado con éxito', HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-pagos');
+
+                        // return array(
+                        //     'status' => true,
+                        //     'mensaje' => 'Pago realizado con éxito',
+                        //     'pagina' => ''
+                        // );
+                    }
+                }
+            }
+        }
+    }
 }
