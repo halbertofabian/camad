@@ -938,8 +938,7 @@ class PagosControlador
 
 
 
-                var_dump($charge['status']);
-                return;
+                
                 if ($charge['status'] == "succeeded") {
 
                     $datos = array();
