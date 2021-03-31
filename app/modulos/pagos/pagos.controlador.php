@@ -995,6 +995,8 @@ class PagosControlador
                         // );
                     }
                 }
+            } else {
+                AppControlador::msj('error', '¡Error!', 'Tarjeta declinada, intente con otra', HTTP_HOST);
             }
         }
     }
