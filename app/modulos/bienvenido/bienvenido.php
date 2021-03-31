@@ -64,7 +64,7 @@ elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador"  &&  $_SESSION['s
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p class="card-text"><?php echo $pqt['pqt_descripcion'] ?></p>
+                                        <p class="card-text"></p>
 
                                         <strong>Duración: <?php echo $pqt['pqt_duracion'] ?></strong>
                                         <br>
