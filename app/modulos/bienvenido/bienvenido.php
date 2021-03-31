@@ -44,6 +44,9 @@ elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador"  &&  $_SESSION['s
     <div class="container">
         <h4>Hola <strong class="text-primary"><?php echo $_SESSION['session_usr']['usr_nombre'] . ' ' . $_SESSION['session_usr']['usr_app']  ?></strong> bienvenido(a) al sistema</h4>
         <div class="row">
+            <div class="col-12 col-md-4">
+                <a href="<?php echo HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-pagos' ?>" class="btn btn-dark mt-1 mb-1">Mis pagos</a>
+            </div>
             <?php
 
             $ins = InscripcionesModelo::mdlMostrarInscripciones($_SESSION['session_usr']['usr_id']);
@@ -263,7 +266,7 @@ if ($incripcion != NULL) :
                     <div class="row">
                         <div class="col-md-4 col-12 ">
                             <p>
-                                <?php// echo $incripcion['pqt_descripcion']; ?>
+
                             </p>
                             <?php
                             $pago = $dt_pago_online['PPG_ONLINE']['total'] - $dt_pago_online['PPG_ONLINE']['adeudo'];

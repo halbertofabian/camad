@@ -63,7 +63,7 @@
     <link href="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/toastr/build/toastr.min.css" rel="stylesheet" />
 
     <link href="<?php echo HTTP_HOST . 'app/'  ?>assets/plugin/select2-c/css/select2.min.css" rel="stylesheet" />
-    
+
 
     <!-- BEGIN: Vendor JS-->
     <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>vendors/js/vendors.min.js"></script>
@@ -102,7 +102,7 @@
     <!-- <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>plugin/select2/select2.full.min.js"></script> -->
     <script src="<?php echo  HTTP_HOST . 'app/assets/' ?>plugin/select2-c/js/select2.min.js"></script>
 
-    
+
 
 </head>
 <!-- END: Head-->
@@ -789,6 +789,7 @@
                     <div class="navbar-container main-menu-content" data-menu="menu-container">
                         <!-- include ../../../includes/mixins-->
                         <ul class="nav navbar-nav" id="main-menu-navigation" data-menu="menu-navigation">
+
                             <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST  ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-home"></i>Inicio</a></li>
                             <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-fichas' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Kardex de fichas</a></li>
                             <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?php echo HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-pagos' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Kardex de pagos</a></li>
