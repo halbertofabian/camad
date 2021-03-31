@@ -261,9 +261,9 @@ if ($incripcion != NULL) :
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-12 ">
                             <p>
-                                <?php echo $incripcion['pqt_descripcion']; ?>
+                                <?php// echo $incripcion['pqt_descripcion']; ?>
                             </p>
                             <?php
                             $pago = $dt_pago_online['PPG_ONLINE']['total'] - $dt_pago_online['PPG_ONLINE']['adeudo'];
