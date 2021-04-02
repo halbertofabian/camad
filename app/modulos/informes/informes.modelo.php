@@ -32,4 +32,34 @@ class InformesModelo
             $con = null;
         }
     }
+
+    public static function mdlInforme_2($ifs)
+    {
+        try {
+
+            if ($ifs['fpg_usuario_registro'] != "") {
+                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ? AND fpg.fpg_usuario_registro = ? ";
+                $con = Conexion::conectar();
+                $pps = $con->prepare($sql);
+                $pps->bindValue(1, $ifs['fpg_fecha_registro_inicio']);
+                $pps->bindValue(2, $ifs['fpg_fecha_registro_fin']);
+                $pps->bindValue(3, $ifs['fpg_usuario_registro']);
+                $pps->execute();
+                return $pps->fetchAll();
+            } else {
+                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ?  ";
+                $con = Conexion::conectar();
+                $pps = $con->prepare($sql);
+                $pps->bindValue(1, $ifs['fpg_fecha_registro_inicio']);
+                $pps->bindValue(2, $ifs['fpg_fecha_registro_fin']);
+                $pps->execute();
+                return $pps->fetchAll();
+            }
+        } catch (PDOException $th) {
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 }

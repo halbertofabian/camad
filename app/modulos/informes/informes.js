@@ -90,3 +90,55 @@ $("#formInforme_1").on("submit", function (e) {
         },
     })
 })
+
+$("#formInforme_2").on("submit", function (e) {
+    e.preventDefault();
+    var datos = new FormData(this);
+
+
+
+    datos.append("btnFiltrarInforme_2", true);
+
+    $.ajax({
+
+        url: urlApp + 'app/modulos/informes/informes.ajax.php',
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        beforeSend: function () {
+            startLoadButton()
+        },
+        success: function (res) {
+            stopLoadButton('Filtrar')
+            console.log(res)
+
+            var html = "";
+
+
+            $("#text-cert").html("")
+            if (res != null) {
+                res.forEach(ifs => {
+
+
+                    html +=
+                        `
+                            <tr>
+                                <td>${ifs.usr_nombre + " " + ifs.usr_app + " " + ifs.usr_apm}</td>
+                                <td>${ifs.pqt_nombre}</td>
+                                <td>${ifs.fpg_usuario_registro}</td>
+                                <td>${ifs.fpg_fecha_registro}</td>
+                            </tr>
+
+                        `;
+
+                });
+
+                $("#tbodyInforme_2").html(html)
+
+            }
+        },
+    })
+})

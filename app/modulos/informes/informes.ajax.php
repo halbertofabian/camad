@@ -31,9 +31,21 @@ class InformesAjax
 
         echo json_encode($res, true);
     }
+
+    public function ajaxInform_2()
+    {
+        $res = InformesModelo::mdlInforme_2($_POST);
+
+        echo json_encode($res, true);
+    }
 }
 
 if (isset($_POST['btnFiltrarInforme_1'])) {
     $informe_1 = new InformesAjax();
     $informe_1->ajaxInform_1();
+}
+
+if (isset($_POST['btnFiltrarInforme_2'])) {
+    $informe_1 = new InformesAjax();
+    $informe_1->ajaxInform_2();
 }
