@@ -128,8 +128,9 @@ $("#formInforme_2").on("submit", function (e) {
                             <tr>
                                 <td>${ifs.usr_nombre + " " + ifs.usr_app + " " + ifs.usr_apm}</td>
                                 <td>${ifs.pqt_nombre}</td>
-                                <td>${ifs.fpg_usuario_registro}</td>
                                 <td>${ifs.fpg_fecha_registro}</td>
+                                <td>${ifs.fpg_usuario_registro}</td>
+                                
                             </tr>
 
                         `;
