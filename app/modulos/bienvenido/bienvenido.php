@@ -412,7 +412,7 @@ if ($incripcion != NULL) :
 
 
 
-                                    var stripe = Stripe('pk_test_51Ib6ZVLLBkZC6OyUFsL5gtwshUAIglo3TmFEOpzY7pGYJJJan4YdQqZqL5dZefC8DGA1sqIUiJ8WfanVUQmQwzHO00NJFNbFww');
+                                    var stripe = Stripe("<?php echo PUBLIC_KEY_STRIPE ?>");
 
                                     // Create an instance of Elements.
                                     var elements = stripe.elements();

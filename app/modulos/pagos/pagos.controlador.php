@@ -915,7 +915,7 @@ class PagosControlador
                 // require_once('/path/to/stripe-php/init.php');
                 require_once DOCUMENT_ROOT . 'app/lib/stripe-php/autoload.php';
 
-                \Stripe\Stripe::setApiKey('sk_test_51Ib6ZVLLBkZC6OyUZw4lGE2JV9tnQniO0wMfFbfYQRNZwG6ZaZkHl4eC6dHT17AX9Upv02GvQwbvIWr1zIDVKgjZ00ROAE4ZI5');
+                \Stripe\Stripe::setApiKey(SECRET_KEY_STRIPE);
 
                 $token = $_POST['stripeToken'];
 
@@ -938,7 +938,7 @@ class PagosControlador
 
 
 
-                
+
                 if ($charge['status'] == "succeeded") {
 
                     $datos = array();
