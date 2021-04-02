@@ -38,20 +38,22 @@ class InformesModelo
         try {
 
             if ($ifs['fpg_usuario_registro'] != "") {
-                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ? AND fpg.fpg_usuario_registro = ? ";
+                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ? AND fpg.fpg_usuario_registro = ? AND fpg_id_sucursal = ?";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $ifs['fpg_fecha_registro_inicio']);
                 $pps->bindValue(2, $ifs['fpg_fecha_registro_fin']);
                 $pps->bindValue(3, $ifs['fpg_usuario_registro']);
+                $pps->bindValue(4, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             } else {
-                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ?  ";
+                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ?  AND fpg_id_sucursal = ? ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $ifs['fpg_fecha_registro_inicio']);
                 $pps->bindValue(2, $ifs['fpg_fecha_registro_fin']);
+                $pps->bindValue(3, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             }
