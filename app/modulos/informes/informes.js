@@ -9,7 +9,12 @@
  *  Instagram: http://instagram.com/softmormx
  *  Twitter: https://twitter.com/softmormx
  */
+$(document).ready(function () {
+    var datos = new FormData();
+    cargarInforme2(datos);
 
+
+});
 $("#formInforme_1").on("submit", function (e) {
     e.preventDefault();
     var datos = new FormData(this);
@@ -97,13 +102,9 @@ $("#formInforme_2").on("submit", function (e) {
     cargarInforme2(datos);
 
 })
-//
-//$("#formInforme_2").on("load", function (e) {
-//    e.preventDefault();
-//    var datos = new FormData(this);
-//    cargarInforme2(datos);
-//
-//})
+
+
+
 
 function cargarInforme2(datos) {
 
