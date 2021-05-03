@@ -1,6 +1,6 @@
 
 <?php
-require_once DOCUMENT_ROOT . "app/lib/openpay-php/Openpay.php";
+//require_once DOCUMENT_ROOT . "app/lib/openpay-php/Openpay.php";
 /**
  *  Desarrollador: ifixitmor
  *  Fecha de creación: 01/12/2020 12:00

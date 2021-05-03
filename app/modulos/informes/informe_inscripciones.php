@@ -1,3 +1,4 @@
+
 <div class="row">
 
     <div class="col-12">
@@ -17,22 +18,6 @@
                             <div class="form-group">
                                 <label for="fpg_fecha_registro_fin">Fecha fin</label>
                                 <input type="date" name="fpg_fecha_registro_fin" id="fpg_fecha_registro_fin" required class="form-control theDate">
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-12">
-                            <div class="form-group">
-                                <label for="fpg_usuario_registro">Usuario:</label>
-                                <select name="fpg_usuario_registro" class="form-control" id="fpg_usuario_registro">
-                                    <option value="">Todos</option>
-                                    <?php
-                                    $usuarios = UsuariosModelo::mdlMostrarUsuarios();
-                                    foreach ($usuarios as $key => $usr) :  # code...
-
-                                    ?>
-                                        <option value="<?php echo $usr['usr_nombre']  ?>"><?php echo $usr['usr_matricula'] . ' - ' . $usr['usr_nombre']  ?></option>
-
-                                    <?php endforeach; ?>
-                                </select>
                             </div>
                         </div>
                         <div class="col-md-3 col-12">
@@ -64,7 +49,10 @@
                             <th>Alumno</th>
                             <th>Paquete</th>
                             <th>Fecha de inscripción</th>
-                            <th>Usuario Inscribio</th>
+                            <th>Usuario Registró</th>
+                            <th>Usuario Inscribió</th>
+                            <th>Adeudo</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyInforme_2">

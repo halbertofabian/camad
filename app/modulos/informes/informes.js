@@ -55,7 +55,7 @@ $("#formInforme_1").on("submit", function (e) {
 
                     monto_total += Number(ifs.ppg_total);
                     html +=
-                        `
+                            `
                             <tr>
                                 <td>${ifs.ppg_id}</td>
                                 <td>${ifs.ppg_ficha_pago}</td>
@@ -94,10 +94,26 @@ $("#formInforme_1").on("submit", function (e) {
 $("#formInforme_2").on("submit", function (e) {
     e.preventDefault();
     var datos = new FormData(this);
+    cargarInforme2(datos);
+
+})
+//
+//$("#formInforme_2").on("load", function (e) {
+//    e.preventDefault();
+//    var datos = new FormData(this);
+//    cargarInforme2(datos);
+//
+//})
+
+function cargarInforme2(datos) {
 
 
+    fecha_inicial = $('#fpg_fecha_registro_inicio').val() + 'T00:00';
+    fecha_final = $('#fpg_fecha_registro_fin').val() + 'T23:59';
 
     datos.append("btnFiltrarInforme_2", true);
+    datos.append("fpg_fecha_registro_inicio", fecha_inicial);
+    datos.append("fpg_fecha_registro_fin", fecha_final);
 
     $.ajax({
 
@@ -124,12 +140,15 @@ $("#formInforme_2").on("submit", function (e) {
 
 
                     html +=
-                        `
+                            `
                             <tr>
                                 <td>${ifs.usr_nombre + " " + ifs.usr_app + " " + ifs.usr_apm}</td>
                                 <td>${ifs.pqt_nombre}</td>
                                 <td>${ifs.fpg_fecha_registro}</td>
-                                <td>${ifs.fpg_usuario_registro}</td>
+                                <td>${ifs.usr_usuario_registro}</td>
+                                <td>${ifs.ppg_usuario_registro}</td>
+                                <td>${ifs.ppg_adeudo}</td>
+                                <td>${ifs.ppg_total}</td>
                                 
                             </tr>
 
@@ -142,4 +161,4 @@ $("#formInforme_2").on("submit", function (e) {
             }
         },
     })
-})
+}

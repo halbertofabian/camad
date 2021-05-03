@@ -28,6 +28,9 @@ function stopLoadButton(label) {
     $(".btn-load").html(`${label}`)
 }
 
+$(document).ready(function () {
+    
+
 $(".tablas").DataTable({
 
 
@@ -60,6 +63,7 @@ $(".tablas").DataTable({
 
     }
 
+});
 });
 
 $('.select2').select2();

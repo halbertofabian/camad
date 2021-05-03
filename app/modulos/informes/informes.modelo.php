@@ -1,5 +1,6 @@
 
 <?php
+
 /**
  *  Desarrollador: ifixitmor
  *  Fecha de creación: 17/01/2021 22:11
@@ -12,10 +13,9 @@
  */
 require_once DOCUMENT_ROOT . "app/modulos/conexion/conexion.php";
 
-class InformesModelo
-{
-    public static function mdlInforme_1($ifs)
-    {
+class InformesModelo {
+
+    public static function mdlInforme_1($ifs) {
         //SELECT * FROM tbl_paquetes_pagos_ppg
         try {
             //code...
@@ -33,30 +33,32 @@ class InformesModelo
         }
     }
 
-    public static function mdlInforme_2($ifs)
-    {
+    public static function mdlInforme_2($ifs) {
         try {
 
-            if ($ifs['fpg_usuario_registro'] != "") {
-                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ? AND fpg.fpg_usuario_registro = ? AND fpg_id_sucursal = ?";
+//            if ($ifs['fpg_usuario_registro'] != "") {
+                $sql = "SELECT usr.usr_nombre, usr.usr_app, usr.usr_apm, pqt.pqt_nombre, fpg.fpg_fecha_registro, usr.usr_usuario_registro, ppg.ppg_usuario_registro, ppg.ppg_adeudo, ppg.ppg_total
+                FROM tbl_paquetes_pagos_ppg as ppg JOIN tbl_ficha_pago_fpg as fpg ON ppg.ppg_ficha_pago = fpg.fpg_id
+                JOIN tbl_usuarios_usr as usr ON usr.usr_id = fpg.fpg_alumno
+                JOIN tbl_paquete_pqt as pqt ON fpg.fpg_paquete = pqt.pqt_sku
+                WHERE ppg.ppg_concepto = 'PPG_INSCRIPCION' AND ppg.ppg_fecha_registro 
+                BETWEEN ? AND ? AND ppg.ppg_estado_pagado = 'PAGADO';";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $ifs['fpg_fecha_registro_inicio']);
                 $pps->bindValue(2, $ifs['fpg_fecha_registro_fin']);
-                $pps->bindValue(3, $ifs['fpg_usuario_registro']);
-                $pps->bindValue(4, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
-            } else {
-                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ?  AND fpg_id_sucursal = ? ";
-                $con = Conexion::conectar();
-                $pps = $con->prepare($sql);
-                $pps->bindValue(1, $ifs['fpg_fecha_registro_inicio']);
-                $pps->bindValue(2, $ifs['fpg_fecha_registro_fin']);
-                $pps->bindValue(3, $_SESSION['session_suc']['scl_id']);
-                $pps->execute();
-                return $pps->fetchAll();
-            }
+//            } else {
+//                $sql = "SELECT usr.usr_nombre,usr.usr_app,usr.usr_apm,pqt.pqt_nombre,fpg.fpg_usuario_registro,fpg.fpg_fecha_registro FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg_fecha_registro BETWEEN ? AND ?  AND fpg_id_sucursal = ? ";
+//                $con = Conexion::conectar();
+//                $pps = $con->prepare($sql);
+//                $pps->bindValue(1, $ifs['fpg_fecha_registro_inicio']);
+//                $pps->bindValue(2, $ifs['fpg_fecha_registro_fin']);
+//                $pps->bindValue(3, $_SESSION['session_suc']['scl_id']);
+//                $pps->execute();
+//                return $pps->fetchAll();
+//            }
         } catch (PDOException $th) {
             return false;
         } finally {
@@ -64,4 +66,5 @@ class InformesModelo
             $con = null;
         }
     }
+
 }
