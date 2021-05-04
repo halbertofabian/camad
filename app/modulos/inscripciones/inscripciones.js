@@ -70,3 +70,59 @@ $("#formInscribirAlumno").on("submit", function (e) {
 
 
 })
+
+$(".btnCancelarInscripcion").on("click", function () {
+
+    var fpg_id = $(this).attr("fpg_id");
+    swal({
+        title: "¿Seguro de querer cancelar está inscripción?",
+        text: "La inscripcíón " + fpg_id + " será cancelada. ¿Deseas continuar?",
+        icon: "warning",
+        buttons: ["No, cancelar", "Si, cancelar cupón inscripcíón " + fpg_id],
+        dangerMode: false,
+        closeOnClickOutside: false,
+    })
+            .then((willDelete) => {
+                if (willDelete) {
+                    var datos = new FormData();
+                    datos.append("btnCancelarInscripcion", true);
+                    datos.append("fpg_id", fpg_id);
+
+                    $.ajax({
+                        type: "POST",
+                        url: urlApp + 'app/modulos/inscripciones/inscripciones.ajax.php',
+                        data: datos,
+                        dataType: "json",
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+
+                        },
+                        success: function (res) {
+
+                            if (res.status) {
+                                swal({
+                                    title: "Muy bien",
+                                    text: res.mensaje,
+                                    icon: "success",
+                                    buttons: [false, "Continuar"],
+                                    dangerMode: true,
+                                    closeOnClickOutside: false,
+
+                                })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                window.location.reload();
+                                            } else {
+                                                window.location.reload();
+                                            }
+                                        });
+                            } else {
+                                toastr.error(res.mensaje, 'ERROR');
+                            }
+
+                        }
+                    });
+                }
+            })
+})

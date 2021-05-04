@@ -221,6 +221,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                         <!-- <?php //endif; 
                                                 ?> -->
                                         <a class="btn btn-info" href="<?php echo HTTP_HOST . 'inscripciones/fichas/' . $fpg['fpg_id'] ?> " data-toggle="tooltip" data-placement="top" title="Ver ficha de inscripcón"><i class=" fa fa-file-pdf-o"></i></a>
+                                        <button type="button" class="btn btn-danger btnCancelarInscripcion" fpg_id="<?= $fpg['fpg_id'] ?>" data-toggle="tooltip" data-placement="top" title="Cancelar inscripcón"><i class="fa fa-times"></i></button>
                                     </div>
                                 </td>
                             </tr>

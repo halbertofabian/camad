@@ -11,8 +11,6 @@
  *  Instagram: http://instagram.com/softmormx
  *  Twitter: https://twitter.com/softmormx
  */
-
-
 include_once '../../../config.php';
 
 require_once DOCUMENT_ROOT . 'app/modulos/inscripciones/inscripciones.modelo.php';
@@ -20,16 +18,29 @@ require_once DOCUMENT_ROOT . 'app/modulos/inscripciones/inscripciones.controlado
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
-class InscripcionesAjax
-{
-    public function ajaxCrearInscripcion()
-    {
+
+class InscripcionesAjax {
+
+    public $fpg_id;
+
+    public function ajaxCrearInscripcion() {
         $res = InscripcionesControlador::ctrAgregarInscripciones();
         echo json_encode($res, true);
     }
+
+    public function ajaxCancelarInscripcion() {
+        $res = InscripcionesControlador::ctrEliminarInscripciones($this->fpg_id);
+        echo json_encode($res, true);
+    }
+
 }
 
 if (isset($_POST['btnInscribirAlumnos'])) {
     $crearInscripcion = new InscripcionesAjax();
     $crearInscripcion->ajaxCrearInscripcion();
+}
+if (isset($_POST['btnCancelarInscripcion'])) {
+    $crearInscripcion = new InscripcionesAjax();
+    $crearInscripcion->fpg_id = $_POST['fpg_id'];
+    $crearInscripcion->ajaxCancelarInscripcion();
 }
