@@ -96,7 +96,23 @@ class InscripcionesControlador
     public function ctrMostrarInscripciones()
     {
     }
-    public function ctrEliminarInscripciones()
+    public function ctrEliminarInscripciones($fpg_id)
     {
+        $eliminar = InscripcionesModelo::mdlEliminarInscripciones($fpg_id);
+        if($eliminar){
+            
+            return array(
+                'status' => true,
+                'mensaje' => 'La inscripción se elimino correctamente.',
+                'pagina' => HTTP_HOST . 'inscripciones'
+            );
+            
+        }else{
+            return array(
+                'status' => false,
+                'mensaje' => 'La inscripción no se elimino. Intentelo nuevamente.',
+                'pagina' => HTTP_HOST . 'inscripciones'
+            );
+        }
     }
 }

@@ -96,14 +96,14 @@ class InscripcionesModelo
         try {
             //code...
             if ($usr_id == "") {
-                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg.fpg_id_sucursal = ? ";
+                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg.fpg_id_sucursal = ? and fpg.fpg_estado = '1'";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
                 $pps->execute();
                 return $pps->fetchAll();
             } elseif ($usr_id != "") {
-                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE usr.usr_id = ? ";
+                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE usr.usr_id = ? and fpg.fpg_estado = '1'";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $usr_id);
@@ -135,14 +135,14 @@ class InscripcionesModelo
             $con = null;
         }
     }
-    public static function mdlEliminarInscripciones()
+    public static function mdlEliminarInscripciones($fpg_id)
     {
         try {
             //code...
-            $sql = "";
+            $sql = "UPDATE tbl_ficha_pago_fpg SET fpg_estado = '0' WHERE fpg_id = ?";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
-
+            $pps->bindValue(1, $fpg_id);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {
