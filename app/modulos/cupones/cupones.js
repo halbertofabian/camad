@@ -52,13 +52,13 @@ $("#formAgregarCupones").on("submit", function (e) {
                     dangerMode: true,
                     closeOnClickOutside: false,
                 })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            location.href = res.pagina
-                        } else {
-                            location.href = res.pagina
-                        }
-                    });
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                location.href = res.pagina
+                            } else {
+                                location.href = res.pagina
+                            }
+                        });
 
             } else {
                 toastr.error(res.mensaje, 'Error')
@@ -66,4 +66,106 @@ $("#formAgregarCupones").on("submit", function (e) {
 
         }
     })
+})
+$("#formActualizarCupones").on("submit", function (e) {
+    e.preventDefault();
+    var datos = new FormData(this);
+    datos.append("btnActualizarCupon", true);
+
+    $.ajax({
+        type: "POST",
+        url: urlApp + 'app/modulos/cupones/cupones.ajax.php',
+        data: datos,
+        cache: false,
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        beforeSend: function () {
+
+        },
+        success: function (res) {
+            console.log(res)
+
+            if (res.status) {
+
+                swal({
+                    title: "¡Muy bien!",
+                    text: res.mensaje,
+                    icon: "success",
+                    buttons: [false, "Continuar"],
+                    dangerMode: true,
+                    closeOnClickOutside: false,
+                })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                location.href = res.pagina
+                            } else {
+                                location.href = res.pagina
+                            }
+                        });
+
+            } else {
+                toastr.error(res.mensaje, 'Error')
+            }
+
+        }
+    })
+})
+
+
+
+$(".btnElimimarCupon").on("click", function () {
+
+    var cps_codigo = $(this).attr("cps_codigo");
+    swal({
+        title: "¿Seguro de querer eliminar este cupón?",
+        text: "El cupo con número " + cps_codigo + " será eliminado. ¿Deseas continuar?",
+        icon: "warning",
+        buttons: ["No, cancelar", "Si, eliminar cupón con número " + cps_codigo],
+        dangerMode: false,
+        closeOnClickOutside: false,
+    })
+            .then((willDelete) => {
+                if (willDelete) {
+                    var datos = new FormData();
+                    datos.append("btnEliminarCupon", true);
+                    datos.append("cps_codigo", cps_codigo);
+
+                    $.ajax({
+                        type: "POST",
+                        url: urlApp + 'app/modulos/cupones/cupones.ajax.php',
+                        data: datos,
+                        dataType: "json",
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+
+                        },
+                        success: function (res) {
+
+                            if (res.status) {
+                                swal({
+                                    title: "Muy bien",
+                                    text: res.mensaje,
+                                    icon: "success",
+                                    buttons: [false, "Continuar"],
+                                    dangerMode: true,
+                                    closeOnClickOutside: false,
+
+                                })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                window.location.reload();
+                                            } else {
+                                                window.location.reload();
+                                            }
+                                        });
+                            } else {
+                                toastr.error(res.mensaje, 'ERROR');
+                            }
+
+                        }
+                    });
+                }
+            })
 })

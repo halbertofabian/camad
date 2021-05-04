@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="card">
+                <div class="card" style="height: 120px;">
                     <div class="card-body">
                         <h4 class="card-title">Informe de inscripciones</h4>
                         <a class="btn btn-link float-right" href="<?php echo HTTP_HOST ?>informes/inscripciones">Ver</a>
@@ -29,7 +29,7 @@
             </div>
 
             <div class="col-md-3">
-                <div class="card">
+                <div class="card" style="height: 120px;">
                     <div class="card-body">
                         <h4 class="card-title">Informe de ventas</h4>
                         <a class="btn btn-link float-right" href="<?php echo HTTP_HOST ?>informes/ventas">Ver</a>

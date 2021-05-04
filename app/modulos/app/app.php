@@ -612,6 +612,8 @@
                                             </li>
                                             <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cupones' ?>" data-toggle="dropdown" data-i18n="Gestión de cupones"><i class="feather icon-circle"></i>Gestión de cupones</a>
                                             </li>
+                                            <li data-menu=""><a class="dropdown-item" href="<?php echo HTTP_HOST . 'cupones/activos' ?>" data-toggle="dropdown" data-i18n="Cupones activos"><i class="feather icon-circle"></i>Cupones activos</a>
+                                            </li>
                                         </ul>
                                     </li>
                                     <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown" data-i18n="Cupones"><i class="feather icon-grid"></i>Usuarios</a>
