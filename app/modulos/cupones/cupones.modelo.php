@@ -46,7 +46,7 @@ class CuponesModelo {
     public static function mdlActualizarCupones($cps) {
         try {
             //code...
-            $sql = "UPDATE tbl_cupones_cps SET cps_nombre = ?, cps_asociado = ?, cps_fecha_inicio = ?, cps_fecha_fin = ?, cps_tope = ?, cps_uso = ?, cps_usuario_registro = ?, cps_fecha_registro = ?, cps_sku_producto = ?, cps_restricciones = ?, cps_estado = cps_estado, cps_descuento_pagos = ? WHERE cps_codigo = ?";
+            $sql = "UPDATE tbl_cupones_cps SET cps_nombre = ?, cps_asociado = ?, cps_fecha_inicio = ?, cps_fecha_fin = ?, cps_tope = ?, cps_usuario_registro = ?, cps_fecha_registro = ?, cps_sku_producto = ?, cps_restricciones = ?, cps_descuento_pagos = ? WHERE cps_codigo = ?";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $cps['cps_nombre']);
@@ -54,13 +54,12 @@ class CuponesModelo {
             $pps->bindValue(3, $cps['cps_fecha_inicio']);
             $pps->bindValue(4, $cps['cps_fecha_fin']);
             $pps->bindValue(5, $cps['cps_tope']);
-            $pps->bindValue(6, $cps['cps_uso']);
-            $pps->bindValue(7, $cps['cps_usuario_registro']);
-            $pps->bindValue(8, $cps['cps_fecha_registro']);
-            $pps->bindValue(9, $cps['cps_sku_producto']);
-            $pps->bindValue(10, $cps['cps_restricciones']);
-            $pps->bindValue(11, $cps['cps_descuento_pagos']);
-            $pps->bindValue(12, $cps['cps_codigo']);
+            $pps->bindValue(6, $cps['cps_usuario_registro']);
+            $pps->bindValue(7, $cps['cps_fecha_registro']);
+            $pps->bindValue(8, $cps['cps_sku_producto']);
+            $pps->bindValue(9, $cps['cps_restricciones']);
+            $pps->bindValue(10, $cps['cps_descuento_pagos']);
+            $pps->bindValue(11, $cps['cps_codigo']);
             $pps->execute();
             return $pps->rowCount() > 0;
         } catch (PDOException $th) {

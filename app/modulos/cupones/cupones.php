@@ -58,11 +58,11 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                     </div>
                     <div class="form-group">
                         <label for="cps_fecha_inicio">Inicio</label>
-                        <input type="datetime-local" name="cps_fecha_inicio" id="cps_fecha_inicio" class="form-control" placeholder="">
+                        <input type="text" name="cps_fecha_inicio" id="cps_fecha_inicio" class="form-control date" placeholder="dd/mm/yyyy">
                     </div>
                     <div class="form-group">
                         <label for="cps_fecha_fin">Fin</label>
-                        <input type="datetime-local" name="cps_fecha_fin" id="cps_fecha_fin" class="form-control" placeholder="">
+                        <input type="text" name="cps_fecha_fin" id="cps_fecha_fin" class="form-control date" placeholder="dd/mm/yyyy">
                     </div>
                 </div>
             </div>
