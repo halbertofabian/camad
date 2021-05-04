@@ -102,7 +102,7 @@ class InscripcionesModelo {
                 $pps->execute();
                 return $pps->fetchAll();
             } elseif ($usr_id != "") {
-                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE usr.usr_id = ? and fpg.fpg_estado = '1'";
+                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE usr.usr_id = ?";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $usr_id);

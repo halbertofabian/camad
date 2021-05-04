@@ -133,7 +133,7 @@ class InscripcionesControlador {
                     );
                 } else {
                     return array(
-                        'mensaje' => 'Ocurrio un error, recarga la página e intenta de nuevo',
+                        'mensaje' => 'No se pudo eliminar debido a que exiten abonos sobre esta inscripción.',
                         'status' => false,
                         'pagina' => HTTP_HOST . 'inscripciones/canceladas'
                     );
