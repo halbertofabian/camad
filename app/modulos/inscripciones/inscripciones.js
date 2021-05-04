@@ -34,10 +34,10 @@ $("#formInscribirAlumno").on("submit", function (e) {
         },
         success: function (res) {
 
-            
+
             if (res.status) {
                 toastr.success(res.mensaje, 'Muy bien!')
-                
+
 
                 $(".btnInscribir").html(`Redirigiendo a ${res.pagina}`);
 
@@ -125,4 +125,80 @@ $(".btnCancelarInscripcion").on("click", function () {
                     });
                 }
             })
+})
+
+$(".btnCambioEstadoInscripcion").on("change", function () {
+
+
+    var fpg_solicitud_cancelacion = $(this).val();
+    var fpg_id = $(this).attr("fpg_id");
+
+    swal({
+        title: "¿Estás seguro de realizar está operación?",
+        text: "Se realizara este aprobación / rechazo a la ficha # " + fpg_id,
+        icon: "warning",
+        buttons: ['No, cancelar', 'Si, continuar'],
+        dangerMode: true,
+    })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    var datos = new FormData()
+                    datos.append("fpg_solicitud_cancelacion", fpg_solicitud_cancelacion);
+                    datos.append("fpg_id", fpg_id);
+                    datos.append("btnCambioEstadoInscripcion", true);
+
+                    $.ajax({
+                        type: "POST",
+                        url: urlApp + 'app/modulos/inscripciones/inscripciones.ajax.php',
+                        data: datos,
+                        cache: false,
+                        dataType: "json",
+                        processData: false,
+                        contentType: false,
+                        beforeSend: function () {
+
+                        },
+                        success: function (res) {
+
+                            if (res.status) {
+
+                                swal({
+                                    title: "!Muy bien¡",
+                                    text: res.mensaje,
+                                    icon: "success",
+                                    buttons: [false, "Continuar"],
+                                    dangerMode: true,
+                                    closeOnClickOutside: false,
+                                })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                window.location.reload();
+                                            } else {
+                                                window.location.reload();
+                                            }
+                                        });
+
+                            } else {
+                                swal({
+                                    title: "!Error¡",
+                                    text: res.mensaje,
+                                    icon: "error",
+                                    buttons: [false, "Continuar"],
+                                    dangerMode: true,
+                                    closeOnClickOutside: false,
+                                })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                window.location.reload();
+                                            } else {
+                                                window.location.reload();
+                                            }
+                                        });
+                            }
+                        }
+                    })
+                }
+            })
+
 })

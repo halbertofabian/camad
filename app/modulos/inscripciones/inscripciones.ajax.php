@@ -32,6 +32,11 @@ class InscripcionesAjax {
         $res = InscripcionesControlador::ctrEliminarInscripciones($this->fpg_id);
         echo json_encode($res, true);
     }
+    public function ajaxCambioEstadoSolicitud()
+    {
+        $res = InscripcionesControlador::ctrCambioEstadoSolicitud();
+        echo json_encode($res, true);
+    }
 
 }
 
@@ -43,4 +48,8 @@ if (isset($_POST['btnCancelarInscripcion'])) {
     $crearInscripcion = new InscripcionesAjax();
     $crearInscripcion->fpg_id = $_POST['fpg_id'];
     $crearInscripcion->ajaxCancelarInscripcion();
+}
+if (isset($_POST['btnCambioEstadoInscripcion'])) {
+    $cancelarInscripcion = new InscripcionesAjax();
+    $cancelarInscripcion->ajaxCambioEstadoSolicitud();
 }

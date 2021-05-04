@@ -13,10 +13,9 @@
  */
 require_once DOCUMENT_ROOT . "app/modulos/conexion/conexion.php";
 
-class InscripcionesModelo
-{
-    public static function mdlAgregarInscripciones($ins)
-    {
+class InscripcionesModelo {
+
+    public static function mdlAgregarInscripciones($ins) {
         try {
             //code...
             $sql = "INSERT INTO tbl_ficha_pago_fpg(fpg_alumno,fpg_paquete,fpg_inscripcion,fpg_examen,fpg_guia,fpg_incorporacion,fpg_certificado,fpg_semana,fpg_numero_semana,fpg_liga,fpg_usuario_registro,fpg_fecha_registro,fpg_id_sucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -44,8 +43,8 @@ class InscripcionesModelo
             $con = null;
         }
     }
-    public static function mdlAgregarInscripcionesOnline($ins)
-    {
+
+    public static function mdlAgregarInscripcionesOnline($ins) {
         try {
             //code...
             $sql = "INSERT INTO tbl_ficha_pago_fpg(fpg_alumno,fpg_paquete,fpg_inscripcion,fpg_examen,fpg_guia,fpg_incorporacion,fpg_certificado,fpg_semana,fpg_numero_semana,fpg_pago_online,fpg_liga,fpg_usuario_registro,fpg_fecha_registro,fpg_id_sucursal) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -74,8 +73,8 @@ class InscripcionesModelo
             $con = null;
         }
     }
-    public static function mdlActualizarInscripciones()
-    {
+
+    public static function mdlActualizarInscripciones() {
         try {
             //code...
             $sql = "";
@@ -91,8 +90,8 @@ class InscripcionesModelo
             $con = null;
         }
     }
-    public static function mdlMostrarInscripciones($usr_id = "")
-    {
+
+    public static function mdlMostrarInscripciones($usr_id = "") {
         try {
             //code...
             if ($usr_id == "") {
@@ -118,8 +117,33 @@ class InscripcionesModelo
         }
     }
 
-    public static function mdlMostrarUltimaInscripcionAlumno($usr_id)
-    {
+    public static function mdlMostrarInscripcionesCanceladas($usr_id = "") {
+        try {
+            //code...
+            if ($usr_id == "") {
+                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE fpg.fpg_id_sucursal = ? and fpg.fpg_estado = '0'";
+                $con = Conexion::conectar();
+                $pps = $con->prepare($sql);
+                $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+                $pps->execute();
+                return $pps->fetchAll();
+            } elseif ($usr_id != "") {
+                $sql = "SELECT fpg.*, pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete WHERE usr.usr_id = ? and fpg.fpg_estado = '0'";
+                $con = Conexion::conectar();
+                $pps = $con->prepare($sql);
+                $pps->bindValue(1, $usr_id);
+                $pps->execute();
+                return $pps->fetchAll();
+            }
+        } catch (PDOException $th) {
+            //throw $th;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlMostrarUltimaInscripcionAlumno($usr_id) {
         try {
             //code...
             $sql = "SELECT fpg.fpg_id,usr.usr_matricula FROM tbl_ficha_pago_fpg fpg JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno WHERE usr.usr_id = ? ORDER BY fpg.fpg_id DESC LIMIT 1";
@@ -135,8 +159,8 @@ class InscripcionesModelo
             $con = null;
         }
     }
-    public static function mdlEliminarInscripciones($fpg_id)
-    {
+
+    public static function mdlEliminarInscripciones($fpg_id) {
         try {
             //code...
             $sql = "UPDATE tbl_ficha_pago_fpg SET fpg_estado = '0' WHERE fpg_id = ?";
@@ -153,8 +177,7 @@ class InscripcionesModelo
         }
     }
 
-    public static function mdlMostrarInscripcionesById($fpg_id)
-    {
+    public static function mdlMostrarInscripcionesById($fpg_id) {
         try {
             //code...
             $sql = "SELECT fpg.*,pqt.*,usr.* FROM tbl_ficha_pago_fpg fpg JOIN tbl_paquete_pqt pqt ON pqt.pqt_sku = fpg.fpg_paquete JOIN tbl_usuarios_usr usr ON usr.usr_id = fpg.fpg_alumno WHERE fpg.fpg_id = ? ";
@@ -171,4 +194,44 @@ class InscripcionesModelo
             $con = null;
         }
     }
+
+    public static function mdlSolicitudCancelacion($fpg) {
+        try {
+            //code...
+
+            $sql = "DELETE FROM tbl_ficha_pago_fpg WHERE fpg_id = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $fpg['fpg_id']);
+
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlSolicitudCancelacion2($fpg) {
+        try {
+            //code...
+
+            $sql = " UPDATE tbl_ficha_pago_fpg SET fpg_estado = '1' WHERE fpg_id  = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $fpg['fpg_id']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
 }

@@ -1,8 +1,7 @@
 <?php
-
 if (isset($rutas[1]) && $rutas[1] == "new") :
     cargarComponente('breadcrumb', '', 'Nueva inscripción');
-?>
+    ?>
     <div class="container">
 
         <form method="post" id="formInscribirAlumno">
@@ -22,14 +21,16 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                         <select name="ins_paquete" class="form-control select2" id="pqt_alumno" required>
                             <?php
                             if (isset($rutas[1])) :
-                                $pqt = PaquetesModelo::mdlMostrarPaquetes($rutas[1]); ?>
+                                $pqt = PaquetesModelo::mdlMostrarPaquetes($rutas[1]);
+                                ?>
                                 <option value="<?php echo $pqt['pqt_sku'] ?>"><?php echo $pqt['pqt_nombre'] ?></option>
                             <?php else : ?>
                                 <option value="">Seleccione un paquete</option>
-                            <?php endif;
+                            <?php
+                            endif;
                             $paquetes = PaquetesModelo::mdlMostrarPaquetes();
                             foreach ($paquetes as $key => $pqt) :
-                            ?>
+                                ?>
                                 <option value="<?php echo $pqt['pqt_sku'] ?>"><?php echo $pqt['pqt_nombre'] ?></option>
                             <?php endforeach; ?>
                         </select>
@@ -127,11 +128,10 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
         </form>
     </div>
 
-<?php elseif (isset($rutas[1]) && $rutas[1] == "fichas" && $rutas[2] != "") :
+    <?php
+elseif (isset($rutas[1]) && $rutas[1] == "fichas" && $rutas[2] != "") :
     cargarComponente('breadcrumb', '', 'Ficha de inscripción');
-
-
-?>
+    ?>
 
     <div class="container">
 
@@ -141,9 +141,92 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
         </iframe>
 
     </div>
-<?php else :
+    <?php
+elseif (isset($rutas[1]) && $rutas[1] == "canceladas") :
+    cargarComponente('breadcrumb', '', 'Inscripciones canceladas');
+    ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 table-responsive ">
+                <table class="table tablas table-bordered tablaPagosAlumno table-striped table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th>Número de inscripción</th>
+                            <th>Matricula</th>
+                            <th>Alumno</th>
+                            <th>Paquete</th>
+                            <th>Usuario registro</th>
+                            <th>Fecha registro</th>
+                            <th>Adeudo <br> Total</th>
+                            <th>Total <br> Pagado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                        $inscripciones = InscripcionesModelo::mdlMostrarInscripcionesCanceladas();
+                        foreach ($inscripciones as $key => $fpg) :
+                            ?>
+                            <tr>
+                                <td><?php echo $fpg['fpg_id'] ?></td>
+                                <td><?php echo $fpg['usr_matricula'] ?></td>
+                                <td><?php echo $fpg['usr_nombre'] . ' ' . $fpg['usr_app'] . ' ' . $fpg['usr_apm'] ?></td>
+                                <td><?php echo $fpg['pqt_nombre'] ?></td>
+                                <td><?php echo $fpg['fpg_usuario_registro'] ?></td>
+                                <td><?php echo $fpg['fpg_fecha_registro'] ?></td>
+                                <td>
+                                    <?php
+                                    $datosFicha = PagosControlador::ctrMostrarDatosFichaPagoByFicha($fpg['fpg_id']);
+
+
+
+                                    $adeudo = 0;
+                                    $adeudo += $datosFicha['PPG_INSCRIPCION']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_EXAMEN']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_GUIA']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_INCORPORACION']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_CERTIFICADO']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_SEMANAL']['adeudo'];
+
+                                    $total = 0;
+                                    $total += $datosFicha['PPG_INSCRIPCION']['total'];
+                                    $total += $datosFicha['PPG_EXAMEN']['total'];
+                                    $total += $datosFicha['PPG_GUIA']['total'];
+                                    $total += $datosFicha['PPG_INCORPORACION']['total'];
+                                    $total += $datosFicha['PPG_CERTIFICADO']['total'];
+                                    $total += $datosFicha['PPG_SEMANAL']['total'];
+
+                                    $total = $total - $adeudo;
+
+                                    echo '$ <strong class="text-primary">' . number_format($adeudo, 2) . '</strong>';
+                                    ?>
+                                </td>
+                                <td>
+
+                                    <?php
+                                    echo '$ <strong class="text-primary">' . number_format($total, 2) . '</strong>';
+                                    ?>
+                                </td>
+                                <td style="width: 120px;">
+                                    <select class="form-control btnCambioEstadoInscripcion" fpg_id="<?= $fpg['fpg_id'] ?>" name="fpg_solicitud_cancelacion" id="fpg_solicitud_cancelacion">
+                                        <option value="1">Pendiente</option>
+                                        <option value="2">Aprobar</option>
+                                        <option value="3">Rechazar</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <?php
+else :
     cargarComponente('breadcrumb', '', 'Listar inscripciones');
-?>
+    ?>
     <div class="container">
         <div class="row">
             <div class="col-12 table-responsive ">
@@ -165,14 +248,13 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                     <tbody>
 
                         <?php
-
                         $inscripciones = InscripcionesModelo::mdlMostrarInscripciones();
                         foreach ($inscripciones as $key => $fpg) :
-                        ?>
+                            ?>
                             <tr>
                                 <td><?php echo $fpg['fpg_id'] ?></td>
                                 <td><?php echo $fpg['usr_matricula'] ?></td>
-                                <td><?php echo $fpg['usr_nombre'] . ' ' . $fpg['usr_app'] . ' ' . $fpg['usr_apm']  ?></td>
+                                <td><?php echo $fpg['usr_nombre'] . ' ' . $fpg['usr_app'] . ' ' . $fpg['usr_apm'] ?></td>
                                 <td><?php echo $fpg['pqt_nombre'] ?></td>
                                 <td><?php echo $fpg['fpg_usuario_registro'] ?></td>
                                 <td><?php echo $fpg['fpg_fecha_registro'] ?></td>
@@ -180,22 +262,22 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                     <?php
                                     $datosFicha = PagosControlador::ctrMostrarDatosFichaPagoByFicha($fpg['fpg_id']);
 
-                                   
+
 
                                     $adeudo = 0;
-                                    $adeudo +=  $datosFicha['PPG_INSCRIPCION']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_INSCRIPCION']['adeudo'];
                                     $adeudo += $datosFicha['PPG_EXAMEN']['adeudo'];
-                                    $adeudo +=  $datosFicha['PPG_GUIA']['adeudo'];
-                                    $adeudo +=  $datosFicha['PPG_INCORPORACION']['adeudo'];
-                                    $adeudo +=  $datosFicha['PPG_CERTIFICADO']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_GUIA']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_INCORPORACION']['adeudo'];
+                                    $adeudo += $datosFicha['PPG_CERTIFICADO']['adeudo'];
                                     $adeudo += $datosFicha['PPG_SEMANAL']['adeudo'];
 
                                     $total = 0;
-                                    $total +=  $datosFicha['PPG_INSCRIPCION']['total'];
+                                    $total += $datosFicha['PPG_INSCRIPCION']['total'];
                                     $total += $datosFicha['PPG_EXAMEN']['total'];
-                                    $total +=  $datosFicha['PPG_GUIA']['total'];
-                                    $total +=  $datosFicha['PPG_INCORPORACION']['total'];
-                                    $total +=  $datosFicha['PPG_CERTIFICADO']['total'];
+                                    $total += $datosFicha['PPG_GUIA']['total'];
+                                    $total += $datosFicha['PPG_INCORPORACION']['total'];
+                                    $total += $datosFicha['PPG_CERTIFICADO']['total'];
                                     $total += $datosFicha['PPG_SEMANAL']['total'];
 
                                     $total = $total - $adeudo;
@@ -204,11 +286,10 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                     ?>
                                 </td>
                                 <td>
-                                    
-                                <?php 
-                                
-                                echo '$ <strong class="text-primary">' . number_format($total, 2) . '</strong>';
-                                ?>
+
+                                    <?php
+                                    echo '$ <strong class="text-primary">' . number_format($total, 2) . '</strong>';
+                                    ?>
                                 </td>
                                 <td>
                                     <a href="<?php echo HTTP_HOST . 'alumno/' . $fpg['usr_id'] . '/kerdex-fichas' ?>" class="btn btn-dark">Ver</a>
@@ -219,7 +300,7 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                                         ?>
                                         <a href="<?php echo HTTP_HOST . 'pagos/new/' . $fpg['usr_matricula'] . '/' . $fpg['fpg_id'] ?>" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Abonar"><i class="fa fa-money" aria-hidden="true"></i></a>
                                         <!-- <?php //endif; 
-                                                ?> -->
+                                        ?> -->
                                         <a class="btn btn-info" href="<?php echo HTTP_HOST . 'inscripciones/fichas/' . $fpg['fpg_id'] ?> " data-toggle="tooltip" data-placement="top" title="Ver ficha de inscripcón"><i class=" fa fa-file-pdf-o"></i></a>
                                         <button type="button" class="btn btn-danger btnCancelarInscripcion" fpg_id="<?= $fpg['fpg_id'] ?>" data-toggle="tooltip" data-placement="top" title="Cancelar inscripcón"><i class="fa fa-times"></i></button>
                                     </div>
@@ -252,27 +333,25 @@ if (isset($rutas[1]) && $rutas[1] == "new") :
                         <div class="row">
                             <div class="col-md-3 col-12">
                                 <div class="form-group">
-                                  <label for="usr_id_sucursal">Sucursal</label>
-                                  <select class="form-control" name="usr_id_sucursal" id="usr_id_sucursal">
-                                  <option value="<?php echo $_SESSION['session_suc']['scl_id']  ?>"><?php echo $_SESSION['session_suc']['scl_nombre'] ?></option>
-                                    <?php  
+                                    <label for="usr_id_sucursal">Sucursal</label>
+                                    <select class="form-control" name="usr_id_sucursal" id="usr_id_sucursal">
+                                        <option value="<?php echo $_SESSION['session_suc']['scl_id'] ?>"><?php echo $_SESSION['session_suc']['scl_nombre'] ?></option>
+                                        <?php
                                         $sucursales = SucursalesModelo::mdlMostrarSucursales();
                                         foreach ($sucursales as $key => $scl):
-                                    ?>
+                                            ?>
 
-                                    <option value="<?php echo $scl['scl_id'] ?>"><?php echo $scl['scl_nombre'] ?></option>
+                                            <option value="<?php echo $scl['scl_id'] ?>"><?php echo $scl['scl_nombre'] ?></option>
 
-                                    <?php endforeach; ?>
-                                  </select>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="col-md-3 col-12">
                                 <div class="form-group">
                                     <?php
-
                                     $usr_id = UsuariosControlador::ctrConsultarSiguienteUsuario('');
-
                                     ?>
                                     <label for="usr_matricula">Matricula</label>
                                     <input type="text" name="usr_matricula" id="usr_matricula" class="form-control" placeholder="Escribe el nombre completo del alumno" value="<?php echo $usr_id ?>" readonly required>
