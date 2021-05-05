@@ -145,7 +145,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "fichas" && $rutas[2] != "") :
 elseif (isset($rutas[1]) && $rutas[1] == "canceladas") :
     cargarComponente('breadcrumb', '', 'Inscripciones canceladas');
     ?>
-    <div class="container">
+    <div class="containeir">
         <div class="row">
             <div class="col-12 table-responsive ">
                 <table class="table tablas table-bordered tablaPagosAlumno table-striped table-hover text-center">
@@ -227,7 +227,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "canceladas") :
 else :
     cargarComponente('breadcrumb', '', 'Listar inscripciones');
     ?>
-    <div class="container">
+    <div class="containeir">
         <div class="row">
             <div class="col-12 table-responsive ">
                 <table class="table tablas table-bordered tablaPagosAlumno table-striped table-hover text-center">

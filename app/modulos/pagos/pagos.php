@@ -12,14 +12,12 @@ if (isset($rutas[2]) && isset($rutas[3])) :
         AppControlador::msj('warning', '¡Ups!', 'Esta caja esta registrada para que operé en otra sucursal, para continuar cierra caja en ' . $copn['scl_nombre'] . '', HTTP_HOST);
         return;
     }
-
-
-?>
+    ?>
     <script>
         pagina = "pagos/new"
     </script>
 
-    <div class="container">
+    <div class="containeir">
         <div class="row">
             <div class="col-12">
                 <strong class="float-right" style="font-size: 18px;"><?php echo $copn['cja_nombre'] ?></strong>
@@ -387,10 +385,8 @@ if (isset($rutas[2]) && isset($rutas[3])) :
                     </div>
                 </div>
                 <?php
-
                 // $crearAbono = new PagosControlador();
                 // $crearAbono->ctrAgregarPagos();
-
                 ?>
             </form>
             <div class="row d-none">
@@ -470,10 +466,7 @@ if (isset($rutas[2]) && isset($rutas[3])) :
             </div>
         </fieldset>
         <?php
-
         $fichaPago = PagosControlador::ctrMostrarDatosFichaPago3($rutas[3]);
-
-
         ?>
     </div>
 
@@ -556,10 +549,9 @@ if (isset($rutas[2]) && isset($rutas[3])) :
             </div>
         </div>
     </div>
-<?php
-elseif (isset($rutas[1]) && $rutas[1] == "ficha" && isset($rutas[2])) :
+<?php elseif (isset($rutas[1]) && $rutas[1] == "ficha" && isset($rutas[2])) :
     cargarComponente('breadcrumb', '', 'Ficha de pago');
-?>
+    ?>
 
     <div class="container">
 
@@ -568,11 +560,11 @@ elseif (isset($rutas[1]) && $rutas[1] == "ficha" && isset($rutas[2])) :
     </div>
 
 
-<?php
+    <?php
 elseif (isset($rutas[1]) && $rutas[1] == "new") :
     cargarComponente('breadcrumb', '', 'Pagos');
-?>
-    <div class="container">
+    ?>
+    <div class="containeir">
         <form id="formBuscarAlumnoPagos" method="post">
             <div class="row">
 
@@ -590,7 +582,8 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 <option value="<?php echo $_SESSION['session_suc']['scl_sub_fijo'] ?>"><?php echo $_SESSION['session_suc']['scl_sub_fijo'] ?></option>
                                 <?php
                                 $sucursales = SucursalesModelo::mdlMostrarSucursales();
-                                foreach ($sucursales as $key => $scl) : ?>
+                                foreach ($sucursales as $key => $scl) :
+                                    ?>
                                     <option value="<?php echo $scl['scl_sub_fijo'] ?>"><?php echo $scl['scl_sub_fijo'] ?></option>
                                 <?php endforeach; ?>
                             </select>
@@ -838,10 +831,8 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                 </div>
             </div>
             <?php
-
             // $crearAbono = new PagosControlador();
             // $crearAbono->ctrAgregarPagos();
-
             ?>
         </form>
         <div class="row d-none">
@@ -921,7 +912,8 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
         </div>
     </div>
 
-    <?php elseif (isset($rutas[1]) && $rutas[1] == "fichas" && isset($rutas[2])) :
+    <?php
+elseif (isset($rutas[1]) && $rutas[1] == "fichas" && isset($rutas[2])) :
     // cargarComponente('breadcrumb', '', 'Ficha #' . $rutas[2]);
     cargarComponente('breadcrumb_nivel_1', '', 'Ficha #' . $rutas[2], array(['ruta' => 'pagos/fichas', 'label' => 'Listar Fichas']));
 
@@ -934,7 +926,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
 
         $alumno = UsuariosModelo::mdlMostrarUsuarios('', '', true, $vfch['vfch_alumno']);
         $abonos = PagosModelo::mdlMostrarCarritoAlumno($vfch['vfch_ficha_pago'], $vfch['vfch_id']);
-    ?>
+        ?>
 
         <div class="container">
             <div class="row">
@@ -948,7 +940,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                             </tr>
                             <tr style="background-color: #A7D3F3;">
                                 <th><?php echo $alumno['usr_matricula'] ?></th>
-                                <th><?php echo $alumno['usr_nombre'] . ' ' . $alumno['usr_app'] . ' ' . $alumno['usr_apm']  ?></th>
+                                <th><?php echo $alumno['usr_nombre'] . ' ' . $alumno['usr_app'] . ' ' . $alumno['usr_apm'] ?></th>
 
                                 <th style="text-align: right;">
 
@@ -973,12 +965,12 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                             </tr>
                         </thead>
                         <tbody <tr style="background-color: #A7D3F3;">
-                            <td><?php echo $vfch['vfch_sub_monto'] ?></td>
-                            <td><?php echo $vfch['vfch_monto'] ?></td>
-                            <td><?php echo $vfch['vfch_mp'] ?></td>
-                            <td><?php echo $vfch['vfch_referencia'] ?></td>
-                            <td><?php echo $vfch['vfch_fecha_registro'] ?></td>
-                            <td><?php echo $vfch['vfch_usuario_registro'] ?></td>
+                                <td><?php echo $vfch['vfch_sub_monto'] ?></td>
+                                <td><?php echo $vfch['vfch_monto'] ?></td>
+                                <td><?php echo $vfch['vfch_mp'] ?></td>
+                                <td><?php echo $vfch['vfch_referencia'] ?></td>
+                                <td><?php echo $vfch['vfch_fecha_registro'] ?></td>
+                                <td><?php echo $vfch['vfch_usuario_registro'] ?></td>
                             </tr>
                         </tbody>
 
@@ -1005,12 +997,9 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                             </thead>
                             <tbody>
                                 <?php
-
-
                                 //preArray($pagos);
                                 foreach ($abonos as $key => $ppg) :
-
-                                ?>
+                                    ?>
                                     <tr>
 
 
@@ -1041,17 +1030,18 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
 
 
 
-    <?php else :
+        <?php
+    else :
         echo '<script>window.location.href="' . HTTP_HOST . 'pagos/fichas"</script>';
     endif;
-
     ?>
 
 
-<?php elseif (isset($rutas[1]) && $rutas[1] == "fichas") :
+    <?php
+elseif (isset($rutas[1]) && $rutas[1] == "fichas") :
     cargarComponente('breadcrumb', '', 'Fichas de pago');
-?>
-    <div class="container">
+    ?>
+    <div class="containeir">
         <div class="row">
             <!-- <button type="button" class="btn btn-dark" id="btnImprimir" >Imprimir</button> -->
             <div class="col-12 table-responsive table-bordered tablaPagosAlumno table-striped dt-responsive table-hover" id="tablaPagosAlumno">
@@ -1075,12 +1065,10 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                     </thead>
                     <tbody>
                         <?php
-
-                        $fichas_venta =  PagosModelo::mdlConsultarFichas();
+                        $fichas_venta = PagosModelo::mdlConsultarFichas();
                         //preArray($pagos);
                         foreach ($fichas_venta as $key => $ppg) :
-
-                        ?>
+                            ?>
 
                             <?php
                             $vfch_class = "";
@@ -1092,15 +1080,15 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 $vfch_button = "<strong class='mt-1'>Solicitud rechazada</strong>";
                             } else {
                                 if ($_SESSION['session_usr']['usr_rol'] == 'Administrador') {
-                                    $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago mt-1" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
+                                    $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
                                 } elseif ($_SESSION['session_usr']['usr_caja'] == $ppg['vfch_id_corte']) {
-                                    $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago mt-1" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
+                                    $vfch_button = ' <button class="btn btn-danger btnCanelarFichaPago" vfch_id="' . $ppg['vfch_id'] . '">Cancelar</button>';
                                 } else {
                                     $vfch_button = '';
                                 }
                             }
                             ?>
-                            <tr class="<?php echo $vfch_class  ?>">
+                            <tr class="<?php echo $vfch_class ?>">
 
                                 <td>
                                     <a href="<?php echo HTTP_HOST . 'pagos/fichas/' . $ppg['vfch_id'] ?>" class="btn btn-dark"><?php echo $ppg['vfch_id'] ?></a>
@@ -1116,11 +1104,10 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 <td><?php echo $ppg['vfch_usuario_registro'] ?></td>
                                 <td><?php echo $ppg['vfch_estado'] ?></td>
                                 <td>
-
-                                    <a class="btn btn-info" href="<?php echo HTTP_HOST . 'pagos/ficha/' . $ppg['vfch_id'] ?> " data-toggle="tooltip" data-placement="top" title="Ver ficha de pago" "><i class=" fa fa-file-pdf-o"></i></a>
-
-
-                                    <?php echo $vfch_button ?>
+                                    <div class="btn-group">
+                                        <a class="btn btn-info" href="<?php echo HTTP_HOST . 'pagos/ficha/' . $ppg['vfch_id'] ?> " data-toggle="tooltip" data-placement="top" title="Ver ficha de pago" "><i class=" fa fa-file-pdf-o"></i></a>
+                                        <?php echo $vfch_button ?>
+                                    </div>
                                 </td>
 
 
@@ -1134,7 +1121,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
 
 <?php elseif (isset($rutas[1]) && $rutas[1] == "fichas-canceladas") :
     cargarComponente('breadcrumb', '', 'Fichas de pago canceladas');
-?>
+    ?>
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -1173,12 +1160,10 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                     </thead>
                     <tbody>
                         <?php
-
-                        $fichas_venta =  PagosModelo::mdlConsultarFichas("", "", 1);
+                        $fichas_venta = PagosModelo::mdlConsultarFichas("", "", 1);
                         //preArray($pagos);
                         foreach ($fichas_venta as $key => $ppg) :
-
-                        ?>
+                            ?>
 
                             <?php
                             $vfch_class = "";
@@ -1193,7 +1178,7 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                                 $vfch_button = "<strong class='mt-1'>Solicitud de cancelación en espera de aprobación</strong>";
                             }
                             ?>
-                            <tr class="<?php echo $vfch_class  ?>">
+                            <tr class="<?php echo $vfch_class ?>">
 
                                 <td>
                                     <a href="<?php echo HTTP_HOST . 'pagos/fichas/' . $ppg['vfch_id'] ?>" class="btn btn-dark"><?php echo $ppg['vfch_id'] ?></a>
@@ -1233,9 +1218,10 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
 
 
 
-<?php elseif (isset($rutas[1]) && $rutas[1] == "historial") :
+    <?php
+elseif (isset($rutas[1]) && $rutas[1] == "historial") :
     cargarComponente('breadcrumb', '', 'Historial de pagos');
-?>
+    ?>
     <div class="container">
         <div class="row">
             <div class="col-12 table-responsive table-bordered tablaPagosAlumno table-striped dt-responsive table-hover">
@@ -1259,12 +1245,10 @@ elseif (isset($rutas[1]) && $rutas[1] == "new") :
                     </thead>
                     <tbody>
                         <?php
-
-                        $pagos =  PagosModelo::mdlMostrarPagos();
+                        $pagos = PagosModelo::mdlMostrarPagos();
                         //preArray($pagos);
                         foreach ($pagos as $key => $ppg) :
-
-                        ?>
+                            ?>
                             <tr>
 
                                 <td><?php echo $ppg['ppg_id'] ?></td>

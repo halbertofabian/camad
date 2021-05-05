@@ -195,9 +195,9 @@ elseif (isset($rutas[1]) && $rutas[1] == "update") :
 else :
     cargarComponente('breadcrumb', '', 'Listar cupones');
     ?>
-    <div class="container">
+    <div class="containeir">
         <div class="row">
-            <div class="col-12 table-responsive ">
+            <div class="col">
                 <table class="table tablas table-bordered tablaPagosAlumno table-striped table-hover">
                     <thead>
                         <tr>
@@ -239,7 +239,7 @@ else :
                                 <td><?php echo $cps['cps_fecha_registro'] ?></td>
                                 <td>
                                     <div class="btn-group">
-                                        <a class="btn btn-success" href="<?= HTTP_HOST . 'cupones/update/' . $cps['cps_codigo'] ?>" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i> Editar</a>
+                                        <a class="btn btn-warning" href="<?= HTTP_HOST . 'cupones/update/' . $cps['cps_codigo'] ?>" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fa fa-edit"></i> Editar</a>
                                         <button type="button" class="btn btn-danger btnElimimarCupon" cps_codigo="<?= $cps['cps_codigo'] ?>"><i class="fa fa-trash"></i> Eliminar</button>
                                     </div>
                                 </td>

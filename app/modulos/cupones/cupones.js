@@ -114,7 +114,7 @@ $("#formActualizarCupones").on("submit", function (e) {
 
 
 
-$(".btnElimimarCupon").on("click", function () {
+$(".tablas tbody").on("click",'button.btnElimimarCupon', function () {
 
     var cps_codigo = $(this).attr("cps_codigo");
     swal({

@@ -71,8 +71,8 @@ $("#formInscribirAlumno").on("submit", function (e) {
 
 })
 
-$(".btnCancelarInscripcion").on("click", function () {
-
+$(".tablas tbody").on("click","button.btnCancelarInscripcion", function () {
+   
     var fpg_id = $(this).attr("fpg_id");
     swal({
         title: "¿Seguro de querer cancelar está inscripción?",

@@ -2,7 +2,7 @@
 if (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "new") :
     cargarComponente('breadcrumb_nivel_1', '', 'Nuevo paquete', array(['ruta' => 'paquetes', 'label' => 'Listar paquetes']));
 ?>
-    <div class="container">
+    <div class="containeir">
         <form method="post">
             <div class="row">
                 <div class="col-md-4 col-12 form-group">
@@ -150,7 +150,7 @@ elseif (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "update") :
     $paquetes = PaquetesModelo::mdlMostrarPaquetes($rutas[2]);
 
 ?>
-    <div class="container">
+    <div class="containeir">
         <form method="post">
             <div class="row">
                 <div class="col-md-4 col-12 form-group">
@@ -307,7 +307,7 @@ elseif (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "update") :
 <?php else :
     cargarComponente('breadcrumb', '', 'Lista de paquetes');
 ?>
-    <div class="container">
+    <div class="containeir">
         <div class="row">
             <?php
             $paquetes = PaquetesModelo::mdlMostrarPaquetes();

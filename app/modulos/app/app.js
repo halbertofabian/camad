@@ -65,10 +65,10 @@ function stopLoadButton(label) {
 
 $(document).ready(function () {
     
-
+$(".tablas").css('width', "100%");
 $(".tablas").DataTable({
-
-
+    responsive: true,
+    "scrollX": true,
     "ordering": true,
 
     "language": {

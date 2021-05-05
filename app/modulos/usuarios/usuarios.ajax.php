@@ -24,6 +24,7 @@ require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/usuarios/usuarios.controlador.php';
 
 require_once DOCUMENT_ROOT . 'app/modulos/sucursales/sucursales.modelo.php';
+require_once DOCUMENT_ROOT . 'app/modulos/inscripciones/inscripciones.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/sucursales/sucursales.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
 require_once DOCUMENT_ROOT . 'app/lib/PHPExcel/Classes/PHPExcel/IOFactory.php';
@@ -36,6 +37,7 @@ class UsuariosAjax
     public $usr_id;
     public $usr_rol;
     public $usr_searh;
+    public $fpg_id;
     public function ajaxEliminarUsuario()
     {
         $eliminarVenta = UsuariosControlador::ctrEliminarUsuario($this->usr_id);
@@ -77,6 +79,12 @@ class UsuariosAjax
         $respuesta = UsuariosControlador::ctrAgregarUsuariosAjax();
         echo json_encode($respuesta, true);
     }
+    public function ajaxEliminarInscripcion()
+    {
+        $eliminarInscripcion = InscripcionesModelo::mdlSolicitudCancelacion($_POST);
+        preArray($eliminarInscripcion);
+        echo json_encode($eliminarInscripcion);
+    }
 }
 if (isset($_POST['btnEliminarUsuario'])) {
     $eliminarUsuario = new UsuariosAjax();
@@ -114,4 +122,8 @@ if (isset($_POST['btnBuscarAlumno'])) {
 if (isset($_POST['btnGuardarUsuario'])) {
     $agregarUsuario = new UsuariosAjax();
     $agregarUsuario->ajaxAgreagarUsuarios();
+}
+if (isset($_POST['btnEliminarInscripcion'])) {
+    $eliminarInscripcion = new UsuariosAjax();
+    $eliminarInscripcion->ajaxEliminarInscripcion();
 }
