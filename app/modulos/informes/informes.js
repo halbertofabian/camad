@@ -152,8 +152,8 @@ function cargarInforme2(datos) {
                                 <td>${ifs.fpg_fecha_registro}</td>
                                 <td>${ifs.usr_usuario_registro}</td>
                                 <td>${ifs.ppg_usuario_registro}</td>
-                                <td>${ifs.ppg_adeudo}</td>
-                                <td>${res.adeudos[count]}</td>
+                                <td>$ ${$.number(ifs.ppg_adeudo, 2)}</td>
+                                <td>$ ${res.adeudos[count]}</td>
                                 
                             </tr>
 
