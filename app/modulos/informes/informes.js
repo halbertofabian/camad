@@ -156,7 +156,7 @@ function cargarInforme2(datos) {
                                 <td>$ ${$.number(ifs.ppg_total, 2)}</td>
 
                                 <td>$ ${$.number(ifs.ppg_adeudo, 2)}</td>
-                                <td>$ ${res.adeudos[count]}</td>
+                                <td><a href="${urlApp+'alumno/'+ifs.usr_id+'/kerdex-fichas'}" target="_blank">$ ${res.adeudos[count]}</a></td>
                                 
                             </tr>
 

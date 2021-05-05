@@ -40,7 +40,7 @@ class InformesModelo
         try {
 
             //            if ($ifs['fpg_usuario_registro'] != "") {
-            $sql = "SELECT fpg.fpg_id, usr.usr_matricula, usr.usr_nombre, usr.usr_app, usr.usr_apm, pqt.pqt_nombre, fpg.fpg_fecha_registro, usr.usr_usuario_registro, ppg.ppg_usuario_registro, ppg.ppg_adeudo, ppg.ppg_total
+            $sql = "SELECT fpg.fpg_id, usr.usr_id, usr.usr_matricula, usr.usr_nombre, usr.usr_app, usr.usr_apm, pqt.pqt_nombre, fpg.fpg_fecha_registro, usr.usr_usuario_registro, ppg.ppg_usuario_registro, ppg.ppg_adeudo, ppg.ppg_total
                 FROM tbl_paquetes_pagos_ppg as ppg JOIN tbl_ficha_pago_fpg as fpg ON ppg.ppg_ficha_pago = fpg.fpg_id
                 JOIN tbl_usuarios_usr as usr ON usr.usr_id = fpg.fpg_alumno
                 JOIN tbl_paquete_pqt as pqt ON fpg.fpg_paquete = pqt.pqt_sku

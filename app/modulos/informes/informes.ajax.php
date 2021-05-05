@@ -35,10 +35,12 @@ class InformesAjax {
     public function ajaxInform_2() {
         $res = InformesModelo::mdlInforme_2($_POST);
         $adeudoData = array();
-            $adeudo = 0;
+        
         foreach ($res as $ads) {
-
+            
             $adeudos = PagosControlador::ctrMostrarDatosFichaPagoByFicha($ads['fpg_id']);
+        
+            $adeudo = 0;
             $adeudo += $adeudos['PPG_INSCRIPCION']['adeudo'];
             $adeudo += $adeudos['PPG_EXAMEN']['adeudo'];
             $adeudo += $adeudos['PPG_GUIA']['adeudo'];
@@ -46,6 +48,7 @@ class InformesAjax {
             $adeudo += $adeudos['PPG_CERTIFICADO']['adeudo'];
             $adeudo += $adeudos['PPG_SEMANAL']['adeudo'];
             array_push($adeudoData, number_format($adeudo, 2));
+            
         }
         
         $array = array('data' => $res, 'adeudos' => $adeudoData);
