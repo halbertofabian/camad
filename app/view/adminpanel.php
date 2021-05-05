@@ -12,7 +12,7 @@ if (isset($_POST['btnBuscarByCorteCaja'])) {
 }
 ?>
 
-<div class="container">
+<div class="containeir">
     <form method="post" action="#id_corte">
         <div class="row">
 

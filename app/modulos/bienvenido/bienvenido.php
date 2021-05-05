@@ -13,7 +13,7 @@ elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador"  &&  $_SESSION['s
 
 
 ?>
-    <div class="container">
+    <div class="containeir">
         <h4>Hola <strong class="text-primary"><?php echo $_SESSION['session_usr']['usr_nombre'] ?></strong> bienvenido(a) al sistema</h4>
 
         <?php if ($_SESSION['session_usr']['usr_caja'] == 0) : ?>
@@ -41,7 +41,7 @@ elseif ($_SESSION['session_usr']['usr_rol'] != "Administrador"  &&  $_SESSION['s
     </div>
 
 <?php else : ?>
-    <div class="container">
+    <div class="containeir">
         <h4>Hola <strong class="text-primary"><?php echo $_SESSION['session_usr']['usr_nombre'] . ' ' . $_SESSION['session_usr']['usr_app']  ?></strong> bienvenido(a) al sistema</h4>
         <div class="row">
             <div class="col-12 col-md-4">
