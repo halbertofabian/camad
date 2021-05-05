@@ -45,7 +45,7 @@ class InformesModelo
                 JOIN tbl_usuarios_usr as usr ON usr.usr_id = fpg.fpg_alumno
                 JOIN tbl_paquete_pqt as pqt ON fpg.fpg_paquete = pqt.pqt_sku
                 WHERE ppg.ppg_concepto = 'PPG_INSCRIPCION' AND ppg.ppg_fecha_registro 
-                BETWEEN ? AND ? AND ppg.ppg_estado_pagado = 'PAGADO' AND ppg_id_sucursal = ? ;";
+                BETWEEN ? AND ? AND ppg.ppg_estado_pagado = 'PAGADO' AND ppg_adeudo = 0 AND ppg_id_sucursal = ? ;";
             $con = Conexion::conectar();
             $pps = $con->prepare($sql);
             $pps->bindValue(1, $ifs['fpg_fecha_registro_inicio']);

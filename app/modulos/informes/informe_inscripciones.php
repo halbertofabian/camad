@@ -24,7 +24,7 @@
                                 <label for="ppg_id_sucursal">Sucursal</label>
                                 <select class="form-control" name="ppg_id_sucursal" id="ppg_id_sucursal">
                                     <option value="<?= $_SESSION['session_suc']['scl_id'] ?>"><?= $_SESSION['session_suc']['scl_nombre'] ?></option>
-                                    <?php foreach (SucursalesModelo::mdlMostrarSucursales() as $scl): ?>
+                                    <?php foreach (SucursalesModelo::mdlMostrarSucursales() as $scl) : ?>
                                         <option value="<?= $scl['scl_id'] ?>"><?= $scl['scl_nombre'] ?></option>
                                     <?php endforeach; ?>
                                 </select>
@@ -52,16 +52,18 @@
         </div>
 
         <div class="card">
-            <div class="card-body">
-                <table class="table table-striped tablaInforme2">
+            <div class="card-body ">
+                <table class="table table-responsive dt-responsive table-striped tablaInforme2">
                     <thead>
                         <tr>
                             <th>Mátricula</th>
                             <th>Alumno</th>
                             <th>Paquete</th>
+                            <th>Ficha</th>
                             <th>Fecha de inscripción</th>
                             <th>Usuario Registró</th>
                             <th>Usuario Inscribió</th>
+                            <th>Total inscripción</th>
                             <th>Adeudo inscripción</th>
                             <th>Adeudo total</th>
                         </tr>

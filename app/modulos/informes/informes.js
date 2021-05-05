@@ -149,9 +149,12 @@ function cargarInforme2(datos) {
                                 <td>${ifs.usr_matricula}</td>
                                 <td>${ifs.usr_nombre + " " + ifs.usr_app + " " + ifs.usr_apm}</td>
                                 <td>${ifs.pqt_nombre}</td>
+                                <td> <a href="${urlApp+'inscripciones/fichas/'+ifs.fpg_id}" target="_blank">${ifs.fpg_id}</a>  </td>
                                 <td>${ifs.fpg_fecha_registro}</td>
                                 <td>${ifs.usr_usuario_registro}</td>
                                 <td>${ifs.ppg_usuario_registro}</td>
+                                <td>$ ${$.number(ifs.ppg_total, 2)}</td>
+
                                 <td>$ ${$.number(ifs.ppg_adeudo, 2)}</td>
                                 <td>$ ${res.adeudos[count]}</td>
                                 
