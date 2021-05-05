@@ -111,10 +111,12 @@ function cargarInforme2(datos) {
 
     fecha_inicial = $('#fpg_fecha_registro_inicio').val() + 'T00:00';
     fecha_final = $('#fpg_fecha_registro_fin').val() + 'T23:59';
+    ppg_id_sucursal = $('#ppg_id_sucursal').val();
 
     datos.append("btnFiltrarInforme_2", true);
     datos.append("fpg_fecha_registro_inicio", fecha_inicial);
     datos.append("fpg_fecha_registro_fin", fecha_final);
+    datos.append("ppg_id_sucursal", ppg_id_sucursal);
 
     $.ajax({
 
@@ -133,28 +135,30 @@ function cargarInforme2(datos) {
             console.log(res)
 
             var html = "";
-
+            var count = 0;
 
             $("#text-cert").html("")
+            console.log(res.adeudos);
             if (res != null) {
-                res.forEach(ifs => {
+                res.data.forEach(ifs => {
 
 
                     html +=
                             `
                             <tr>
+                                <td>${ifs.usr_matricula}</td>
                                 <td>${ifs.usr_nombre + " " + ifs.usr_app + " " + ifs.usr_apm}</td>
                                 <td>${ifs.pqt_nombre}</td>
                                 <td>${ifs.fpg_fecha_registro}</td>
                                 <td>${ifs.usr_usuario_registro}</td>
                                 <td>${ifs.ppg_usuario_registro}</td>
                                 <td>${ifs.ppg_adeudo}</td>
-                                <td></td>
+                                <td>${res.adeudos[count]}</td>
                                 
                             </tr>
 
                         `;
-
+                    count++;
                 });
 
                 $("#tbodyInforme_2").html(html)

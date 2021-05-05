@@ -18,26 +18,41 @@ require_once DOCUMENT_ROOT . 'app/modulos/pagos/pagos.modelo.php';
 require_once DOCUMENT_ROOT . 'app/modulos/informes/informes.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/pagos/pagos.controlador.php';
 require_once DOCUMENT_ROOT . 'app/modulos/app/app.controlador.php';
-class InformesAjax
-{
-    public function ajaxInform_1()
-    {
+
+class InformesAjax {
+
+    public function ajaxInform_1() {
         $res = InformesControlador::ctrInforme_1(array(
-            'ifs_sucursal' => $_SESSION['session_suc']['scl_id'],
-            'ifs_fecha_inicio' => $_POST['ifs_fecha_inicio'],
-            'ifs_fecha_fin' => $_POST['ifs_fecha_fin'],
-            'ifs_concepto' => $_POST['ifs_concepto'],
+                    'ifs_sucursal' => $_SESSION['session_suc']['scl_id'],
+                    'ifs_fecha_inicio' => $_POST['ifs_fecha_inicio'],
+                    'ifs_fecha_fin' => $_POST['ifs_fecha_fin'],
+                    'ifs_concepto' => $_POST['ifs_concepto'],
         ));
 
         echo json_encode($res, true);
     }
 
-    public function ajaxInform_2()
-    {
+    public function ajaxInform_2() {
         $res = InformesModelo::mdlInforme_2($_POST);
+        $adeudoData = array();
+            $adeudo = 0;
+        foreach ($res as $ads) {
 
-        echo json_encode($res, true);
+            $adeudos = PagosControlador::ctrMostrarDatosFichaPagoByFicha($ads['fpg_id']);
+            $adeudo += $adeudos['PPG_INSCRIPCION']['adeudo'];
+            $adeudo += $adeudos['PPG_EXAMEN']['adeudo'];
+            $adeudo += $adeudos['PPG_GUIA']['adeudo'];
+            $adeudo += $adeudos['PPG_INCORPORACION']['adeudo'];
+            $adeudo += $adeudos['PPG_CERTIFICADO']['adeudo'];
+            $adeudo += $adeudos['PPG_SEMANAL']['adeudo'];
+            array_push($adeudoData, number_format($adeudo, 2));
+        }
+        
+        $array = array('data' => $res, 'adeudos' => $adeudoData);
+
+        echo json_encode($array, true);
     }
+
 }
 
 if (isset($_POST['btnFiltrarInforme_1'])) {
