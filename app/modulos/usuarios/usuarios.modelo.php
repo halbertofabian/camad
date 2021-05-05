@@ -216,7 +216,7 @@ class UsuariosModelo
                 $pps->execute();
                 return $pps->fetch();
             } else if ($usr_id == "" && $usr_rol != "") {
-                $sql = "SELECT usr.*,scl.scl_nombre FROM tbl_usuarios_usr usr JOIN tbl_sucursal_scl scl ON usr.usr_id_sucursal = scl.scl_id  WHERE usr_rol = ? AND usr_id_sucursal = ?   ORDER BY usr_id DESC ";
+                $sql = "SELECT usr.*,scl.scl_nombre, fpg.fpg_id FROM tbl_usuarios_usr usr JOIN tbl_sucursal_scl scl ON usr.usr_id_sucursal = scl.scl_id JOIN tbl_ficha_pago_fpg as fpg ON fpg.fpg_alumno = usr.usr_id WHERE usr_rol = ? AND usr_id_sucursal = ?   ORDER BY usr_id DESC ";
                 $con = Conexion::conectar();
                 $pps = $con->prepare($sql);
                 $pps->bindValue(1, $usr_rol);
