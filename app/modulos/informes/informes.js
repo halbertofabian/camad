@@ -149,7 +149,7 @@ function cargarInforme2(datos) {
                                 <td>${ifs.usr_usuario_registro}</td>
                                 <td>${ifs.ppg_usuario_registro}</td>
                                 <td>${ifs.ppg_adeudo}</td>
-                                <td>${ifs.ppg_total}</td>
+                                <td></td>
                                 
                             </tr>
 

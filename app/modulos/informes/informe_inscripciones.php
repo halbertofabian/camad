@@ -1,4 +1,3 @@
-
 <div class="row">
 
     <div class="col-12">
@@ -51,8 +50,8 @@
                             <th>Fecha de inscripción</th>
                             <th>Usuario Registró</th>
                             <th>Usuario Inscribió</th>
-                            <th>Adeudo</th>
-                            <th>Total</th>
+                            <th>Adeudo inscripción</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="tbodyInforme_2">
