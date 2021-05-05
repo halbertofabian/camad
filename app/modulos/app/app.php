@@ -122,22 +122,22 @@
 
             <!-- END: Header-->
             <nav class="header-navbar navbar-expand-lg navbar navbar-with-menu navbar-fixed navbar-shadow navbar-brand-center">
-                <div class="navbar-header d-xl-block d-none">
-                    <ul class="nav navbar-nav flex-row">
-                        <li class="nav-item"><a class="navbar-brand" href="">
-                                <div class="brand-logo">
-                                    <img src="<?= ICON_APP ?>" width="35" alt="">
-                                    <?php
-                                    if (isset($_SESSION['session_suc']['scl_nombre'])) {
-                                        echo $_SESSION['session_suc']['scl_nombre'];
-                                    } else {
-                                        echo "";
-                                    }
-                                    ?>
-                                </div>
-                            </a></li>
-                    </ul>
-                </div>
+                <!--                <div class="navbar-header d-xl-block d-none">
+                                    <ul class="nav navbar-nav flex-row">
+                                        <li class="nav-item"><a class="navbar-brand" href="">
+                                                <div class="brand-logo">
+                                                    <img src="<?= ICON_APP ?>" width="35" alt="">
+                <?php
+                if (isset($_SESSION['session_suc']['scl_nombre'])) {
+                    echo $_SESSION['session_suc']['scl_nombre'];
+                } else {
+                    echo "";
+                }
+                ?>
+                                                </div>
+                                            </a></li>
+                                    </ul>
+                                </div>-->
                 <div class="navbar-wrapper">
                     <div class="navbar-container content">
                         <div class="navbar-collapse" id="navbar-mobile">
@@ -146,16 +146,24 @@
                                     <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon feather icon-menu"></i></a></li>
                                 </ul>
                                 <ul class="nav navbar-nav bookmark-icons">
-                                    <li class="nav-item d-none d-lg-block">
-                                        <a class="nav-link" href="<?= HTTP_HOST ?>">
-                                            <img src="<?= ICON_APP ?>" width="31" alt="">
-                                            <!-- <i class="ficon feather icon-check-square"></i> -->
+                                    <li class="nav-item">
+                                        <a class="navbar-brand" href="">
+                                            <div class="brand-logo d-none d-md-block">
+                                                <img src="<?= ICON_APP ?>" width="35" alt="">
+                                                <?php
+                                                if (isset($_SESSION['session_suc']['scl_nombre'])) {
+                                                    echo $_SESSION['session_suc']['scl_nombre'];
+                                                } else {
+                                                    echo "";
+                                                }
+                                                ?>
+                                            </div>
                                         </a>
                                     </li>
 
-                                        <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon feather icon-message-square"></i></a></li>
-                                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
-                                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calender.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon feather icon-calendar"></i></a></li> -->
+                                                <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon feather icon-message-square"></i></a></li>
+                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
+                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calender.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon feather icon-calendar"></i></a></li> -->
                                 </ul>
                                 <!-- <ul class="nav navbar-nav">
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"><i class="ficon feather icon-star warning"></i></a>
@@ -249,8 +257,8 @@
                                         <?php if ($_SESSION['session_usr']['usr_rol'] != "Alumno") : ?>
                                             <a class="dropdown-item" href="<?= HTTP_HOST . 'plantel' ?>"><i class="feather icon-grid"></i> Cambio de sucursal</a>
                                         <?php endif; ?>
-                                <!-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My -->
-                                <!-- Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a> -->
+                        <!-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My -->
+                        <!-- Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a> -->
                                         <!-- <div class="dropdown-divider"></div> -->
                                         <a class="dropdown-item" href="<?= HTTP_HOST . 'salir' ?>"><i class="feather icon-power"></i> Salir</a>
                                     </div>
