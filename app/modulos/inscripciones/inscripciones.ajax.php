@@ -37,6 +37,11 @@ class InscripcionesAjax {
         $res = InscripcionesControlador::ctrCambioEstadoSolicitud();
         echo json_encode($res, true);
     }
+    public function ajaxCambioEstadoCertificado()
+    {
+        $res = InscripcionesControlador::ctrCambioEstadoCertificado();
+        echo json_encode($res, true);
+    }
 
 }
 
@@ -52,4 +57,8 @@ if (isset($_POST['btnCancelarInscripcion'])) {
 if (isset($_POST['btnCambioEstadoInscripcion'])) {
     $cancelarInscripcion = new InscripcionesAjax();
     $cancelarInscripcion->ajaxCambioEstadoSolicitud();
+}
+if (isset($_POST['btnCambioEstadoCertificado'])) {
+    $cambiarEstadoCertificado = new InscripcionesAjax();
+    $cambiarEstadoCertificado->ajaxCambioEstadoCertificado();
 }

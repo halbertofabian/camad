@@ -127,13 +127,13 @@
                         <li class="nav-item"><a class="navbar-brand" href="">
                                 <div class="brand-logo">
                                     <img src="<?= ICON_APP ?>" width="35" alt="">
-    <?php
-    if (isset($_SESSION['session_suc']['scl_nombre'])) {
-        echo $_SESSION['session_suc']['scl_nombre'];
-    } else {
-        echo "";
-    }
-    ?>
+                                    <?php
+                                    if (isset($_SESSION['session_suc']['scl_nombre'])) {
+                                        echo $_SESSION['session_suc']['scl_nombre'];
+                                    } else {
+                                        echo "";
+                                    }
+                                    ?>
                                 </div>
                             </a></li>
                     </ul>
@@ -153,9 +153,9 @@
                                         </a>
                                     </li>
 
-                                    <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon feather icon-message-square"></i></a></li>
-                                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
-                                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calender.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon feather icon-calendar"></i></a></li> -->
+                                        <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon feather icon-message-square"></i></a></li>
+                                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
+                                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calender.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon feather icon-calendar"></i></a></li> -->
                                 </ul>
                                 <!-- <ul class="nav navbar-nav">
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"><i class="ficon feather icon-star warning"></i></a>
@@ -246,11 +246,11 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" href="<?= HTTP_HOST . 'mi-perfil' ?>"><i class="feather icon-user"></i> Editar perfil</a>
-    <?php if ($_SESSION['session_usr']['usr_rol'] != "Alumno") : ?>
+                                        <?php if ($_SESSION['session_usr']['usr_rol'] != "Alumno") : ?>
                                             <a class="dropdown-item" href="<?= HTTP_HOST . 'plantel' ?>"><i class="feather icon-grid"></i> Cambio de sucursal</a>
                                         <?php endif; ?>
-                                    <!-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My -->
-                                    <!-- Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a> -->
+                                <!-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My -->
+                                <!-- Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a> -->
                                         <!-- <div class="dropdown-divider"></div> -->
                                         <a class="dropdown-item" href="<?= HTTP_HOST . 'salir' ?>"><i class="feather icon-power"></i> Salir</a>
                                     </div>
@@ -260,18 +260,18 @@
                     </div>
                 </div>
             </nav>
-    <?php
-    if (isset($_GET['ruta']) && $_GET['ruta'] == "plantel" && $_SESSION['session_usr']['usr_rol'] != "Alumno") {
-        echo '<br><br><br><br><br>';
-        cargarPagina('plantel');
-        return;
-    }
-    if (!isset($_SESSION['session_suc'])) {
-        echo '<br><br><br><br><br>';
-        cargarPagina('plantel');
-        return;
-    }
-    ?>
+            <?php
+            if (isset($_GET['ruta']) && $_GET['ruta'] == "plantel" && $_SESSION['session_usr']['usr_rol'] != "Alumno") {
+                echo '<br><br><br><br><br>';
+                cargarPagina('plantel');
+                return;
+            }
+            if (!isset($_SESSION['session_suc'])) {
+                echo '<br><br><br><br><br>';
+                cargarPagina('plantel');
+                return;
+            }
+            ?>
             <ul class="main-search-list-defaultlist d-none">
                 <li class="d-flex align-items-center"><a class="pb-25" href="#">
                         <h6 class="text-primary mb-0">Files</h6>
@@ -356,7 +356,7 @@
                     </a></li>
             </ul>
 
-    <?php if ($_SESSION['session_usr']['usr_rol'] == "Asesor Educativo") : ?>
+            <?php if ($_SESSION['session_usr']['usr_rol'] == "Asesor Educativo") : ?>
                 <!-- BEGIN: Header-->
 
                 <div class="horizontal-menu-wrapper">
@@ -391,6 +391,8 @@
                                         </li>
                                         <li data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'inscripciones' ?>" data-toggle="dropdown" data-i18n="Inscripciones"><i class="feather icon-plus"></i>Listar Inscripciones</a>
                                         </li>
+                                        <li data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'inscripciones/porCertificar' ?>" data-toggle="dropdown" data-i18n="Por certificar"><i class="feather icon-plus"></i>Por certificar</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Pagos</span></a>
@@ -404,21 +406,21 @@
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'listar-gastos' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Gastos</a></li>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'ingresos' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Ingresos</a></li>
 
-        <?php
-        if ($_SESSION['session_usr']['usr_caja'] != 0) :
-            ?>
+                                <?php
+                                if ($_SESSION['session_usr']['usr_caja'] != 0) :
+                                    ?>
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'cerrar-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Cerrar caja</a></li>
 
-        <?php else : ?>
+                                <?php else : ?>
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'abrir-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Abrir caja</a></li>
 
-        <?php endif; ?>
+                                <?php endif; ?>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-    <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Responsable de sucursal") : ?>
+            <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Responsable de sucursal") : ?>
                 <!-- BEGIN: Header-->
 
                 <div class="horizontal-menu-wrapper">
@@ -472,6 +474,8 @@
                                     </li>
                                     <li data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'inscripciones/canceladas' ?>" data-toggle="dropdown" data-i18n="Inscripciones canceladas"><i class="feather icon-plus"></i>Inscripciones canceladas</a>
                                     </li>
+                                    <li data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'inscripciones/porCertificar' ?>" data-toggle="dropdown" data-i18n="Por certificar"><i class="feather icon-plus"></i>Por certificar</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Pagos</span></a>
@@ -518,15 +522,15 @@
 
                             </ul>
                             </li>
-        <?php
-        if ($_SESSION['session_usr']['usr_caja'] != 0) :
-            ?>
+                            <?php
+                            if ($_SESSION['session_usr']['usr_caja'] != 0) :
+                                ?>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'cerrar-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Cerrar caja</a></li>
 
-        <?php else : ?>
+                            <?php else : ?>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'abrir-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Abrir caja</a></li>
 
-        <?php endif; ?>
+                            <?php endif; ?>
                             </ul>
                         </div>
                     </div>
@@ -534,7 +538,7 @@
 
 
                 <!-- BEGIN: Main Menu-->
-    <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
+            <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Administrador") : ?>
                 <!-- BEGIN: Header-->
 
                 <div class="horizontal-menu-wrapper">
@@ -594,6 +598,8 @@
                                         </li>
                                         <li data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'inscripciones/canceladas' ?>" data-toggle="dropdown" data-i18n="Inscripciones canceladas"><i class="feather icon-plus"></i>Inscripciones canceladas</a>
                                         </li>
+                                        <li data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'inscripciones/porCertificar' ?>" data-toggle="dropdown" data-i18n="Por certificar"><i class="feather icon-plus"></i>Por certificar</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Pagos</span></a>
@@ -643,22 +649,22 @@
                                     </ul>
                                 </li>
 
-        <?php
-        if ($_SESSION['session_usr']['usr_caja'] != 0) :
-            ?>
+                                <?php
+                                if ($_SESSION['session_usr']['usr_caja'] != 0) :
+                                    ?>
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'cerrar-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Cerrar caja</a></li>
 
-        <?php else : ?>
+                                <?php else : ?>
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'abrir-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Abrir caja</a></li>
 
-        <?php endif; ?>
+                                <?php endif; ?>
 
                             </ul>
                         </div>
                     </div>
                 </div>
 
-    <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Auditor externo") : ?>
+            <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Auditor externo") : ?>
                 <!-- BEGIN: Header-->
 
                 <div class="horizontal-menu-wrapper">
@@ -717,6 +723,8 @@
                                         </li>
                                         <li data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'inscripciones/canceladas' ?>" data-toggle="dropdown" data-i18n="Inscripciones canceladas"><i class="feather icon-plus"></i>Inscripciones canceladas</a>
                                         </li>
+                                        <li data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'inscripciones/porCertificar' ?>" data-toggle="dropdown" data-i18n="Por certificar"><i class="feather icon-plus"></i>Por certificar</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Pagos</span></a>
@@ -764,21 +772,21 @@
                                     </ul>
                                 </li>
 
-        <?php
-        if ($_SESSION['session_usr']['usr_caja'] != 0) :
-            ?>
+                                <?php
+                                if ($_SESSION['session_usr']['usr_caja'] != 0) :
+                                    ?>
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'cerrar-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Cerrar caja</a></li>
 
-        <?php else : ?>
+                                <?php else : ?>
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'abrir-caja' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Abrir caja</a></li>
 
-        <?php endif; ?>
+                                <?php endif; ?>
 
                             </ul>
                         </div>
                     </div>
                 </div>
-    <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Alumno") : ?>
+            <?php elseif ($_SESSION['session_usr']['usr_rol'] == "Alumno") : ?>
                 <!-- BEGIN: Header-->
 
                 <div class="horizontal-menu-wrapper">
@@ -806,7 +814,7 @@
                         </div>
                     </div>
                 </div>
-    <?php endif; ?>
+            <?php endif; ?>
             <!-- END: Main Menu-->
 
             <!-- BEGIN: Content-->
@@ -818,48 +826,48 @@
                     </div>
                     <div class="content-body">
 
-    <?php
-    if (isset($_GET['ruta'])) {
-        //Traer la lista blanca de paginas adminitas
-        if ($_SESSION['session_usr']['usr_rol'] != "Alumno") {
-            $listaBlanca = AppControlador::obtenerListaBlanca();
-        }
-        if ($_SESSION['session_usr']['usr_rol'] == "Alumno") {
-            $listaBlanca = AppControlador::obtenerListaBlancaAlumno();
-        }
+                        <?php
+                        if (isset($_GET['ruta'])) {
+                            //Traer la lista blanca de paginas adminitas
+                            if ($_SESSION['session_usr']['usr_rol'] != "Alumno") {
+                                $listaBlanca = AppControlador::obtenerListaBlanca();
+                            }
+                            if ($_SESSION['session_usr']['usr_rol'] == "Alumno") {
+                                $listaBlanca = AppControlador::obtenerListaBlancaAlumno();
+                            }
 
 
 
-        //Guardad en la variable la ruta que venga de GET
-        //Crea un arreglo vacio
-        $rutas = array();
+                            //Guardad en la variable la ruta que venga de GET
+                            //Crea un arreglo vacio
+                            $rutas = array();
 
-        // Crea los elementos del arreglo a partir de caracter /
-        $rutas = explode("/", $_GET['ruta']);
+                            // Crea los elementos del arreglo a partir de caracter /
+                            $rutas = explode("/", $_GET['ruta']);
 
-        // Asigna a la variable el primer item del arreglo que será la página
-        $ruta_get = $rutas[0];
-        //Inicializamos una bandera en true para ver si hay pagina admitida
-        $_404 = true;
-        //Recorremos la lista de paginas admitidas
-        foreach ($listaBlanca as $item) {
-            //Si hay una conincidencia con lo que venga por GET y un elemento de mi lista
-            if ($ruta_get == $item) {
-                //Marcar la bandera en false indicando que si existe la pagina
-                $_404 = false;
-            }
-        }
-        //Guardar la pagina mostrar dependiendo la bandera
-        $page = $_404 ? '404' : $ruta_get;
+                            // Asigna a la variable el primer item del arreglo que será la página
+                            $ruta_get = $rutas[0];
+                            //Inicializamos una bandera en true para ver si hay pagina admitida
+                            $_404 = true;
+                            //Recorremos la lista de paginas admitidas
+                            foreach ($listaBlanca as $item) {
+                                //Si hay una conincidencia con lo que venga por GET y un elemento de mi lista
+                                if ($ruta_get == $item) {
+                                    //Marcar la bandera en false indicando que si existe la pagina
+                                    $_404 = false;
+                                }
+                            }
+                            //Guardar la pagina mostrar dependiendo la bandera
+                            $page = $_404 ? '404' : $ruta_get;
 
-        //Cargar la pagina solicitada
+                            //Cargar la pagina solicitada
 
-        cargarPagina($page, $rutas);
-    } else {
+                            cargarPagina($page, $rutas);
+                        } else {
 
-        cargarPagina('bienvenido');
-    }
-    ?>
+                            cargarPagina('bienvenido');
+                        }
+                        ?>
 
                     </div>
                 </div>
@@ -916,30 +924,30 @@
             <script src="<?= HTTP_HOST . 'app/' ?>modulos/informes/informes.js"></script>
             <script src="<?= HTTP_HOST . 'app/' ?>modulos/ingresos/ingresos.js"></script>
         </body>
-<?php
-else :
+        <?php
+    else :
 
-    if (isset($_GET['ruta'])) {
+        if (isset($_GET['ruta'])) {
 
-        //Crea un arreglo vacio
-        $rutas = array();
+            //Crea un arreglo vacio
+            $rutas = array();
 
-        // Crea los elementos del arreglo a partir de caracter /
-        $rutas = explode("/", $_GET['ruta']);
+            // Crea los elementos del arreglo a partir de caracter /
+            $rutas = explode("/", $_GET['ruta']);
 
 
-        if (
-                $rutas[0] == 'recuperar' ||
-                $rutas[0] == 'cambiar-contrasena'
-        ) {
-            cargarPagina($rutas[0], $rutas);
+            if (
+                    $rutas[0] == 'recuperar' ||
+                    $rutas[0] == 'cambiar-contrasena'
+            ) {
+                cargarPagina($rutas[0], $rutas);
+            } else {
+                cargarPagina('login');
+            }
         } else {
             cargarPagina('login');
         }
-    } else {
-        cargarPagina('login');
-    }
-    ?>
+        ?>
 
     <?php endif; ?>
     <!-- END: Body-->

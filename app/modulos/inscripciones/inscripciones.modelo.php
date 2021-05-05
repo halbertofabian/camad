@@ -233,5 +233,42 @@ class InscripcionesModelo {
             $con = null;
         }
     }
+    
+    public static function mdlCambiarEstadoCertificado1($fpg) {
+        try {
+            //code...
+
+            $sql = " UPDATE tbl_ficha_pago_fpg SET fpg_estado_certificado = 'EN PROCESO' WHERE fpg_id  = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $fpg['fpg_id']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+    public static function mdlCambiarEstadoCertificado2($fpg) {
+        try {
+            //code...
+
+            $sql = " UPDATE tbl_ficha_pago_fpg SET fpg_estado_certificado = 'CERTIFICADO' WHERE fpg_id  = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $fpg['fpg_id']);
+            $pps->execute();
+            return $pps->rowCount() > 0;
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 
 }

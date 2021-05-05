@@ -159,5 +159,48 @@ class InscripcionesControlador {
             }
         }
     }
+    
+    public static function ctrCambioEstadoCertificado() {
+        if (isset($_POST['btnCambioEstadoCertificado'])) {
+
+            if ($_POST['fpg_solicitud_certificado'] == 'EN PROCESO') {
+
+                $cancelacion = InscripcionesModelo::mdlCambiarEstadoCertificado1($_POST);
+
+                if ($cancelacion) {
+
+                    return array(
+                        'mensaje' => "Certificado en proceso",
+                        'status' => true,
+                        'pagina' => HTTP_HOST . 'inscripciones/canceladas'
+                    );
+                } else {
+                    return array(
+                        'mensaje' => 'No se pudo procesar el certificado.',
+                        'status' => false,
+                        'pagina' => HTTP_HOST . 'inscripciones/porCertificar'
+                    );
+                }
+            } else {
+
+                $cancelacion = InscripcionesModelo::mdlCambiarEstadoCertificado2($_POST);
+
+                if ($cancelacion) {
+
+                    return array(
+                        'mensaje' => "Certificación con exito",
+                        'status' => true,
+                        'pagina' => HTTP_HOST . 'inscripciones/porCertificar'
+                    );
+                } else {
+                    return array(
+                        'mensaje' => 'Ocurrio un error, al certificar',
+                        'status' => false,
+                        'pagina' => HTTP_HOST . 'inscripciones/canceladas'
+                    );
+                }
+            }
+        }
+    }
 
 }

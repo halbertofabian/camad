@@ -224,6 +224,104 @@ elseif (isset($rutas[1]) && $rutas[1] == "canceladas") :
         </div>
     </div>
     <?php
+elseif (isset($rutas[1]) && $rutas[1] == "porCertificar") :
+    cargarComponente('breadcrumb', '', 'Inscripciones por certificar');
+    ?>
+    <div class="containeir">
+        <div class="row">
+            <div class="col-12 table-responsive ">
+                <table class="table tablas table-bordered tablaPagosAlumno table-striped table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th>Número de inscripción</th>
+                            <th>Matricula</th>
+                            <th>Alumno</th>
+                            <th>Paquete</th>
+                            <th>Usuario registro</th>
+                            <th>Fecha registro</th>
+                            <th>Total certificación</th>
+                            <th>Adeudo <br> Total</th>
+                            <th>Total <br> Pagado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                        $inscripciones = InscripcionesModelo::mdlMostrarInscripciones();
+                        foreach ($inscripciones as $key => $fpg) {
+                            $datosFicha = PagosControlador::ctrMostrarDatosFichaPagoByFicha($fpg['fpg_id']);
+
+                            $adeudo = 0;
+                            $adeudo += $datosFicha['PPG_INSCRIPCION']['adeudo'];
+                            $adeudo += $datosFicha['PPG_EXAMEN']['adeudo'];
+                            $adeudo += $datosFicha['PPG_GUIA']['adeudo'];
+                            $adeudo += $datosFicha['PPG_INCORPORACION']['adeudo'];
+                            $adeudo += $datosFicha['PPG_CERTIFICADO']['adeudo'];
+                            $adeudo += $datosFicha['PPG_SEMANAL']['adeudo'];
+
+                            $total = 0;
+                            $total += $datosFicha['PPG_INSCRIPCION']['total'];
+                            $total += $datosFicha['PPG_EXAMEN']['total'];
+                            $total += $datosFicha['PPG_GUIA']['total'];
+                            $total += $datosFicha['PPG_INCORPORACION']['total'];
+                            $total += $datosFicha['PPG_CERTIFICADO']['total'];
+                            $total += $datosFicha['PPG_SEMANAL']['total'];
+
+                            if ($adeudo == 0 || $datosFicha['PPG_CERTIFICADO']['adeudo'] == 0) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $fpg['fpg_id'] ?></td>
+                                    <td><?php echo $fpg['usr_matricula'] ?></td>
+                                    <td><?php echo $fpg['usr_nombre'] . ' ' . $fpg['usr_app'] . ' ' . $fpg['usr_apm'] ?></td>
+                                    <td><?php echo $fpg['pqt_nombre'] ?></td>
+                                    <td><?php echo $fpg['fpg_usuario_registro'] ?></td>
+                                    <td><?php echo $fpg['fpg_fecha_registro'] ?></td>
+                                    <td>
+                                        <?php
+                                        echo '$ <strong class="text-primary">' . number_format($datosFicha['PPG_CERTIFICADO']['total'], 2) . '</strong>';
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        echo '$ <strong class="text-primary">' . number_format($adeudo, 2) . '</strong>';
+                                        ?>
+                                    </td>
+                                    <td>
+
+                                        <?php
+                                        echo '$ <strong class="text-primary">' . number_format($total, 2) . '</strong>';
+                                        ?>
+                                    </td>
+                                    <td style="width: 130px;">
+                                        <select class="form-control btnCambioEstadoCertificado" fpg_id="<?= $fpg['fpg_id'] ?>" name="fpg_solicitud_certificado" id="fpg_solicitud_certificado">
+                                            <?php
+                                            $estados = array(0 => 'PENDIENTE', 1 => 'EN PROCESO', 2 => 'CERTIFICADO');
+                                            foreach ($estados as $estado) {
+                                                if ($estado == $fpg['fpg_estado_certificado']) {
+                                                    $select = "selected";
+                                                } else {
+                                                    $select = "";
+                                                }
+                                                ?>
+                                                <option value="<?= $estado ?>" <?= $select ?>><?= $estado ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        }
+                        ?>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <?php
 else :
     cargarComponente('breadcrumb', '', 'Listar inscripciones');
     ?>
@@ -306,7 +404,7 @@ else :
                                     </div>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+    <?php endforeach; ?>
 
                     </tbody>
                 </table>
@@ -343,7 +441,7 @@ else :
 
                                             <option value="<?php echo $scl['scl_id'] ?>"><?php echo $scl['scl_nombre'] ?></option>
 
-                                        <?php endforeach; ?>
+<?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
