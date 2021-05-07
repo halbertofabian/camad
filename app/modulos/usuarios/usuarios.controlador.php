@@ -535,7 +535,7 @@ class UsuariosControlador {
                 if (move_uploaded_file($_FILES['archivoCURP']['tmp_name'], $directorio . '/' . 'CURP.pdf')) {
                     echo '<script>toastr.success("La CURP se subió correctamente.", "Muy Bien!")</script>';
                 } else {
-                    echo '<script>toastr.warning("La CURP aun no se sube.", "Alerta!")</script>';
+                    echo '<script>toastr.warning("La CURP aún no se sube.", "Alerta!")</script>';
                 }
             } else {
                 if(!empty($_FILES['archivoCURP']['tmp_name'])){
@@ -548,7 +548,7 @@ class UsuariosControlador {
                 if (move_uploaded_file($_FILES['archivoINE']['tmp_name'], $directorio . '/' . 'INE.pdf')) {
                     echo '<script>toastr.success("El INE se subió correctamente.", "Muy Bien!")</script>';
                 } else {
-                    echo '<script>toastr.warning("El INE aun no se sube.", "Alerta!")</script>';
+                    echo '<script>toastr.warning("El INE aún no se sube.", "Alerta!")</script>';
                 }
             } else {
                 if(!empty($_FILES['archivoINE']['tmp_name'])){
@@ -560,7 +560,7 @@ class UsuariosControlador {
                 if (move_uploaded_file($_FILES['archivoACTA']['tmp_name'], $directorio . '/' . 'ACTA_DE_NACIMIENTO.pdf')) {
                     echo '<script>toastr.success("La ACTA DE NACIMIENTO se subió correctamente.", "Muy Bien!")</script>';
                 } else {
-                    echo '<script>toastr.warning("La ACTA DE NACIMIENTO aun no se sube.", "Alerta!")</script>';
+                    echo '<script>toastr.warning("La ACTA DE NACIMIENTO aún no se sube.", "Alerta!")</script>';
                 }
             } else {
                 if(!empty($_FILES['archivoACTA']['tmp_name'])){
@@ -572,7 +572,7 @@ class UsuariosControlador {
                 if (move_uploaded_file($_FILES['archivoCERTIFICADO']['tmp_name'], $directorio . '/' . 'CERTIFICADO_DE_SECUNDARIA.pdf')) {
                     echo '<script>toastr.success("El CERTIFICADO se subió correctamente.", "Muy Bien!")</script>';
                 } else {
-                    echo '<script>toastr.warning("El CERTIFICADO aun no se sube.", "Alerta!")</script>';
+                    echo '<script>toastr.warning("El CERTIFICADO aún no se sube.", "Alerta!")</script>';
                 }
             } else {
                 if(!empty($_FILES['archivoCERTIFICADO']['tmp_name'])){
