@@ -528,7 +528,7 @@ class UsuariosControlador {
             $mensajes = "";
             $directorio = "app/upload/archivos_alumnos/" . $_SESSION['session_usr']['usr_matricula'];
             if (!file_exists($directorio)) {
-                mkdir($directorio, 0777);
+                mkdir($directorio, 0777,true);
             }
             //CURP
             if (!file_exists($directorio . '/CURP.pdf')) {
