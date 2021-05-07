@@ -63,6 +63,7 @@
         <link href="<?= HTTP_HOST . 'app/' ?>assets/plugin/toastr/build/toastr.min.css" rel="stylesheet" />
 
         <link href="<?= HTTP_HOST . 'app/' ?>assets/plugin/select2-c/css/select2.min.css" rel="stylesheet" />
+        <link href="<?= HTTP_HOST . 'app/' ?>assets/plugin/dropzone/dropzone.css" rel="stylesheet" />
 
 
         <!-- BEGIN: Vendor JS-->
@@ -104,6 +105,9 @@
 
 
         <script src="<?= HTTP_HOST . 'app/assets/plugin/jquery-mask/jquery.mask.min.js' ?>"></script>
+        <script src="<?= HTTP_HOST . 'app/assets/plugin/dropzone/dropzone.js' ?>"></script>
+        
+        
 
     </head>
     <!-- END: Head-->
@@ -816,6 +820,7 @@
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-home"></i>Inicio</a></li>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-fichas' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Kardex de fichas</a></li>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-pagos' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Kardex de pagos</a></li>
+                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/subir-documentos' ?>" data-toggle="tooltip" data-placement="top"><i class="fa fa-file"></i>Subir documentos</a></li>
 
 
                             </ul>

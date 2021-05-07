@@ -1,5 +1,6 @@
 
 <?php
+
 /**
  *  Desarrollador: ifixitmor
  *  Fecha de creación: 16/10/2020 11:57
@@ -10,10 +11,9 @@
  *  Instagram: http://instagram.com/softmormx
  *  Twitter: https://twitter.com/softmormx
  */
-class UsuariosControlador
-{
-    public function ctrAgregarUsuarios($url_destino = "usuarios")
-    {
+class UsuariosControlador {
+
+    public function ctrAgregarUsuarios($url_destino = "usuarios") {
         if (isset($_POST['btnGuardarUsuario'])) {
 
             $_POST['usr_clave'] = password_hash($_POST['usr_clave'], PASSWORD_DEFAULT);
@@ -31,8 +31,7 @@ class UsuariosControlador
         }
     }
 
-    public function ctrAgregarUsuarios2($url_destino = "usuarios")
-    {
+    public function ctrAgregarUsuarios2($url_destino = "usuarios") {
         if (isset($_POST['btnGuardarUsuario'])) {
 
 
@@ -45,9 +44,9 @@ class UsuariosControlador
                 $nuevoAncho = 200;
                 $nuevoAlto = 200;
 
-                /*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL Producto
-					=============================================*/
+                /* =============================================
+                  CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL Producto
+                  ============================================= */
                 $fileimg = md5($_POST["usr_matricula"]);
 
                 $directorio = "app/upload/firmas_digitales";
@@ -55,15 +54,15 @@ class UsuariosControlador
                 if (!file_exists($directorio))
                     mkdir($directorio, 0777);
 
-                /*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
+                /* =============================================
+                  DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+                  ============================================= */
 
                 if ($_FILES["usr_firma"]["type"] == "image/jpeg") {
 
-                    /*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
+                    /* =============================================
+                      GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                      ============================================= */
 
                     //$aleatorio = mt_rand(100, 999);
 
@@ -85,9 +84,9 @@ class UsuariosControlador
 
 
 
-                    /*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
+                    /* =============================================
+                      GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                      ============================================= */
 
                     $ruta = $directorio . '/' . $_POST['usr_matricula'] . ".png";
 
@@ -123,9 +122,7 @@ class UsuariosControlador
         }
     }
 
-
-    public static  function ctrAgregarUsuariosAjax()
-    {
+    public static function ctrAgregarUsuariosAjax() {
         if (isset($_POST['btnGuardarUsuario'])) {
 
 
@@ -157,8 +154,8 @@ class UsuariosControlador
             }
         }
     }
-    public function ctrActualizarUsuarios($url_destino = "usuarios")
-    {
+
+    public function ctrActualizarUsuarios($url_destino = "usuarios") {
         if (isset($_POST['btnActualizarUsuario'])) {
 
             if ($_POST['usr_clave'] == "") {
@@ -178,13 +175,12 @@ class UsuariosControlador
             }
         }
     }
-    public function ctrActualizarUsuarios2($url_destino = "usuarios")
-    {
+
+    public function ctrActualizarUsuarios2($url_destino = "usuarios") {
         if (isset($_POST['btnActualizarUsuario'])) {
 
 
-            preArray($_POST);
-            preArray($_FILES);
+
             $ruta = $_POST['usr_firma_hidden'];
 
             if (isset($_FILES["usr_firma"]["tmp_name"]) && $_FILES["usr_firma"]["tmp_name"] != "") {
@@ -194,9 +190,9 @@ class UsuariosControlador
                 $nuevoAncho = 200;
                 $nuevoAlto = 200;
 
-                /*=============================================
-					CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL Producto
-					=============================================*/
+                /* =============================================
+                  CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL Producto
+                  ============================================= */
                 $fileimg = md5(uniqid());
 
                 $directorio = "app/upload/firmas_digitales/" . $fileimg;
@@ -204,15 +200,15 @@ class UsuariosControlador
                 if (!file_exists($directorio))
                     mkdir($directorio, 0777);
 
-                /*=============================================
-					DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-					=============================================*/
+                /* =============================================
+                  DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+                  ============================================= */
 
                 if ($_FILES["usr_firma"]["type"] == "image/jpeg") {
 
-                    /*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
+                    /* =============================================
+                      GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                      ============================================= */
 
                     //$aleatorio = mt_rand(100, 999);
 
@@ -228,9 +224,9 @@ class UsuariosControlador
                 }
 
                 if ($_FILES["usr_firma"]["type"] == "image/png") {
-                    /*=============================================
-						GUARDAMOS LA IMAGEN EN EL DIRECTORIO
-						=============================================*/
+                    /* =============================================
+                      GUARDAMOS LA IMAGEN EN EL DIRECTORIO
+                      ============================================= */
 
                     $ruta = $directorio . '/' . $_POST['usr_matricula'] . ".png";
 
@@ -272,11 +268,12 @@ class UsuariosControlador
             }
         }
     }
-    public function ctrMostrarUsuarios($usr_correo)
-    {
+
+    public function ctrMostrarUsuarios($usr_correo) {
+        
     }
-    public static function ctrEliminarUsuario($usr_id)
-    {
+
+    public static function ctrEliminarUsuario($usr_id) {
 
         $eliminarUsuario = UsuariosModelo::mdlEliminarUsuarios($usr_id);
 
@@ -298,13 +295,11 @@ class UsuariosControlador
                 'status' => false,
                 'mensaje' => 'Ocurrio un error, parece que este alumno esta relacionado con una inscripción, primero elimina su relación e intentalo de nuevo',
                 'pagina' => 'alumnos'
-
             );
         }
     }
 
-    public static function ctrImportarProductosExcel()
-    {
+    public static function ctrImportarProductosExcel() {
         try {
 
 
@@ -317,7 +312,6 @@ class UsuariosControlador
 
 
             //var_dump($nombreArchivo);
-
             // Cargar hoja de calculo
             $leerExcel = PHPExcel_IOFactory::createReaderForFile($nombreArchivo);
 
@@ -366,15 +360,11 @@ class UsuariosControlador
                     "usr_colonia" => $usr_colonia,
                     "usr_estado" => $usr_estado,
                     "usr_municipio" => $usr_municipio,
-
                     "usr_clave" => '',
                     "usr_rol" => 'Alumno',
                     "usr_usuario_registro" => $_SESSION['session_usr']['usr_nombre'],
                     "usr_fecha_registro" => FECHA,
                     "usr_id_sucursal" => SUCURSAL_ID,
-
-
-
                 );
 
                 //var_dump($data);
@@ -391,7 +381,7 @@ class UsuariosControlador
             return array(
                 'status' => true,
                 'mensaje' => "Carga de alumnos con éxito",
-                'insert' =>  $countInsert,
+                'insert' => $countInsert,
                 'update' => $countUpdate
             );
         } catch (Exception $th) {
@@ -399,15 +389,13 @@ class UsuariosControlador
             return array(
                 'status' => false,
                 'mensaje' => "No se encuentra el archivo solicitado, por favor carga el archivo correcto",
-                'insert' =>  "",
+                'insert' => "",
                 'update' => ""
             );
         }
     }
 
-
-    public static function ctrActivarUsuarioViaEmail()
-    {
+    public static function ctrActivarUsuarioViaEmail() {
         if (isset($_POST['btnActivarUsuario'])) {
             // Solicitar Activacion y generar Token 
 
@@ -447,14 +435,13 @@ class UsuariosControlador
         }
     }
 
-    public  function ctrRecuprarClaveUsuarioViaEmail()
-    {
+    public function ctrRecuprarClaveUsuarioViaEmail() {
         if (isset($_POST['btnRecuperarClave'])) {
             // Solicitar Activacion y generar Token 
 
             if ($_POST['usr_correo'] == "") {
 
-                echo  '<script>
+                echo '<script>
                         toastr.error("Asegurate de que este usuario tenga un correo asignado", "Error")
                     </script>';
                 return;
@@ -465,7 +452,7 @@ class UsuariosControlador
 
 
             if (!$consultarEmail) {
-                echo  '<script>
+                echo '<script>
                 toastr.error("Este correo no se encuentra registrado en la base de datos, asegurate de introducir el correcto", "Error")
                     </script>';
                 return;
@@ -493,7 +480,7 @@ class UsuariosControlador
                 // );
                 AppControlador::msj('success', '¡Muy bien!', 'Se ha enviado un correo electrónico para restablecer la contraseña. Léelo para obtener más instrucciones.', HTTP_HOST);
             } else {
-                echo  '<script>
+                echo '<script>
                 toastr.error("Correo no enviando, ponte en contácto con soporte", "Error")
                     </script>';
                 return;
@@ -501,8 +488,7 @@ class UsuariosControlador
         }
     }
 
-    public  function ctrCambiarClaveAlumno()
-    {
+    public function ctrCambiarClaveAlumno() {
 
         if (isset($_POST['btnCambiarContrasena'])) {
 
@@ -527,14 +513,76 @@ class UsuariosControlador
         }
     }
 
-    public static function ctrConsultarSiguienteUsuario($sub_fijo = SUB_FIJO)
-    {
+    public static function ctrConsultarSiguienteUsuario($sub_fijo = SUB_FIJO) {
         $usr_id = UsuariosModelo::mdlConsultarUltimoUsuario();
         $usr_id['usr_id'] = $usr_id['usr_id'] + 1;
-        $usr_id['usr_id'] =  strlen($usr_id['usr_id']) == 0 ? "0001"  : $usr_id['usr_id'];
-        $usr_id['usr_id'] =  strlen($usr_id['usr_id']) == 1 ? "000" . $usr_id['usr_id'] : $usr_id['usr_id'];
-        $usr_id['usr_id'] =  strlen($usr_id['usr_id']) == 2 ? "00" . $usr_id['usr_id'] : $usr_id['usr_id'];
-        $usr_id['usr_id'] =  strlen($usr_id['usr_id']) == 3 ? "0" . $usr_id['usr_id'] : $usr_id['usr_id'];
+        $usr_id['usr_id'] = strlen($usr_id['usr_id']) == 0 ? "0001" : $usr_id['usr_id'];
+        $usr_id['usr_id'] = strlen($usr_id['usr_id']) == 1 ? "000" . $usr_id['usr_id'] : $usr_id['usr_id'];
+        $usr_id['usr_id'] = strlen($usr_id['usr_id']) == 2 ? "00" . $usr_id['usr_id'] : $usr_id['usr_id'];
+        $usr_id['usr_id'] = strlen($usr_id['usr_id']) == 3 ? "0" . $usr_id['usr_id'] : $usr_id['usr_id'];
         return $sub_fijo . $usr_id['usr_id'];
     }
+
+    public function ctrSubirArchivos() {
+        if (isset($_POST['btnSubirArchivos'])) {
+            $mensajes = "";
+            $directorio = "app/upload/archivos_alumnos/" . $_SESSION['session_usr']['usr_matricula'];
+            if (!file_exists($directorio)) {
+                mkdir($directorio, 0777);
+            }
+            //CURP
+            if (!file_exists($directorio . '/CURP.pdf')) {
+                if (move_uploaded_file($_FILES['archivoCURP']['tmp_name'], $directorio . '/' . 'CURP.pdf')) {
+                    echo '<script>toastr.success("La CURP se subió correctamente.", "Muy Bien!")</script>';
+                } else {
+                    echo '<script>toastr.warning("La CURP aun no se sube.", "Alerta!")</script>';
+                }
+            } else {
+                if(!empty($_FILES['archivoCURP']['tmp_name'])){
+                    $mensajes .= "La CURP ya exite en el directorio. <br>";
+                }
+//                echo '<script>toastr.info("La CURP ya exite en el directorio.", "Archivo Existente!")</script>';
+            }
+            //INE
+            if (!file_exists($directorio . '/INE.pdf')) {
+                if (move_uploaded_file($_FILES['archivoINE']['tmp_name'], $directorio . '/' . 'INE.pdf')) {
+                    echo '<script>toastr.success("El INE se subió correctamente.", "Muy Bien!")</script>';
+                } else {
+                    echo '<script>toastr.warning("El INE aun no se sube.", "Alerta!")</script>';
+                }
+            } else {
+                if(!empty($_FILES['archivoINE']['tmp_name'])){
+                    $mensajes .= "El INE ya exite en el directorio.<br>";
+                }
+            }
+            //ACTA DE NACIMIENTO
+            if (!file_exists($directorio . '/ACTA_DE_NACIMIENTO.pdf')) {
+                if (move_uploaded_file($_FILES['archivoACTA']['tmp_name'], $directorio . '/' . 'ACTA_DE_NACIMIENTO.pdf')) {
+                    echo '<script>toastr.success("La ACTA DE NACIMIENTO se subió correctamente.", "Muy Bien!")</script>';
+                } else {
+                    echo '<script>toastr.warning("La ACTA DE NACIMIENTO aun no se sube.", "Alerta!")</script>';
+                }
+            } else {
+                if(!empty($_FILES['archivoACTA']['tmp_name'])){
+                   $mensajes .= "La ACTA DE NACIMIENTO ya exite en el directorio.<br>";
+                }
+            }
+            //CETIFICADO DE SECUNDARIA
+            if (!file_exists($directorio . '/CERTIFICADO_DE_SECUNDARIA.pdf')) {
+                if (move_uploaded_file($_FILES['archivoCERTIFICADO']['tmp_name'], $directorio . '/' . 'CERTIFICADO_DE_SECUNDARIA.pdf')) {
+                    echo '<script>toastr.success("El CERTIFICADO se subió correctamente.", "Muy Bien!")</script>';
+                } else {
+                    echo '<script>toastr.warning("El CERTIFICADO aun no se sube.", "Alerta!")</script>';
+                }
+            } else {
+                if(!empty($_FILES['archivoCERTIFICADO']['tmp_name'])){
+                    $mensajes .= "El CERTIFICADO ya exite en el directorio.<br>";
+                }
+            }
+            if(!empty($mensajes)){
+                echo '<script>toastr.info("'.$mensajes.'", "Archivo Existente!")</script>';
+            }
+        }
+    }
+
 }
