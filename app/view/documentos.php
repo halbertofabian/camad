@@ -1,6 +1,6 @@
 <?php
 if (isset($rutas[1]) && $rutas[1] != "" && $rutas[1] == "subir-documentos") :
-    cargarComponente('breadcrumb_nivel_1', '', 'Subir documentos #' . $rutas[2], array(['ruta' => 'documentos', 'label' => 'Listar documentos']));
+    cargarComponente('breadcrumb_nivel_1', '', 'Subir documentos', array(['ruta' =>   'index.php?ruta=documentos&file='.$rutas[2].'&v=false', 'label' => 'Documentos de '.$rutas[2]]));
     ?>
     <div class="container-fluid">
         <div class="row justify-content-center align-content-center">
