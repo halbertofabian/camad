@@ -86,7 +86,7 @@ class UsuariosAjax
     }
     public function ajaxEliminarDocumento()
     {
-        $eliminarDocumento = UsuariosControlador::ctrEliminarDocumento($_POST);
+        $eliminarDocumento = UsuariosControlador::ctrEliminarDocumento();
         echo json_encode($eliminarDocumento);
     }
 }
