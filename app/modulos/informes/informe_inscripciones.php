@@ -44,7 +44,7 @@
                         <p id="text-total"></p>
                     </div>
                     <div class="col-md-3">
-                        <a href="" id="btn_export_result" class="btn btn-success waves-effect waves-light d-none" data-toggle="tooltip" data-placement="top" title="" data-original-title="Exportar resultados a Excel"> <i class="fa fa-file-excel-o"></i> </a>
+                        <a href="" id="" class="btn btn-success waves-effect waves-light d-nonebtn_export_result d-none" data-toggle="tooltip" data-placement="top" title="" data-original-title="Exportar resultados a Excel"> <i class="fa fa-file-excel-o"></i> </a>
 
                     </div>
                 </div>
@@ -53,25 +53,29 @@
 
         <div class="card">
             <div class="card-body ">
-                <table class="table table-responsive dt-responsive table-striped tablaInforme2">
-                    <thead>
-                        <tr>
-                            <th>Mátricula</th>
-                            <th>Alumno</th>
-                            <th>Paquete</th>
-                            <th>Ficha</th>
-                            <th>Fecha de inscripción</th>
-                            <th>Usuario Registró</th>
-                            <th>Usuario Inscribió</th>
-                            <th>Total inscripción</th>
-                            <th>Adeudo inscripción</th>
-                            <th>Adeudo total</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyInforme_2">
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-responsive-lg table-striped tablaInforme2" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Mátricula</th>
+                                    <th>Alumno</th>
+                                    <th>Paquete</th>
+                                    <th>Ficha</th>
+                                    <th>Fecha de inscripción</th>
+                                    <th>Usuario Registró</th>
+                                    <th>Usuario Inscribió</th>
+                                    <th>Total inscripción</th>
+                                    <th>Adeudo inscripción</th>
+                                    <th>Adeudo total</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyInforme_2">
 
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
             </div>
         </div>
