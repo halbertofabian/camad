@@ -585,9 +585,12 @@ class UsuariosControlador {
         }
     }
 
-    public static function ctrEliminarDocumento($documento) {
+    public static function ctrEliminarDocumento() {
         if (isset($_POST['btnEliminarArchivo'])) {
-            $file = obtener_files(DOCUMENT_ROOT . 'app/upload/archivos_alumnos/' . $_SESSION['session_usr']['usr_matricula'] . '/' . $documento);
+            
+            $file = DOCUMENT_ROOT . 'app/upload/archivos_alumnos/' . $_SESSION['session_usr']['usr_matricula'] . '/' . $_POST['file'];
+           
+            
             $eliminarDocumento = unlink($file);
 
             if ($eliminarDocumento) {
