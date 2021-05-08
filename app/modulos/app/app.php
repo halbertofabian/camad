@@ -572,6 +572,8 @@
                                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="<?= HTTP_HOST ?>" data-toggle="dropdown"><i class="feather icon-home"></i><span data-i18n="Panel de control">Panel de control</span></a>
                                     <ul class="dropdown-menu">
                                         <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-grid"></i>Inicio</a>
+                                        <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'documentos' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-grid"></i>Documentos</a>
+
                                         <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'sucursales' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-grid"></i>Sucursales</a>
                                         <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'configuracion' ?>" data-toggle="dropdown" data-i18n="Configuraciones"><i class="feather icon-grid"></i>Configuraciones</a>
                                         <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'cajas' ?>" data-toggle="dropdown" data-i18n="cajas"><i class="feather icon-grid"></i>Cajas</a>
