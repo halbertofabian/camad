@@ -415,3 +415,77 @@ $(".btnEliminarInscripcion").on("click", function () {
                 }
             })
 })
+
+$(".btnEliminarArchivo").on("click", function () {
+    var file = $(this).attr("file");
+
+    swal({
+        title: "¿Seguro de querer eliminar este documento?",
+        text: "El documento " + file + " será eliminado. ¿Deseas continuar?",
+        icon: "warning",
+        buttons: ["No, cancelar", "Si, eliminar documento"],
+        dangerMode: false,
+        closeOnClickOutside: false,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                var datos = new FormData();
+                datos.append("btnEliminarArchivo", true);
+                datos.append("file", file);
+
+                $.ajax({
+                    type: "POST",
+                    url: urlApp + 'app/modulos/usuarios/usuarios.ajax.php',
+                    data: datos,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+
+                    },
+                    success: function (res) {
+
+                        if (res.status) {
+                            swal({
+                                title: "Muy bien",
+                                text: res.mensaje,
+                                icon: "success",
+                                buttons: [false, "Continuar"],
+                                dangerMode: true,
+                                closeOnClickOutside: false,
+
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        location.href = 'alumno/ver-documentos';
+                                    } else {
+                                        location.href = res.pagina
+                                    }
+                                });
+                        } else {
+                            swal({
+                                title: "Error",
+                                text: res.mensaje,
+                                icon: "error",
+                                buttons: [false, "Continuar"],
+                                dangerMode: true,
+                                closeOnClickOutside: false,
+
+                            })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        location.href = res.pagina
+                                    } else {
+                                        location.href = res.pagina
+                                    }
+                                });
+
+                        }
+
+
+                    }
+                });
+            }
+        });
+
+})
