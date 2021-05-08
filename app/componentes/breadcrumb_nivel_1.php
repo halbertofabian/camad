@@ -1,5 +1,5 @@
 <div class="" >
-    <div class="container text-white ">
+    <div class="containeir text-white ">
         <div class="d-flex align-items-center">
             <div class="mr-3">
                 <!-- <h1 class="mb-3"><?php echo $label ?></h1> -->
