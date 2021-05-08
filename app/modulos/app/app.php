@@ -106,8 +106,8 @@
 
         <script src="<?= HTTP_HOST . 'app/assets/plugin/jquery-mask/jquery.mask.min.js' ?>"></script>
         <script src="<?= HTTP_HOST . 'app/assets/plugin/dropzone/dropzone.js' ?>"></script>
-        
-        
+
+
 
     </head>
     <!-- END: Head-->
@@ -165,9 +165,9 @@
                                         </a>
                                     </li>
 
-                                                <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon feather icon-message-square"></i></a></li>
-                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
-                                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calender.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon feather icon-calendar"></i></a></li> -->
+                                                    <!-- <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip" data-placement="top" title="Chat"><i class="ficon feather icon-message-square"></i></a></li>
+                                                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon feather icon-mail"></i></a></li>
+                                                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-calender.html" data-toggle="tooltip" data-placement="top" title="Calendar"><i class="ficon feather icon-calendar"></i></a></li> -->
                                 </ul>
                                 <!-- <ul class="nav navbar-nav">
                                     <li class="nav-item d-none d-lg-block"><a class="nav-link bookmark-star"><i class="ficon feather icon-star warning"></i></a>
@@ -261,8 +261,8 @@
                                         <?php if ($_SESSION['session_usr']['usr_rol'] != "Alumno") : ?>
                                             <a class="dropdown-item" href="<?= HTTP_HOST . 'plantel' ?>"><i class="feather icon-grid"></i> Cambio de sucursal</a>
                                         <?php endif; ?>
-                        <!-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My -->
-                        <!-- Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a> -->
+                    <!-- <a class="dropdown-item" href="app-email.html"><i class="feather icon-mail"></i> My -->
+                    <!-- Inbox</a><a class="dropdown-item" href="app-todo.html"><i class="feather icon-check-square"></i> Task</a><a class="dropdown-item" href="app-chat.html"><i class="feather icon-message-square"></i> Chats</a> -->
                                         <!-- <div class="dropdown-divider"></div> -->
                                         <a class="dropdown-item" href="<?= HTTP_HOST . 'salir' ?>"><i class="feather icon-power"></i> Salir</a>
                                     </div>
@@ -820,8 +820,12 @@
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-home"></i>Inicio</a></li>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-fichas' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Kardex de fichas</a></li>
                                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/kerdex-pagos' ?>" data-toggle="tooltip" data-placement="top"><i class="feather icon-grid"></i>Kardex de pagos</a></li>
-                                <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/subir-documentos' ?>" data-toggle="tooltip" data-placement="top"><i class="fa fa-file"></i>Subir documentos</a></li>
-
+                                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="feather icon-grid"></i><span data-i18n="Users">Documentos</span></a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/subir-documentos' ?>" data-toggle="tooltip" data-placement="top"><i class="fa fa-cloud-upload"></i>Subir documentos</a></li>
+                                        <li class="nav-item d-none d-lg-block"><a class="nav-link" href="<?= HTTP_HOST . 'alumno/' . $_SESSION['session_usr']['usr_id'] . '/ver-documentos' ?>" data-toggle="tooltip" data-placement="top"><i class="fa fa-eye"></i>Ver documentos</a></li>
+                                    </ul>
+                                </li>
 
                             </ul>
                         </div>
