@@ -14,7 +14,7 @@ $files = obtener_files(DOCUMENT_ROOT . 'app/upload/archivos_alumnos/' . $_SESSIO
                             </a>
                             <div class="card-body">
                                 <p class="card-title text-center" style="width: 100%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;"><?= $file ?></p>
-                                <p class="card-text text-center"><a href="<?= unlink($file) ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a></p>
+                                <p class="card-text text-center"><button type="button" class="btn btn-danger btnEliminarArchivo" name="btnEliminarArchivo" file="<?= $file ?>" data-toggle="tooltip" data-placement="top" title="Eliminar archivo"><i class="fa fa-trash"></i></button></p>
                             </div>
                         </div>
                     </div>
