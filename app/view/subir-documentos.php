@@ -22,6 +22,7 @@
                                                     <span class="input-group-text"><i class="fa fa-cloud-upload"></i></span>
                                                 </div>
                                                 <div class="custom-file">
+                                                    <input type="hidden" name="matricula" id="matricula" value="<?= $_SESSION['session_usr']['usr_matricula'] ?>">
                                                     <input type="file" class="custom-file-input" accept=".pdf" id="archivoCURP" name="archivoCURP">
                                                     <label class="custom-file-label" for="archivoCURP">Seleccionar curp</label>
                                                 </div>

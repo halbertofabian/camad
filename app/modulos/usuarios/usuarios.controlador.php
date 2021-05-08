@@ -526,7 +526,7 @@ class UsuariosControlador {
     public function ctrSubirArchivos() {
         if (isset($_POST['btnSubirArchivos'])) {
             $mensajes = "";
-            $directorio = "app/upload/archivos_alumnos/" . $_SESSION['session_usr']['usr_matricula'];
+            $directorio = "app/upload/archivos_alumnos/" . $_POST['matricula'];
             if (!file_exists($directorio)) {
                 mkdir($directorio, 0777, true);
             }
