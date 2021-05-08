@@ -82,8 +82,12 @@ class UsuariosAjax
     public function ajaxEliminarInscripcion()
     {
         $eliminarInscripcion = InscripcionesModelo::mdlSolicitudCancelacion($_POST);
-        preArray($eliminarInscripcion);
         echo json_encode($eliminarInscripcion);
+    }
+    public function ajaxEliminarDocumento()
+    {
+        $eliminarDocumento = UsuariosControlador::ctrEliminarDocumento($_POST);
+        echo json_encode($eliminarDocumento);
     }
 }
 if (isset($_POST['btnEliminarUsuario'])) {
@@ -126,4 +130,8 @@ if (isset($_POST['btnGuardarUsuario'])) {
 if (isset($_POST['btnEliminarInscripcion'])) {
     $eliminarInscripcion = new UsuariosAjax();
     $eliminarInscripcion->ajaxEliminarInscripcion();
+}
+if (isset($_POST['btnEliminarArchivo'])) {
+    $eliminarDocumento = new UsuariosAjax();
+    $eliminarDocumento->ajaxEliminarDocumento();
 }
