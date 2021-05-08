@@ -528,7 +528,7 @@ class UsuariosControlador {
             $mensajes = "";
             $directorio = "app/upload/archivos_alumnos/" . $_SESSION['session_usr']['usr_matricula'];
             if (!file_exists($directorio)) {
-                mkdir($directorio, 0777,true);
+                mkdir($directorio, 0777, true);
             }
             //CURP
             if (!file_exists($directorio . '/CURP.pdf')) {
@@ -538,7 +538,7 @@ class UsuariosControlador {
                     echo '<script>toastr.warning("La CURP aún no se sube.", "Alerta!")</script>';
                 }
             } else {
-                if(!empty($_FILES['archivoCURP']['tmp_name'])){
+                if (!empty($_FILES['archivoCURP']['tmp_name'])) {
                     $mensajes .= "La CURP ya exite en el directorio. <br>";
                 }
 //                echo '<script>toastr.info("La CURP ya exite en el directorio.", "Archivo Existente!")</script>';
@@ -551,7 +551,7 @@ class UsuariosControlador {
                     echo '<script>toastr.warning("El INE aún no se sube.", "Alerta!")</script>';
                 }
             } else {
-                if(!empty($_FILES['archivoINE']['tmp_name'])){
+                if (!empty($_FILES['archivoINE']['tmp_name'])) {
                     $mensajes .= "El INE ya exite en el directorio.<br>";
                 }
             }
@@ -563,8 +563,8 @@ class UsuariosControlador {
                     echo '<script>toastr.warning("La ACTA DE NACIMIENTO aún no se sube.", "Alerta!")</script>';
                 }
             } else {
-                if(!empty($_FILES['archivoACTA']['tmp_name'])){
-                   $mensajes .= "La ACTA DE NACIMIENTO ya exite en el directorio.<br>";
+                if (!empty($_FILES['archivoACTA']['tmp_name'])) {
+                    $mensajes .= "La ACTA DE NACIMIENTO ya exite en el directorio.<br>";
                 }
             }
             //CETIFICADO DE SECUNDARIA
@@ -575,12 +575,32 @@ class UsuariosControlador {
                     echo '<script>toastr.warning("El CERTIFICADO aún no se sube.", "Alerta!")</script>';
                 }
             } else {
-                if(!empty($_FILES['archivoCERTIFICADO']['tmp_name'])){
+                if (!empty($_FILES['archivoCERTIFICADO']['tmp_name'])) {
                     $mensajes .= "El CERTIFICADO ya exite en el directorio.<br>";
                 }
             }
-            if(!empty($mensajes)){
-                echo '<script>toastr.info("'.$mensajes.'", "Archivo Existente!")</script>';
+            if (!empty($mensajes)) {
+                echo '<script>toastr.info("' . $mensajes . '", "Archivo Existente!")</script>';
+            }
+        }
+    }
+
+    public static function ctrEliminarDocumento($documento) {
+        if (isset($_POST['btnEliminarArchivo'])) {
+            $file = obtener_files(DOCUMENT_ROOT . 'app/upload/archivos_alumnos/' . $_SESSION['session_usr']['usr_matricula'] . '/' . $documento);
+            $eliminarDocumento = unlink($file);
+
+            if ($eliminarDocumento) {
+                return array(
+                    'status' => true,
+                    'mensaje' => 'El documento se a eliminado con exito',
+                );
+            } else {
+                return array(
+                    'status' => false,
+                    'mensaje' => 'Ocurrio un error al eliminar el documento',
+                    'pagina' => 'alumnos'
+                );
             }
         }
     }
