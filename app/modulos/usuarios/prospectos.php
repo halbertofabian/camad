@@ -30,6 +30,7 @@ cargarComponente('breadcrumb', '', 'Lista de prospectos');
                         <th>Correo electrónico</th>
                         <th>Usuario registro</th>
                         <th>Fecha registro</th>
+                        <th>Acciones</th>
 
                     </tr>
                 </thead>
