@@ -392,4 +392,44 @@ class UsuariosModelo
             $con = null;
         }
     }
+
+    public static function mdlListarAlumnosProspectos()
+    {
+        try {
+            //code...
+            $sql = "SELECT * FROM tbl_usuarios_usr WHERE usr_rol = 'Alumno' AND usr_id_sucursal = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $_SESSION['session_suc']['scl_id']);
+            $pps->execute();
+            return  $pps->fetchAll();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false; //
+
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
+
+    public static function mdlListarAlumnosPaquete($usr_id)
+    {
+        try {
+            //code...
+            $sql = "SELECT fpg_alumno FROM tbl_ficha_pago_fpg WHERE fpg_alumno = ?";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps -> bindValue(1,$usr_id);
+            $pps->execute();
+            return  $pps->fetchAll();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false; //
+
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 }
