@@ -56,6 +56,11 @@ class InformesAjax {
         echo json_encode($array, true);
     }
 
+    public function ajaxInform_3(){
+        $res = InformesModelo::mdlInorme_3($_POST);
+        echo json_encode($res, true);
+    }
+
 }
 
 if (isset($_POST['btnFiltrarInforme_1'])) {
@@ -66,4 +71,9 @@ if (isset($_POST['btnFiltrarInforme_1'])) {
 if (isset($_POST['btnFiltrarInforme_2'])) {
     $informe_1 = new InformesAjax();
     $informe_1->ajaxInform_2();
+}
+
+if (isset($_POST['btnFiltrarInforme_3'])) {
+    $informe_3 = new InformesAjax();
+    $informe_3->ajaxInform_3();
 }

@@ -60,7 +60,7 @@ $("#formInforme_1").on("submit", function (e) {
 
                     monto_total += Number(ifs.ppg_total);
                     html +=
-                            `
+                        `
                             <tr>
                                 <td>${ifs.ppg_id}</td>
                                 <td>${ifs.ppg_ficha_pago}</td>
@@ -144,19 +144,19 @@ function cargarInforme2(datos) {
 
 
                     html +=
-                            `
+                        `
                             <tr>
                                 <td>${ifs.usr_matricula}</td>
                                 <td>${ifs.usr_nombre + " " + ifs.usr_app + " " + ifs.usr_apm}</td>
                                 <td>${ifs.pqt_nombre}</td>
-                                <td> <a href="${urlApp+'inscripciones/fichas/'+ifs.fpg_id}" target="_blank">${ifs.fpg_id}</a>  </td>
+                                <td> <a href="${urlApp + 'inscripciones/fichas/' + ifs.fpg_id}" target="_blank">${ifs.fpg_id}</a>  </td>
                                 <td>${ifs.fpg_fecha_registro}</td>
                                 <td>${ifs.usr_usuario_registro}</td>
                                 <td>${ifs.fpg_usuario_registro}</td>
                                 <td>$ ${$.number(ifs.ppg_total, 2)}</td>
 
                                 <td>$ ${$.number(ifs.ppg_adeudo, 2)}</td>
-                                <td><a href="${urlApp+'alumno/'+ifs.usr_id+'/kerdex-fichas'}" target="_blank">$ ${res.adeudos[count]}</a></td>
+                                <td><a href="${urlApp + 'alumno/' + ifs.usr_id + '/kerdex-fichas'}" target="_blank">$ ${res.adeudos[count]}</a></td>
                                 
                             </tr>
 
@@ -167,6 +167,83 @@ function cargarInforme2(datos) {
                 $("#tbodyInforme_2").html(html)
 
             }
+        },
+    })
+}
+
+$("#formInforme_3").on("submit", function (e) {
+    e.preventDefault();
+    var datos = new FormData(this);
+    cargarInforme3(datos);
+
+})
+function cargarInforme3(datos) {
+
+    datos.append("ppg_fecha_registro_inicio", $("#ppg_fecha_registro_inicio").val() + "T00:00")
+    datos.append("ppg_fecha_registro_fin", $("#ppg_fecha_registro_fin").val() + "T23:59")
+    datos.append("btnFiltrarInforme_3", true)
+
+    $("#tbodyInforme_3").html("")
+
+    $.ajax({
+
+        url: urlApp + 'app/modulos/informes/informes.ajax.php',
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        beforeSend: function () {
+            startLoadButton()
+        },
+        success: function (res) {
+            stopLoadButton('Filtrar')
+
+            var totalEfectivo = 0;
+            var totalBanco = 0;
+            var tbodyInforme_3 = "";
+
+            res.forEach(ifs => {
+
+
+                if (ifs.vfch_mp == "EFECTIVO") {
+                    totalEfectivo += Number(ifs.ppg_total);
+                } else {
+                    totalBanco += Number(ifs.ppg_total);
+                }
+
+
+                tbodyInforme_3 +=
+                    `
+                <tr>
+                
+                    <td>${ifs.ppg_id}</td>
+                    <td>${ifs.ppg_ficha_venta}</td>
+                    <td>${ifs.ppg_concepto}</td>
+                    <td> <strong> ${$.number(ifs.ppg_total, 2)} </strong></td>
+                    <td>${ifs.vfch_mp}</td>
+                    <td>${ifs.vfch_referencia}</td>
+                    <td>${ifs.ppg_fecha_registro}</td>
+                    <td>${ifs.ppg_usuario_registro}</td>
+                
+                </tr>
+
+                
+                `;
+
+                $("#tbodyInforme_3").html(tbodyInforme_3)
+                $("#ifs_3_efectivo").html($.number(totalEfectivo,2))
+                $("#ifs_3_banco").html($.number(totalBanco,2))
+                $("#ifs_3_total").html($.number(totalEfectivo+totalBanco,2))
+
+
+
+            });
+
+
+
+
         },
     })
 }

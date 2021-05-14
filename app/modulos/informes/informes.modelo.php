@@ -70,4 +70,27 @@ class InformesModelo
             $con = null;
         }
     }
+
+    //SELECT ppg.ppg_id,ppg.ppg_ficha_pago,ppg.ppg_ficha_venta,ppg.ppg_monto,ppg.ppg_descuento,ppg.ppg_total,ppg.ppg_fecha_registro,ppg.ppg_concepto,ppg.ppg_usuario_registro,vfch.vfch_mp,vfch.vfch_referencia FROM tbl_paquetes_pagos_ppg ppg JOIN tbl_ficha_venta_vfch vfch ON ppg.ppg_ficha_venta = vfch.vfch_id JOIN tbl_ficha_pago_fpg fpg ON ppg.ppg_ficha_pago = fpg.fpg_id JOIN tbl_usuarios_usr usr ON fpg.fpg_alumno = usr.usr_id WHERE ppg.ppg_estado_pagado = 'PAGADO' AND usr.usr_id_sucursal = 'd7a33a4fa6c3c60527abbee3afe843ef'
+
+    public static function mdlInorme_3($data)
+    {
+        try {
+            //code...
+            $sql = "SELECT ppg.ppg_id,ppg.ppg_ficha_pago,ppg.ppg_ficha_venta,ppg.ppg_monto,ppg.ppg_descuento,ppg.ppg_total,ppg.ppg_fecha_registro,ppg.ppg_concepto,ppg.ppg_usuario_registro,vfch.vfch_mp,vfch.vfch_referencia FROM tbl_paquetes_pagos_ppg ppg JOIN tbl_ficha_venta_vfch vfch ON ppg.ppg_ficha_venta = vfch.vfch_id JOIN tbl_ficha_pago_fpg fpg ON ppg.ppg_ficha_pago = fpg.fpg_id JOIN tbl_usuarios_usr usr ON fpg.fpg_alumno = usr.usr_id WHERE ppg.ppg_estado_pagado = 'PAGADO' AND usr.usr_id_sucursal = ? AND ppg.ppg_concepto LIKE '%$data[ppg_concepto]%' AND (ppg.ppg_fecha_registro BETWEEN ? AND ?)";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $data['usr_id_sucursal']);
+            $pps->bindValue(2, $data['ppg_fecha_registro_inicio']);
+            $pps->bindValue(3, $data['ppg_fecha_registro_fin']);
+            $pps->execute();
+            return $pps->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 }
