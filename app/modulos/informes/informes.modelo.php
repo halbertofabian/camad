@@ -93,4 +93,24 @@ class InformesModelo
             $con = null;
         }
     }
+    public static function mdlInorme_4($data)
+    {
+        try {
+            //code...
+            $sql = "SELECT tgts.*,gts.gts_nombre, scl.scl_nombre FROM tbl_gastos_tgts tgts JOIN tbl_categoria_gastos_gts gts ON tgts.tgts_categoria = gts.gts_id JOIN tbl_sucursal_scl scl ON tgts.tgts_id_sucursal = scl.scl_id WHERE scl.scl_id = ? AND (DATE(tgts.tgts_fecha_gasto) BETWEEN ? AND ?)";
+            $con = Conexion::conectar();
+            $pps = $con->prepare($sql);
+            $pps->bindValue(1, $data['tgts_id_sucursal']);
+            $pps->bindValue(2, $data['tgts_fecha_registro_inicio']);
+            $pps->bindValue(3, $data['tgts_fecha_registro_fin']);
+            $pps->execute();
+            return $pps->fetchAll();
+        } catch (PDOException $th) {
+            //throw $th;
+            return false;
+        } finally {
+            $pps = null;
+            $con = null;
+        }
+    }
 }
