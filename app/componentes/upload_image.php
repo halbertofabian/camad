@@ -1,4 +1,4 @@
-<div class="col-12 card-upload-image d-none">
+<div class="col-12 card-upload-image ">
     <div class="card">
         <div class="card-header">
             <div class="card-title">Imagenes</div>

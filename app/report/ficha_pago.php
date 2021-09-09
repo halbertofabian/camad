@@ -56,10 +56,10 @@ $pdf->setFontSubsetting(true);
 
 $pdf->setPrintHeader(false);
 $pdf->setPrintFooter(false);
-$pdf->SetMargins(8, 4, 6, 0);
+$pdf->SetMargins(0, 0, 0, 0);
 $pdf->SetFont('Courier', '', 20, '', true);
 
-$impresion = 210;
+$impresion = 147;
 $impresion2 = $impresion / 2;
 $formato = 'A4';
 // Add a page
