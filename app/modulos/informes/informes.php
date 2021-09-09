@@ -18,6 +18,10 @@
     cargarComponente('breadcrumb_nivel_1', '', 'Informe de ventas mensuales', array(['ruta' => 'informes', 'label' => 'Gestión de informes']));
     cargarview2('informes/informe_mensual', $rutas);
 ?>
+<?php elseif (isset($rutas[1]) && $rutas[1] == 'gastos') :
+    cargarComponente('breadcrumb_nivel_1', '', 'Informe de gastos', array(['ruta' => 'informes', 'label' => 'Gestión de informes']));
+    cargarview2('informes/informe_gastos', $rutas);
+?>
 <?php else :
     cargarComponente('breadcrumb', '', 'Gestión de informes');
 ?>
@@ -47,6 +51,14 @@
                     <div class="card-body">
                         <h4 class="card-title">Informe de ventas v2</h4>
                         <a class="btn btn-link float-right" href="<?php echo HTTP_HOST ?>informes/ventas-mensuales">Ver</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="height: 120px;">
+                    <div class="card-body">
+                        <h4 class="card-title">Informe de gastos</h4>
+                        <a class="btn btn-link float-right" href="<?php echo HTTP_HOST ?>informes/gastos">Ver</a>
                     </div>
                 </div>
             </div>
