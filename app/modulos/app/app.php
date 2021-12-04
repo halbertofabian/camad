@@ -497,6 +497,7 @@
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST ?>" data-toggle="dropdown" data-i18n="Inicio"><i class="feather icon-grid"></i>Inicio</a>
 
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'sucursales' ?>" data-toggle="dropdown" data-i18n="Sucursales"><i class="feather icon-grid"></i>Sucursales</a>
+                                    <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'encuestas/lista' ?>" data-toggle="dropdown" data-i18n="Encuestas"><i class="feather icon-grid"></i>Encuestas</a>
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'configuracion' ?>" data-toggle="dropdown" data-i18n="Configuraciones"><i class="feather icon-grid"></i>Configuraciones</a>
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'cajas' ?>" data-toggle="dropdown" data-i18n="cajas"><i class="feather icon-grid"></i>Cajas</a>
                                     <li class="" data-menu=""><a class="dropdown-item" href="<?= HTTP_HOST . 'cortes' ?>" data-toggle="dropdown" data-i18n="cortes"><i class="feather icon-grid"></i>Cortes</a>

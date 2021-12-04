@@ -30,7 +30,8 @@ class AppControlador
             'cerrar-caja',
             'informes',
             'prospectos',
-            'documentos'
+            'documentos',
+            'encuestas'
         );
     }
     public static function obtenerListaBlancaAlumno()
